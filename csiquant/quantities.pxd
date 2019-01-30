@@ -45,11 +45,12 @@ cdef inline SIUnit div_units(const c.UData& lhs, const c.UData& rhs):
 cdef inline c.OPERAND parse_uoperand(c.QData& out, object py_obj):
     op_type = type(py_obj)
     if op_type is float or op_type is int:
-        out.quantity = py_obj
+        out.quantity = <double>py_obj
         out.units.scale = 1.0
-        out.units.dimensions.data[:] = [0,0,0,0,0,0,0]
+        out.units.dimensions.exponents[:] = [0,0,0,0,0,0,0]
         return c.QUANTITY
     elif op_type is SIUnit:
+        out.quantity = 1.0
         return extract_udata(out.units, py_obj)
     elif op_type is Quantity:
         return extract_qdata(out, py_obj)
@@ -62,9 +63,9 @@ cdef inline c.OPERAND parse_qoperand(c.QData& out, object py_obj):
     if op_type is Quantity:
         return extract_qdata(out, py_obj)
     elif op_type is float or op_type is int:
-        out.quantity = py_obj
+        out.quantity = <double>py_obj
         out.units.scale = 1.0
-        out.units.dimensions.data[:] = [0,0,0,0,0,0,0]
+        out.units.dimensions.exponents[:] = [0,0,0,0,0,0,0]
         return c.QUANTITY
     return c.ERROR
 

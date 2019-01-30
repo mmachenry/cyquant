@@ -3,3 +3,7 @@ venv/
 dist/
 build/
 *.egg-info/
+**.so
+.tox/
+csiquant/__pycache__/
+tests/__pycache__/

@@ -1,3 +1,6 @@
+#!python
+#cython: language_level=3
+
 cimport csiquant.ctypes as c
 cimport csiquant.dimensions as d
 import csiquant.dimensions as d
@@ -48,7 +51,7 @@ cdef class SIUnit:
     def __invert__(self):
         cdef SIUnit ret = SIUnit.__new__(SIUnit)
         ret.data.scale = 1.0
-        ret.data.dimensions = d.dimensionless_t
+        ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
         c.div_udata(ret.data, ret.data, self.data)
         return ret
 
