@@ -51,7 +51,7 @@ cdef class SIUnit:
     def cd(self):
         return self.data.dimensions.exponents[6]
 
-    def __init__(SIUnit self, double scale=1.0, d.Dimensions dims not None=d.dimensionless_t):
+    def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
         if scale <= 0:
             raise ValueError("scale must be greater than 0")
         self.data.scale = scale
@@ -81,17 +81,29 @@ cdef class SIUnit:
         ret.data.units = self.data
         return ret
 
-    cpdef demote(SIUnit self, Quantity value not None):
+    cpdef demote(SIUnit self, Quantity value):
+        cdef int error_code
         cdef double ret
-        if not c.extract_quantity(ret, value.data, self.data):
+        error_code = c.extract_quantity(ret, value.data, self.data)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("unit mismatch")
-        return ret
+
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     __call__ = quantities
 
     """
     Comparison Methods
     """
+
+    cpdef is_of(SIUnit self, d.Dimensions dims):
+        if dims is None:
+            raise TypeError()
+        return c.eq_ddata(self.data.dimensions, dims.data)
 
     def __eq__(lhs, rhs):
         if not type(lhs) is SIUnit:
@@ -103,11 +115,16 @@ cdef class SIUnit:
         except ValueError:
             return NotImplemented
 
-    cpdef cmp(SIUnit self, SIUnit other not None):
-        cdef int signum
-        if not c.cmp_udata(signum, self.data, other.data):
+    cpdef cmp(SIUnit self, SIUnit other):
+        cdef int signum, error_code
+        error_code = c.cmp_udata(signum, self.data, other.data)
+        if error_code == c.Success:
+            return signum
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("units mismatch")
-        return signum
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     """
     Arithmetic Methods
@@ -115,42 +132,52 @@ cdef class SIUnit:
 
     def __mul__(lhs, rhs):
         cdef c.QData lhs_data, rhs_data
-        cdef int code
-        code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
-        if code & c.ERROR:
+        cdef int operand_code
+        operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
+        if operand_code & c.OBJECT:
             return NotImplemented
-        if code & c.QUANTITY:
+        if operand_code & c.QUANTITY:
             return mul_quantities(lhs_data, rhs_data)
         return mul_units(lhs_data.units, rhs_data.units)
 
 
     def __truediv__(lhs, rhs):
         cdef c.QData lhs_data, rhs_data
-        cdef int code
-        code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
-        if code & c.ERROR:
+        cdef int operand_code
+        operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
+        if operand_code & c.OBJECT:
             return NotImplemented
-        if code & c.QUANTITY:
+        if operand_code & c.QUANTITY:
             return div_quantities(lhs_data, rhs_data)
         return div_units(lhs_data.units, rhs_data.units)
 
     def __invert__(self):
+        cdef c.Error error_code
         cdef SIUnit ret = SIUnit.__new__(SIUnit)
         ret.data.scale = 1.0
         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
-        c.div_udata(ret.data, ret.data, self.data)
-        return ret
+        error_code = c.div_udata(ret.data, ret.data, self.data)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.ZeroDiv:
+            raise ZeroDivisionError()
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __pow__(lhs, rhs, modulo):
         if type(lhs) is not SIUnit:
             raise TypeError("Expected SIUnit ** Number")
         return lhs.exp(rhs)
 
-
     cpdef SIUnit exp(SIUnit self, double power):
+        cdef c.Error error_code
         cdef SIUnit ret = SIUnit.__new__(SIUnit)
-        c.pow_udata(ret.data, self.data, power)
-        return ret
+        error_code = c.pow_udata(ret.data, self.data, power)
+        if error_code == c.Success:
+            return ret
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __copy__(self):
         return self
@@ -173,23 +200,42 @@ cdef class Quantity:
         units.data = self.data.units
         return units
 
-    def __init__(Quantity self, double quantity, SIUnit units not None):
+    def __init__(Quantity self, double quantity, SIUnit units):
         self.data.quantity = quantity
         self.data.units = units.data
 
-    cpdef bint is_of(Quantity self, d.Dimensions dims not None):
+    cpdef is_of(Quantity self, d.Dimensions dims):
+        if dims is None:
+            raise TypeError()
+
         return c.eq_ddata(self.data.units.dimensions, dims.data)
 
-    cpdef get_as(Quantity self, SIUnit units not None):
-        cdef double value
-        if not c.extract_quantity(value, self.data, units.data):
-            raise ValueError("units mismatch")
-        return value
+    cpdef get_as(Quantity self, SIUnit units):
+        if units is None:
+            raise TypeError()
 
-    cpdef Quantity cvt_to(Quantity self, SIUnit units not None):
-        cdef int cmp
-        if not c.cmp_udata(cmp, self.data.units, units.data):
+        cdef c.Error error_code
+        cdef double value
+        error_code = c.extract_quantity(value, self.data, units.data)
+        if error_code == c.Success:
+            return value
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("units mismatch")
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    cpdef Quantity cvt_to(Quantity self, SIUnit units):
+        if units is None:
+            raise TypeError()
+
+        cdef c.Error error_code
+        cdef int cmp
+
+        error_code = c.cmp_udata(cmp, self.data.units, units.data)
+        if error_code == c.DimensionMismatch:
+            raise ValueError("units mismatch")
+
         if cmp == 0:
             return self
 
@@ -197,12 +243,22 @@ cdef class Quantity:
         c.cvt_quantity(ret.data, self.data, units.data)
         return ret
 
-    cpdef Quantity round_to(Quantity self, SIUnit units not None):
+    cpdef Quantity round_to(Quantity self, SIUnit units):
+        if units is None:
+            raise TypeError()
+
+        cdef c.Error error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
-        if not c.cvt_quantity(ret.data, self.data, units.data):
+
+        error_code = c.cvt_quantity(ret.data, self.data, units.data)
+        if error_code == c.Success:
+            ret.data.quantity = round(ret.data.quantity)
+            return ret
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("units mismatch")
-        ret.data.quantity = round(ret.data.quantity)
-        return ret
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     """
     Comparison Methods
@@ -213,6 +269,7 @@ cdef class Quantity:
             return NotImplemented
         if type(rhs) is not Quantity:
             return NotImplemented
+
         try:
             return lhs.cmp(rhs) == 0
         except ValueError:
@@ -221,101 +278,142 @@ cdef class Quantity:
     def __ne__(lhs, rhs):
         return not lhs == rhs
 
-    def __lt__(lhs, rhs):
+    def __lt__(lhs not None, rhs not None):
         return lhs.cmp(rhs) < 0
 
-    def __le__(lhs, rhs):
+    def __le__(lhs not None, rhs not None):
         return lhs.cmp(rhs) <= 0
 
-    def __gt__(lhs, rhs):
+    def __gt__(lhs not None, rhs not None):
         return lhs.cmp(rhs) > 0
 
-    def __ge__(lhs, rhs):
+    def __ge__(lhs not None, rhs not None):
         return lhs.cmp(rhs) >= 0
 
-    cpdef int cmp(Quantity self not None, Quantity other not None):
-        cdef int signum
-        if not c.cmp_qdata(signum, self.data, other.data):
-            raise ValueError('unit mismatch')
-        return signum
+    cpdef cmp(Quantity self, Quantity other):
+        cdef int signum, error_code
+        error_code = c.cmp_qdata(signum, self.data, other.data)
+        if error_code == c.Success:
+            return signum
 
-    cpdef bint compatible(Quantity self, Quantity other not None):
+        if error_code == c.DimensionMismatch:
+            raise ValueError('unit mismatch')
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    cpdef bint compatible(Quantity self, Quantity other):
         return c.eq_ddata(self.data.units.dimensions, other.data.units.dimensions)
 
-    cpdef r_approx(Quantity self, Quantity other not None, double rtol=1e-9):
-        cdef c.UData norm_units
-        if self.data.units.scale < other.data.units.scale:
-            norm_units = self.data.units
-        else:
-            norm_units = other.data.units
-
+    cpdef r_approx(Quantity self, Quantity other, double rtol=1e-9):
+        cdef int error_code
+        cdef c.UData norm_udata
         cdef double self_norm, other_norm, epsilon
-        if not c.extract_quantity(self_norm, self.data, norm_units):
+
+        error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
+
+        if error_code == c.Success:
+
+            self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
+            other_norm = c.unsafe_extract_quantity(other.data, norm_udata)
+
+            epsilon = fmax(1.0, fmax(self_norm, other_norm)) * rtol
+            return fabs(self_norm - other_norm) <= fabs(epsilon)
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("unit mismatch")
-        if not c.extract_quantity(other_norm, other.data, norm_units):
-            raise ValueError("unit mismatch")
 
-        epsilon = fmax(1, fmax(self_norm, other_norm)) * rtol
-        return fabs(self_norm - other_norm) <= fabs(epsilon)
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    cpdef a_approx(Quantity self, Quantity other not None, double atol=1e-6):
-        cdef c.UData norm_units
-        if self.data.units.scale < other.data.units.scale:
-            norm_units = self.data.units
-        else:
-            norm_units = other.data.units
-
+    cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):
+        cdef int error_code
+        cdef c.UData norm_udata
         cdef double self_norm, other_norm
-        if not c.extract_quantity(self_norm, self.data, norm_units):
-            raise ValueError("unit mismatch")
-        if not c.extract_quantity(other_norm, other.data, norm_units):
+
+        error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
+        if error_code == c.Success:
+            self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
+            other_norm = c.unsafe_extract_quantity(other.data, norm_udata)
+            return fabs(self_norm - other_norm) <= fabs(atol)
+
+        if error_code == c.DimensionMismatch:
             raise ValueError("unit mismatch")
 
-        return fabs(self_norm - other_norm) <= fabs(atol)
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    cpdef q_approx(Quantity self, Quantity other not None, Quantity qtol not None):
+
+    cpdef q_approx(Quantity self, Quantity other, Quantity qtol):
+        cdef int error_code1, error_code2
         cdef double self_val, other_val
-        if not c.extract_quantity(self_val, self.data, qtol.data.units):
-            raise ValueError("unit mismatch")
-        if not c.extract_quantity(other_val, other.data, qtol.data.units):
-            raise ValueError("unit mismatch")
-        return fabs(self_val - other_val) <= fabs(qtol.data.quantity)
+        error_code1 = c.extract_quantity(self_val, self.data, qtol.data.units)
+        error_code2 = c.extract_quantity(other_val, other.data, qtol.data.units)
+
+        if error_code1 | error_code2 == c.Success:
+            return fabs(self_val - other_val) <= fabs(qtol.data.quantity)
+
+        if error_code1 == c.DimensionMismatch:
+            raise ValueError("unit mismatch (lhs)")
+        if error_code2 == c.DimensionMismatch:
+            raise ValueError("unit mismatch (rhs)")
+
+        raise RuntimeError("Unknown Error Occurred: %i" % (error_code1 | error_code2))
 
     """
     Arithmetic Methods
     """
 
-    def __add__(Quantity lhs not None, Quantity rhs not None):
+    def __add__(Quantity lhs, Quantity rhs):
+        cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
-        if not c.add_qdata(ret.data, lhs.data, rhs.data):
-            raise ValueError("units mismatch")
-        return ret
+        error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
+        if error_code == c.Success:
+            return ret
 
-    def __sub__(Quantity lhs not None, Quantity rhs not None):
+        if error_code == c.DimensionMismatch:
+            raise ValueError("unit mismatch")
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    def __sub__(Quantity lhs, Quantity rhs):
+        cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
-        if not c.sub_qdata(ret.data, lhs.data, rhs.data):
-            raise ValueError("units mismatch")
-        return ret
+        error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.DimensionMismatch:
+            raise ValueError("unit mismatch")
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __mul__(lhs, rhs):
         cdef Quantity ret = Quantity.__new__(Quantity)
         cdef c.QData other
-        cdef int code
-        code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
-        if code & c.ERROR:
+        cdef int operand_code, error_code
+        operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
+        if operand_code & c.OBJECT:
             return NotImplemented
-        c.mul_qdata(ret.data, ret.data, other)
-        return ret
+
+        error_code = c.mul_qdata(ret.data, ret.data, other)
+        if error_code == c.Success:
+            return ret
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __truediv__(lhs, rhs):
         cdef Quantity ret = Quantity.__new__(Quantity)
         cdef c.QData other
-        cdef int code
-        code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
-        if code & c.ERROR:
+        cdef int operand_code, error_code
+        operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
+        if operand_code & c.OBJECT:
             return NotImplemented
-        c.div_qdata(ret.data, ret.data, other)
-        return ret
+        error_code = c.div_qdata(ret.data, ret.data, other)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.ZeroDiv:
+            raise ZeroDivisionError()
+
+        return RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __pow__(lhs, rhs, modulo):
         if type(lhs) is not Quantity:
@@ -326,15 +424,21 @@ cdef class Quantity:
         cdef Quantity ret = Quantity.__new__(Quantity)
         ret.data.quantity = -self.data.quantity
         ret.data.units = self.data.units
-        return self
+        return ret
 
     def __invert__(Quantity self):
+        cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
         ret.data.quantity = 1.0
-        ret.data.units.scale = 1
-        ret.data.units.dimensions = d.dimensionless_t
-        c.div_qdata(ret.data, ret.data, self.data)
-        return ret
+        ret.data.units.scale = 1.0
+        error_code = c.div_qdata(ret.data, ret.data, self.data)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.ZeroDiv:
+            raise ZeroDivisionError()
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __abs__(Quantity self):
         if self.data.quantity >= 0:
@@ -345,9 +449,13 @@ cdef class Quantity:
         return ret
 
     cpdef Quantity exp(Quantity self, double power):
+        cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
-        c.pow_qdata(ret.data, self.data, power)
-        return ret
+        error_code = c.pow_qdata(ret.data, self.data, power)
+        if error_code == c.Success:
+            return ret
+
+        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __copy__(self):
         return self
@@ -366,7 +474,8 @@ cdef class Quantity:
 
     def __hash__(Quantity self):
         cdef double normalized = self.data.quantity * self.data.units.scale
-        qtuple = (normalized, self.data.units.dimensions)
+        exponents = tuple(self.data.units.dimensions.exponents)
+        qtuple = (normalized, exponents)
         return hash(qtuple)
 
     def __repr__(self):

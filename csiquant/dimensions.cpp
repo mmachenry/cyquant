@@ -844,14 +844,28 @@ struct __pyx_t_8csiquant_6ctypes_QData;
 /* "csiquant/ctypes.pxd":14
  *     UData units
  * 
- * cdef enum OPERAND:             # <<<<<<<<<<<<<<
- *     ERROR = 1
+ * cdef enum Operand:             # <<<<<<<<<<<<<<
+ *     OBJECT = 1
  *     UNIT = 2
  */
-enum __pyx_t_8csiquant_6ctypes_OPERAND {
-  __pyx_e_8csiquant_6ctypes_ERROR = 1,
+enum __pyx_t_8csiquant_6ctypes_Operand {
+  __pyx_e_8csiquant_6ctypes_OBJECT = 1,
   __pyx_e_8csiquant_6ctypes_UNIT = 2,
   __pyx_e_8csiquant_6ctypes_QUANTITY = 4
+};
+
+/* "csiquant/ctypes.pxd":28
+ * # begin error code convention interface
+ * 
+ * cdef enum Error:             # <<<<<<<<<<<<<<
+ *     Success = 0
+ *     DimensionMismatch = 1
+ */
+enum __pyx_t_8csiquant_6ctypes_Error {
+  __pyx_e_8csiquant_6ctypes_Success = 0,
+  __pyx_e_8csiquant_6ctypes_DimensionMismatch = 1,
+  __pyx_e_8csiquant_6ctypes_ZeroDiv = 2,
+  __pyx_e_8csiquant_6ctypes_Unknown = 0x80000000
 };
 
 /* "csiquant/ctypes.pxd":3
@@ -1206,15 +1220,16 @@ static struct __pyx_obj_8csiquant_10dimensions_Dimensions *__pyx_f_8csiquant_10d
 /* Module declarations from 'libc.string' */
 
 /* Module declarations from 'csiquant.ctypes' */
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, double); /*proto*/
 static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, double); /*proto*/
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8csiquant_6ctypes_QData &, struct __pyx_t_8csiquant_6ctypes_QData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_extract_quantity(double &, struct __pyx_t_8csiquant_6ctypes_QData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
+static CYTHON_INLINE double __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(struct __pyx_t_8csiquant_6ctypes_QData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, double); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, double); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_min_udata(struct __pyx_t_8csiquant_6ctypes_UData &, struct __pyx_t_8csiquant_6ctypes_UData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_extract_quantity(double &, struct __pyx_t_8csiquant_6ctypes_QData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
 
 /* Module declarations from 'csiquant.dimensions' */
 static PyTypeObject *__pyx_ptype_8csiquant_10dimensions_Dimensions = 0;
@@ -1999,7 +2014,7 @@ static PyObject *__pyx_pf_8csiquant_10dimensions_10Dimensions_2__mul__(struct __
  *         return ret_val
  * 
  */
-  __pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_ret_val->data, __pyx_v_lhs->data, __pyx_v_rhs->data);
+  (void)(__pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_ret_val->data, __pyx_v_lhs->data, __pyx_v_rhs->data));
 
   /* "csiquant/dimensions.pyx":42
  *         cdef Dimensions ret_val = Dimensions.__new__(Dimensions)
@@ -2086,7 +2101,7 @@ static PyObject *__pyx_pf_8csiquant_10dimensions_10Dimensions_4__truediv__(struc
  *         return ret_val
  * 
  */
-  __pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_ret_val->data, __pyx_v_lhs->data, __pyx_v_rhs->data);
+  (void)(__pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_ret_val->data, __pyx_v_lhs->data, __pyx_v_rhs->data));
 
   /* "csiquant/dimensions.pyx":47
  *         cdef Dimensions ret_val = Dimensions.__new__(Dimensions)
@@ -2589,7 +2604,7 @@ static struct __pyx_obj_8csiquant_10dimensions_Dimensions *__pyx_f_8csiquant_10d
  *         return ret_val
  * 
  */
-  __pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_ret_val->data, __pyx_v_self->data, __pyx_v_exp);
+  (void)(__pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_ret_val->data, __pyx_v_self->data, __pyx_v_exp));
 
   /* "csiquant/dimensions.pyx":67
  *         cdef Dimensions ret_val = Dimensions.__new__(Dimensions)
@@ -3242,144 +3257,6 @@ static PyObject *__pyx_pf_8csiquant_10dimensions_10Dimensions_24__setstate_cytho
 /* "csiquant/ctypes.pxd":19
  *     QUANTITY = 4
  * 
- * cdef inline void mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
-  int __pyx_v_i;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("mul_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":22
- *     cdef int i
- * 
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
- * 
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":23
- * 
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]             # <<<<<<<<<<<<<<
- * 
- * cdef inline void div_ddata(DData& out, const DData& lhs, const DData& rhs):
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) + (__pyx_v_rhs.exponents[__pyx_v_i]));
-  }
-
-  /* "csiquant/ctypes.pxd":19
- *     QUANTITY = 4
- * 
- * cdef inline void mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-/* "csiquant/ctypes.pxd":25
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
- * 
- * cdef inline void div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
-  int __pyx_v_i;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("div_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":28
- *     cdef int i
- * 
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
- * 
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":29
- * 
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]             # <<<<<<<<<<<<<<
- * 
- * cdef inline void pow_ddata(DData& out, const DData& lhs, double power):
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) - (__pyx_v_rhs.exponents[__pyx_v_i]));
-  }
-
-  /* "csiquant/ctypes.pxd":25
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
- * 
- * cdef inline void div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-/* "csiquant/ctypes.pxd":31
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
- * 
- * cdef inline void pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, double __pyx_v_power) {
-  int __pyx_v_i;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("pow_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":34
- *     cdef int i
- * 
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] * power
- * 
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":35
- * 
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] * power             # <<<<<<<<<<<<<<
- * 
- * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) * __pyx_v_power);
-  }
-
-  /* "csiquant/ctypes.pxd":31
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
- * 
- * cdef inline void pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
- *     cdef int i
- * 
- */
-
-  /* function exit code */
-  __Pyx_RefNannyFinishContext();
-}
-
-/* "csiquant/ctypes.pxd":37
- *         out.exponents[i] = lhs.exponents[i] * power
- * 
  * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
  *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
  * 
@@ -3390,18 +3267,18 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiq
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("eq_ddata", 0);
 
-  /* "csiquant/ctypes.pxd":38
+  /* "csiquant/ctypes.pxd":20
  * 
  * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
  *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0             # <<<<<<<<<<<<<<
  * 
- * cdef inline void mul_udata(UData& out, const UData& lhs, const UData& rhs):
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
  */
   __pyx_r = (memcmp((&__pyx_v_lhs), (&__pyx_v_rhs), (sizeof(struct __pyx_t_8csiquant_6ctypes_DData))) == 0);
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":37
- *         out.exponents[i] = lhs.exponents[i] * power
+  /* "csiquant/ctypes.pxd":19
+ *     QUANTITY = 4
  * 
  * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
  *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
@@ -3414,185 +3291,449 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiq
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":40
+/* "csiquant/ctypes.pxd":22
  *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
  * 
- * cdef inline void mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     out.scale = lhs.scale * rhs.scale
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     return src.quantity * src.units.scale / units.scale
+ * 
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+static CYTHON_INLINE double __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  double __pyx_r;
+  __Pyx_RefNannyDeclarations
+  double __pyx_t_1;
+  __Pyx_RefNannySetupContext("unsafe_extract_quantity", 0);
+
+  /* "csiquant/ctypes.pxd":23
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
+ *     return src.quantity * src.units.scale / units.scale             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_src.quantity * __pyx_v_src.units.scale);
+  if (unlikely(__pyx_v_units.scale == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(2, 23, __pyx_L1_error)
+  }
+  __pyx_r = (__pyx_t_1 / __pyx_v_units.scale);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":22
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     return src.quantity * src.units.scale / units.scale
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_WriteUnraisable("csiquant.ctypes.unsafe_extract_quantity", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":38
+ * 
+ * #Success
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("mul_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":40
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":41
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) + (__pyx_v_rhs.exponents[__pyx_v_i]));
+  }
+
+  /* "csiquant/ctypes.pxd":42
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":38
+ * 
+ * #Success
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":45
+ * 
+ * #Success
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("div_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":47
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":48
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) - (__pyx_v_rhs.exponents[__pyx_v_i]));
+  }
+
+  /* "csiquant/ctypes.pxd":49
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":45
+ * 
+ * #Success
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":52
+ * 
+ * #Success
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, double __pyx_v_power) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("pow_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":54
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] * power
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":55
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] * power             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) * __pyx_v_power);
+  }
+
+  /* "csiquant/ctypes.pxd":56
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] * power
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * # begin udata functions
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":52
+ * 
+ * #Success
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":61
+ * 
+ * #Success
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale * rhs.scale
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("mul_udata", 0);
 
-  /* "csiquant/ctypes.pxd":41
- * 
- * cdef inline void mul_udata(UData& out, const UData& lhs, const UData& rhs):
+  /* "csiquant/ctypes.pxd":63
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     #todo: overflow checks
  *     out.scale = lhs.scale * rhs.scale             # <<<<<<<<<<<<<<
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
  * 
  */
   __pyx_v_out.scale = (__pyx_v_lhs.scale * __pyx_v_rhs.scale);
 
-  /* "csiquant/ctypes.pxd":42
- * cdef inline void mul_udata(UData& out, const UData& lhs, const UData& rhs):
+  /* "csiquant/ctypes.pxd":64
+ *     #todo: overflow checks
  *     out.scale = lhs.scale * rhs.scale
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
+ *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
  * 
- * cdef inline void div_udata(UData& out, const UData& lhs, const UData& rhs):
+ * #Success
  */
-  __pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  __pyx_r = __pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":40
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+  /* "csiquant/ctypes.pxd":61
  * 
- * cdef inline void mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ * #Success
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
  *     out.scale = lhs.scale * rhs.scale
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
  */
 
   /* function exit code */
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":44
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
- * 
- * cdef inline void div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     out.scale = lhs.scale / rhs.scale
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+/* "csiquant/ctypes.pxd":68
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("div_udata", 0);
 
-  /* "csiquant/ctypes.pxd":45
- * 
- * cdef inline void div_udata(UData& out, const UData& lhs, const UData& rhs):
+  /* "csiquant/ctypes.pxd":69
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale
+ */
+  __pyx_t_1 = ((__pyx_v_rhs.scale == 0.0) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":70
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:
+ *         return ZeroDiv             # <<<<<<<<<<<<<<
+ *     out.scale = lhs.scale / rhs.scale
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":69
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":71
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
  *     out.scale = lhs.scale / rhs.scale             # <<<<<<<<<<<<<<
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
  * 
  */
   if (unlikely(__pyx_v_rhs.scale == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(2, 45, __pyx_L1_error)
+    __PYX_ERR(2, 71, __pyx_L1_error)
   }
   __pyx_v_out.scale = (__pyx_v_lhs.scale / __pyx_v_rhs.scale);
 
-  /* "csiquant/ctypes.pxd":46
- * cdef inline void div_udata(UData& out, const UData& lhs, const UData& rhs):
+  /* "csiquant/ctypes.pxd":72
+ *         return ZeroDiv
  *     out.scale = lhs.scale / rhs.scale
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
  * 
- * cdef inline void pow_udata(UData& out, const UData& lhs, double power):
+ * #Success
  */
-  __pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  __pyx_r = __pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":44
- *     mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
- * 
- * cdef inline void div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     out.scale = lhs.scale / rhs.scale
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+  /* "csiquant/ctypes.pxd":68
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_WriteUnraisable("csiquant.ctypes.div_udata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":48
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+/* "csiquant/ctypes.pxd":75
  * 
- * cdef inline void pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ * #Success
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
  *     out.scale = lhs.scale ** power
- *     pow_ddata(out.dimensions, lhs.dimensions, power)
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, double __pyx_v_power) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, double __pyx_v_power) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pow_udata", 0);
 
-  /* "csiquant/ctypes.pxd":49
- * 
- * cdef inline void pow_udata(UData& out, const UData& lhs, double power):
+  /* "csiquant/ctypes.pxd":77
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):
+ *     #todo: overflow checks
  *     out.scale = lhs.scale ** power             # <<<<<<<<<<<<<<
- *     pow_ddata(out.dimensions, lhs.dimensions, power)
+ *     return pow_ddata(out.dimensions, lhs.dimensions, power)
  * 
  */
   __pyx_v_out.scale = pow(((double)__pyx_v_lhs.scale), __pyx_v_power);
 
-  /* "csiquant/ctypes.pxd":50
- * cdef inline void pow_udata(UData& out, const UData& lhs, double power):
+  /* "csiquant/ctypes.pxd":78
+ *     #todo: overflow checks
  *     out.scale = lhs.scale ** power
- *     pow_ddata(out.dimensions, lhs.dimensions, power)             # <<<<<<<<<<<<<<
+ *     return pow_ddata(out.dimensions, lhs.dimensions, power)             # <<<<<<<<<<<<<<
  * 
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):
+ * #Success
  */
-  __pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_power);
+  __pyx_r = __pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_power);
+  goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":48
- *     div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+  /* "csiquant/ctypes.pxd":75
  * 
- * cdef inline void pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ * #Success
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
  *     out.scale = lhs.scale ** power
- *     pow_ddata(out.dimensions, lhs.dimensions, power)
  */
 
   /* function exit code */
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":52
- *     pow_ddata(out.dimensions, lhs.dimensions, power)
- * 
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+/* "csiquant/ctypes.pxd":82
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
-  int __pyx_r;
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("cmp_udata", 0);
 
-  /* "csiquant/ctypes.pxd":53
- * 
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):
+  /* "csiquant/ctypes.pxd":83
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
  *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
+ *         return DimensionMismatch
  * 
  */
   __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":54
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):
+    /* "csiquant/ctypes.pxd":84
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
  *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return 0             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
  * 
  *     if lhs.scale > rhs.scale:
  */
-    __pyx_r = 0;
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":53
- * 
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):
+    /* "csiquant/ctypes.pxd":83
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
  *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
+ *         return DimensionMismatch
  * 
  */
   }
 
-  /* "csiquant/ctypes.pxd":56
- *         return 0
+  /* "csiquant/ctypes.pxd":86
+ *         return DimensionMismatch
  * 
  *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
  *         (&out)[0] = 1
@@ -3601,7 +3742,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
   __pyx_t_1 = ((__pyx_v_lhs.scale > __pyx_v_rhs.scale) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":57
+    /* "csiquant/ctypes.pxd":87
  * 
  *     if lhs.scale > rhs.scale:
  *         (&out)[0] = 1             # <<<<<<<<<<<<<<
@@ -3610,8 +3751,8 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
  */
     ((&__pyx_v_out)[0]) = 1;
 
-    /* "csiquant/ctypes.pxd":56
- *         return 0
+    /* "csiquant/ctypes.pxd":86
+ *         return DimensionMismatch
  * 
  *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
  *         (&out)[0] = 1
@@ -3620,7 +3761,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
     goto __pyx_L4;
   }
 
-  /* "csiquant/ctypes.pxd":58
+  /* "csiquant/ctypes.pxd":88
  *     if lhs.scale > rhs.scale:
  *         (&out)[0] = 1
  *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
@@ -3630,7 +3771,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
   __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":59
+    /* "csiquant/ctypes.pxd":89
  *         (&out)[0] = 1
  *     elif lhs.scale < rhs.scale:
  *         (&out)[0] = -1             # <<<<<<<<<<<<<<
@@ -3639,7 +3780,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
  */
     ((&__pyx_v_out)[0]) = -1;
 
-    /* "csiquant/ctypes.pxd":58
+    /* "csiquant/ctypes.pxd":88
  *     if lhs.scale > rhs.scale:
  *         (&out)[0] = 1
  *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
@@ -3649,34 +3790,34 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
     goto __pyx_L4;
   }
 
-  /* "csiquant/ctypes.pxd":61
+  /* "csiquant/ctypes.pxd":91
  *         (&out)[0] = -1
  *     else:
  *         (&out)[0] = 0             # <<<<<<<<<<<<<<
  * 
- *     return 1
+ *     return Success
  */
   /*else*/ {
     ((&__pyx_v_out)[0]) = 0;
   }
   __pyx_L4:;
 
-  /* "csiquant/ctypes.pxd":63
+  /* "csiquant/ctypes.pxd":93
  *         (&out)[0] = 0
  * 
- *     return 1             # <<<<<<<<<<<<<<
+ *     return Success             # <<<<<<<<<<<<<<
  * 
- * cdef inline void mul_qdata(QData& out, const QData& lhs, const QData& rhs):
+ * #Success
  */
-  __pyx_r = 1;
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":52
- *     pow_ddata(out.dimensions, lhs.dimensions, power)
- * 
- * cdef inline bint cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":82
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
   /* function exit code */
@@ -3685,208 +3826,488 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, s
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":65
- *     return 1
- * 
- * cdef inline void mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity * rhs.quantity
- *     mul_udata(out.units, lhs.units, rhs.units)
+/* "csiquant/ctypes.pxd":97
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_mul_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_min_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("mul_qdata", 0);
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("min_udata", 0);
 
-  /* "csiquant/ctypes.pxd":66
- * 
- * cdef inline void mul_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     out.quantity = lhs.quantity * rhs.quantity             # <<<<<<<<<<<<<<
- *     mul_udata(out.units, lhs.units, rhs.units)
+  /* "csiquant/ctypes.pxd":98
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
  * 
  */
-  __pyx_v_out.quantity = (__pyx_v_lhs.quantity * __pyx_v_rhs.quantity);
+  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
+  if (__pyx_t_1) {
 
-  /* "csiquant/ctypes.pxd":67
- * cdef inline void mul_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     out.quantity = lhs.quantity * rhs.quantity
- *     mul_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+    /* "csiquant/ctypes.pxd":99
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
  * 
- * cdef inline void div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if lhs.scale < rhs.scale:
  */
-  __pyx_f_8csiquant_6ctypes_mul_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
+    goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":65
- *     return 1
+    /* "csiquant/ctypes.pxd":98
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
  * 
- * cdef inline void mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity * rhs.quantity
- *     mul_udata(out.units, lhs.units, rhs.units)
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":101
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = lhs
+ *     else:
+ */
+  __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":102
+ * 
+ *     if lhs.scale < rhs.scale:
+ *         (&out)[0] = lhs             # <<<<<<<<<<<<<<
+ *     else:
+ *         (&out)[0] = rhs
+ */
+    ((&__pyx_v_out)[0]) = __pyx_v_lhs;
+
+    /* "csiquant/ctypes.pxd":101
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = lhs
+ *     else:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":104
+ *         (&out)[0] = lhs
+ *     else:
+ *         (&out)[0] = rhs             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  /*else*/ {
+    ((&__pyx_v_out)[0]) = __pyx_v_rhs;
+  }
+  __pyx_L4:;
+
+  /* "csiquant/ctypes.pxd":106
+ *         (&out)[0] = rhs
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * ## begin qdata functions
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":97
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
  */
 
   /* function exit code */
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":69
- *     mul_udata(out.units, lhs.units, rhs.units)
+/* "csiquant/ctypes.pxd":111
  * 
- * cdef inline void div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity / rhs.quantity
- *     div_udata(out.units, lhs.units, rhs.units)
+ * #Success
+ * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_div_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("mul_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":114
+ *     cdef Error error_code
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_mul_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":115
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":116
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity * rhs.quantity
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":115
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":118
+ *         return error_code
+ * 
+ *     out.quantity = lhs.quantity * rhs.quantity             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  __pyx_v_out.quantity = (__pyx_v_lhs.quantity * __pyx_v_rhs.quantity);
+
+  /* "csiquant/ctypes.pxd":120
+ *     out.quantity = lhs.quantity * rhs.quantity
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":111
+ * 
+ * #Success
+ * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":124
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("div_qdata", 0);
 
-  /* "csiquant/ctypes.pxd":70
+  /* "csiquant/ctypes.pxd":125
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
  * 
- * cdef inline void div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ */
+  __pyx_t_1 = ((__pyx_v_rhs.quantity == 0.0) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":126
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv             # <<<<<<<<<<<<<<
+ * 
+ *     cdef Error error_code
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":125
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":130
+ *     cdef Error error_code
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":131
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":132
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity / rhs.quantity
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":131
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":134
+ *         return error_code
+ * 
  *     out.quantity = lhs.quantity / rhs.quantity             # <<<<<<<<<<<<<<
- *     div_udata(out.units, lhs.units, rhs.units)
+ *     return Success
  * 
  */
   if (unlikely(__pyx_v_rhs.quantity == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(2, 70, __pyx_L1_error)
+    __PYX_ERR(2, 134, __pyx_L1_error)
   }
   __pyx_v_out.quantity = (__pyx_v_lhs.quantity / __pyx_v_rhs.quantity);
 
-  /* "csiquant/ctypes.pxd":71
- * cdef inline void div_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     out.quantity = lhs.quantity / rhs.quantity
- *     div_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":135
  * 
- * cdef inline void pow_qdata(QData& out, const QData& lhs, double rhs):
+ *     out.quantity = lhs.quantity / rhs.quantity
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
  */
-  __pyx_f_8csiquant_6ctypes_div_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":69
- *     mul_udata(out.units, lhs.units, rhs.units)
- * 
- * cdef inline void div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity / rhs.quantity
- *     div_udata(out.units, lhs.units, rhs.units)
+  /* "csiquant/ctypes.pxd":124
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv
  */
 
   /* function exit code */
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_WriteUnraisable("csiquant.ctypes.div_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":73
- *     div_udata(out.units, lhs.units, rhs.units)
+/* "csiquant/ctypes.pxd":138
  * 
- * cdef inline void pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity ** rhs
- *     pow_udata(out.units, lhs.units, rhs)
+ * #Success
+ * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
  */
 
-static CYTHON_INLINE void __pyx_f_8csiquant_6ctypes_pow_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, double __pyx_v_rhs) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, double __pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pow_qdata", 0);
 
-  /* "csiquant/ctypes.pxd":74
+  /* "csiquant/ctypes.pxd":141
+ *     cdef Error error_code
  * 
- * cdef inline void pow_qdata(QData& out, const QData& lhs, double rhs):
+ *     error_code = pow_udata(out.units, lhs.units, rhs)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_pow_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs);
+
+  /* "csiquant/ctypes.pxd":142
+ * 
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":143
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity ** rhs
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":142
+ * 
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":145
+ *         return error_code
+ * 
  *     out.quantity = lhs.quantity ** rhs             # <<<<<<<<<<<<<<
- *     pow_udata(out.units, lhs.units, rhs)
  * 
+ *     return Success
  */
   __pyx_v_out.quantity = pow(((double)__pyx_v_lhs.quantity), __pyx_v_rhs);
 
-  /* "csiquant/ctypes.pxd":75
- * cdef inline void pow_qdata(QData& out, const QData& lhs, double rhs):
+  /* "csiquant/ctypes.pxd":147
  *     out.quantity = lhs.quantity ** rhs
- *     pow_udata(out.units, lhs.units, rhs)             # <<<<<<<<<<<<<<
  * 
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
  */
-  __pyx_f_8csiquant_6ctypes_pow_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs);
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":73
- *     div_udata(out.units, lhs.units, rhs.units)
+  /* "csiquant/ctypes.pxd":138
  * 
- * cdef inline void pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity ** rhs
- *     pow_udata(out.units, lhs.units, rhs)
+ * #Success
+ * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
  */
 
   /* function exit code */
+  __pyx_L0:;
   __Pyx_RefNannyFinishContext();
+  return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":77
- *     pow_udata(out.units, lhs.units, rhs)
+/* "csiquant/ctypes.pxd":151
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_add_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  int __pyx_r;
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_add_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
   __Pyx_RefNannySetupContext("add_qdata", 0);
 
-  /* "csiquant/ctypes.pxd":78
+  /* "csiquant/ctypes.pxd":154
+ *     cdef Error error_code
  * 
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.quantity += lhs.quantity
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
  */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_cvt_quantity(__pyx_v_out, __pyx_v_rhs, __pyx_v_lhs.units) != 0)) != 0);
-  if (__pyx_t_1) {
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
 
-    /* "csiquant/ctypes.pxd":79
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0             # <<<<<<<<<<<<<<
- *     out.quantity += lhs.quantity
- *     return 1
+  /* "csiquant/ctypes.pxd":155
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
-    __pyx_r = 0;
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":156
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ */
+    __pyx_r = __pyx_v_error_code;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":78
+    /* "csiquant/ctypes.pxd":155
  * 
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.quantity += lhs.quantity
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
   }
 
-  /* "csiquant/ctypes.pxd":80
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
- *     out.quantity += lhs.quantity             # <<<<<<<<<<<<<<
- *     return 1
+  /* "csiquant/ctypes.pxd":158
+ *         return error_code
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)
  * 
  */
-  __pyx_v_out.quantity = (__pyx_v_out.quantity + __pyx_v_lhs.quantity);
+  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
 
-  /* "csiquant/ctypes.pxd":81
- *         return 0
- *     out.quantity += lhs.quantity
- *     return 1             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":159
  * 
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
  */
-  __pyx_r = 1;
+  __pyx_v_out.quantity = (__pyx_v_out.quantity + __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
+
+  /* "csiquant/ctypes.pxd":161
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":77
- *     pow_udata(out.units, lhs.units, rhs)
+  /* "csiquant/ctypes.pxd":151
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
  */
 
   /* function exit code */
@@ -3895,74 +4316,91 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_add_qdata(struct __pyx_t_8csi
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":83
- *     return 1
+/* "csiquant/ctypes.pxd":165
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_sub_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  int __pyx_r;
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_sub_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
   __Pyx_RefNannySetupContext("sub_qdata", 0);
 
-  /* "csiquant/ctypes.pxd":84
+  /* "csiquant/ctypes.pxd":168
+ *     cdef Error error_code
  * 
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.quantity = lhs.quantity - out.quantity
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
  */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_cvt_quantity(__pyx_v_out, __pyx_v_rhs, __pyx_v_lhs.units) != 0)) != 0);
-  if (__pyx_t_1) {
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
 
-    /* "csiquant/ctypes.pxd":85
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0             # <<<<<<<<<<<<<<
- *     out.quantity = lhs.quantity - out.quantity
- *     return 1
+  /* "csiquant/ctypes.pxd":169
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
-    __pyx_r = 0;
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":170
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ */
+    __pyx_r = __pyx_v_error_code;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":84
+    /* "csiquant/ctypes.pxd":169
  * 
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if not cvt_quantity(out, rhs, lhs.units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.quantity = lhs.quantity - out.quantity
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
   }
 
-  /* "csiquant/ctypes.pxd":86
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
- *     out.quantity = lhs.quantity - out.quantity             # <<<<<<<<<<<<<<
- *     return 1
+  /* "csiquant/ctypes.pxd":172
+ *         return error_code
  * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
+ *     return Success
  */
-  __pyx_v_out.quantity = (__pyx_v_lhs.quantity - __pyx_v_out.quantity);
+  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
 
-  /* "csiquant/ctypes.pxd":87
- *         return 0
- *     out.quantity = lhs.quantity - out.quantity
- *     return 1             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":173
  * 
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
  */
-  __pyx_r = 1;
+  __pyx_v_out.quantity = (__pyx_v_out.quantity - __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
+
+  /* "csiquant/ctypes.pxd":174
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":83
- *     return 1
+  /* "csiquant/ctypes.pxd":165
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not cvt_quantity(out, rhs, lhs.units):
- *         return 0
  */
 
   /* function exit code */
@@ -3971,74 +4409,82 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_sub_qdata(struct __pyx_t_8csi
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":89
- *     return 1
+/* "csiquant/ctypes.pxd":178
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     if not extract_quantity(out.quantity, src, units):
- *         return 0
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
-  int __pyx_r;
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
   __Pyx_RefNannySetupContext("cvt_quantity", 0);
 
-  /* "csiquant/ctypes.pxd":90
+  /* "csiquant/ctypes.pxd":181
+ *     cdef Error error_code
  * 
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):
- *     if not extract_quantity(out.quantity, src, units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.units = units
+ *     error_code = extract_quantity(out.quantity, src, units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
  */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_out.quantity, __pyx_v_src, __pyx_v_units) != 0)) != 0);
-  if (__pyx_t_1) {
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_out.quantity, __pyx_v_src, __pyx_v_units);
 
-    /* "csiquant/ctypes.pxd":91
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):
- *     if not extract_quantity(out.quantity, src, units):
- *         return 0             # <<<<<<<<<<<<<<
- *     out.units = units
- *     return 1
+  /* "csiquant/ctypes.pxd":182
+ * 
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
-    __pyx_r = 0;
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":183
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.units = units
+ */
+    __pyx_r = __pyx_v_error_code;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":90
+    /* "csiquant/ctypes.pxd":182
  * 
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):
- *     if not extract_quantity(out.quantity, src, units):             # <<<<<<<<<<<<<<
- *         return 0
- *     out.units = units
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
  */
   }
 
-  /* "csiquant/ctypes.pxd":92
- *     if not extract_quantity(out.quantity, src, units):
- *         return 0
+  /* "csiquant/ctypes.pxd":185
+ *         return error_code
+ * 
  *     out.units = units             # <<<<<<<<<<<<<<
- *     return 1
+ *     return Success
  * 
  */
   __pyx_v_out.units = __pyx_v_units;
 
-  /* "csiquant/ctypes.pxd":93
- *         return 0
- *     out.units = units
- *     return 1             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":186
  * 
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):
+ *     out.units = units
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
  */
-  __pyx_r = 1;
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":89
- *     return 1
+  /* "csiquant/ctypes.pxd":178
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
  * 
- * cdef inline bint cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     if not extract_quantity(out.quantity, src, units):
- *         return 0
  */
 
   /* function exit code */
@@ -4047,174 +4493,165 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":95
- *     return 1
- * 
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+/* "csiquant/ctypes.pxd":190
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_extract_quantity(double &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
-  int __pyx_r;
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_extract_quantity(double &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
-  double __pyx_t_2;
   __Pyx_RefNannySetupContext("extract_quantity", 0);
 
-  /* "csiquant/ctypes.pxd":96
- * 
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):
+  /* "csiquant/ctypes.pxd":191
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
  *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
- *     (&out)[0] = src.quantity * src.units.scale / units.scale
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
  */
   __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_src.units.dimensions, __pyx_v_units.dimensions) != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":97
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):
+    /* "csiquant/ctypes.pxd":192
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
  *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return 0             # <<<<<<<<<<<<<<
- *     (&out)[0] = src.quantity * src.units.scale / units.scale
- *     return 1
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ *     return Success
  */
-    __pyx_r = 0;
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":96
- * 
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):
+    /* "csiquant/ctypes.pxd":191
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
  *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
- *     (&out)[0] = src.quantity * src.units.scale / units.scale
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
  */
   }
 
-  /* "csiquant/ctypes.pxd":98
+  /* "csiquant/ctypes.pxd":193
  *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return 0
- *     (&out)[0] = src.quantity * src.units.scale / units.scale             # <<<<<<<<<<<<<<
- *     return 1
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)             # <<<<<<<<<<<<<<
+ *     return Success
  * 
  */
-  __pyx_t_2 = (__pyx_v_src.quantity * __pyx_v_src.units.scale);
-  if (unlikely(__pyx_v_units.scale == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(2, 98, __pyx_L1_error)
-  }
-  ((&__pyx_v_out)[0]) = (__pyx_t_2 / __pyx_v_units.scale);
+  ((&__pyx_v_out)[0]) = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_src, __pyx_v_units);
 
-  /* "csiquant/ctypes.pxd":99
- *         return 0
- *     (&out)[0] = src.quantity * src.units.scale / units.scale
- *     return 1             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":194
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ *     return Success             # <<<<<<<<<<<<<<
  * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+ * #Success
  */
-  __pyx_r = 1;
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":95
- *     return 1
- * 
- * cdef inline bint extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":190
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
   /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_WriteUnraisable("csiquant.ctypes.extract_quantity", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = 0;
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "csiquant/ctypes.pxd":101
- *     return 1
- * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+/* "csiquant/ctypes.pxd":198
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
   PyObject *__pyx_v_lhs_norm = 0;
   PyObject *__pyx_v_rhs_norm = 0;
-  int __pyx_r;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("cmp_qdata", 0);
 
-  /* "csiquant/ctypes.pxd":102
- * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+  /* "csiquant/ctypes.pxd":199
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
+ *         return DimensionMismatch
  * 
  */
   __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.units.dimensions, __pyx_v_rhs.units.dimensions) != 0)) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":103
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+    /* "csiquant/ctypes.pxd":200
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return 0             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
  * 
  *     cdef lhs_norm = lhs.quantity * lhs.units.scale
  */
-    __pyx_r = 0;
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
     goto __pyx_L0;
 
-    /* "csiquant/ctypes.pxd":102
- * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+    /* "csiquant/ctypes.pxd":199
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
- *         return 0
+ *         return DimensionMismatch
  * 
  */
   }
 
-  /* "csiquant/ctypes.pxd":105
- *         return 0
+  /* "csiquant/ctypes.pxd":202
+ *         return DimensionMismatch
  * 
  *     cdef lhs_norm = lhs.quantity * lhs.units.scale             # <<<<<<<<<<<<<<
  *     cdef rhs_norm = rhs.quantity * rhs.units.scale
  * 
  */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_lhs.quantity * __pyx_v_lhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 105, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_lhs.quantity * __pyx_v_lhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_lhs_norm = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "csiquant/ctypes.pxd":106
+  /* "csiquant/ctypes.pxd":203
  * 
  *     cdef lhs_norm = lhs.quantity * lhs.units.scale
  *     cdef rhs_norm = rhs.quantity * rhs.units.scale             # <<<<<<<<<<<<<<
  * 
  *     if lhs_norm > rhs_norm:
  */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_rhs.quantity * __pyx_v_rhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 106, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_rhs.quantity * __pyx_v_rhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 203, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_rhs_norm = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "csiquant/ctypes.pxd":108
+  /* "csiquant/ctypes.pxd":205
  *     cdef rhs_norm = rhs.quantity * rhs.units.scale
  * 
  *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
  *         (&out)[0] = 1
  *     elif lhs_norm < rhs_norm:
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 108, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(2, 108, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 205, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(2, 205, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":109
+    /* "csiquant/ctypes.pxd":206
  * 
  *     if lhs_norm > rhs_norm:
  *         (&out)[0] = 1             # <<<<<<<<<<<<<<
@@ -4223,7 +4660,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, s
  */
     ((&__pyx_v_out)[0]) = 1;
 
-    /* "csiquant/ctypes.pxd":108
+    /* "csiquant/ctypes.pxd":205
  *     cdef rhs_norm = rhs.quantity * rhs.units.scale
  * 
  *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
@@ -4233,19 +4670,19 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, s
     goto __pyx_L4;
   }
 
-  /* "csiquant/ctypes.pxd":110
+  /* "csiquant/ctypes.pxd":207
  *     if lhs_norm > rhs_norm:
  *         (&out)[0] = 1
  *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
  *         (&out)[0] = -1
  *     else:
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 110, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(2, 110, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 207, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(2, 207, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_1) {
 
-    /* "csiquant/ctypes.pxd":111
+    /* "csiquant/ctypes.pxd":208
  *         (&out)[0] = 1
  *     elif lhs_norm < rhs_norm:
  *         (&out)[0] = -1             # <<<<<<<<<<<<<<
@@ -4254,7 +4691,7 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, s
  */
     ((&__pyx_v_out)[0]) = -1;
 
-    /* "csiquant/ctypes.pxd":110
+    /* "csiquant/ctypes.pxd":207
  *     if lhs_norm > rhs_norm:
  *         (&out)[0] = 1
  *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
@@ -4264,39 +4701,40 @@ static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, s
     goto __pyx_L4;
   }
 
-  /* "csiquant/ctypes.pxd":113
+  /* "csiquant/ctypes.pxd":210
  *         (&out)[0] = -1
  *     else:
  *         (&out)[0] = 0             # <<<<<<<<<<<<<<
  * 
- * 
+ *     return Success
  */
   /*else*/ {
     ((&__pyx_v_out)[0]) = 0;
   }
   __pyx_L4:;
 
-  /* "csiquant/ctypes.pxd":116
+  /* "csiquant/ctypes.pxd":212
+ *         (&out)[0] = 0
  * 
+ *     return Success             # <<<<<<<<<<<<<<
  * 
- *     return 1             # <<<<<<<<<<<<<<
  */
-  __pyx_r = 1;
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
   goto __pyx_L0;
 
-  /* "csiquant/ctypes.pxd":101
- *     return 1
- * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":198
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_WriteUnraisable("csiquant.ctypes.cmp_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = 0;
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_lhs_norm);
   __Pyx_XDECREF(__pyx_v_rhs_norm);
@@ -4607,7 +5045,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 51, __pyx_L1_error)
   __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) __PYX_ERR(0, 56, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(2, 22, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(2, 40, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -4970,12 +5408,12 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_1) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "csiquant/ctypes.pxd":101
- *     return 1
- * 
- * cdef inline bint cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+  /* "csiquant/ctypes.pxd":198
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
  *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return 0
+ *         return DimensionMismatch
  */
 
   /*--- Wrapped vars code ---*/

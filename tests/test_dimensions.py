@@ -88,4 +88,14 @@ def test_pow_dimensions():
         dims ** None
 
 def test_hash_dimensions():
-    assert False
+    dims1 = Dimensions()
+    dims2 = Dimensions()
+
+    dims3 = Dimensions(kg=1, m=2, s=3, k=4, a=5, mol=6, cd=7)
+    dims4 = Dimensions(kg=1, m=2, s=3, k=4, a=5, mol=6, cd=7)
+
+    assert hash(dims1) == hash(dims2)
+    assert hash(dims3) == hash(dims4)
+
+    assert hash(dims1) != hash(dims3)
+    assert hash(dims2) != hash(dims4)
