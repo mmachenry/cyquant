@@ -48,7 +48,6 @@ CLASSIFIERS = [
     "Programming Language :: Python",
     "License :: OSI Approved :: MIT License",
     "Topic :: Scientific/Engineering",
-    "Operating System :: OS Independent",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
 ]
@@ -57,6 +56,7 @@ setup(
     name='csiquant',
     author="Greg Echelberger",
     author_email="gechelberger@gmail.com",
+    url="https://github.com/gechelberger/csiquant",
     version="1.0.0a1",
     description="cython dimensional analysis and unit tracking utility",
     packages=["csiquant"],
