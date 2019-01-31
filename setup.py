@@ -61,6 +61,7 @@ setup(
     description="cython dimensional analysis and unit tracking utility",
     packages=["csiquant"],
     cmdclass=CMDCLASS,
+    setup_requires=["wheel"],
     extras_require=EXTRAS_REQUIRE,
     ext_modules=extensions,
     package_data={
