@@ -53,7 +53,9 @@ cdef class SIUnit:
 
     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
         if scale <= 0:
-            raise ValueError("scale must be greater than 0")
+            raise ValueError("arg 'scale' must be greater than 0")
+        if type(dims) is not d.Dimensions:
+            raise TypeError("Expected Dimensions")
         self.data.scale = scale
         self.data.dimensions = dims.data
 
@@ -232,6 +234,8 @@ cdef class Quantity:
         return units
 
     def __init__(Quantity self, double quantity, SIUnit units):
+        if units is None:
+            raise TypeError()
         self.data.quantity = quantity
         self.data.units = units.data
 
