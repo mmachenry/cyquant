@@ -15,7 +15,7 @@ cdef class Quantity:
     cdef c.QData data
 
     cpdef bint is_of(Quantity self, d.Dimensions dimensions)
-    cpdef double get_as(Quantity self, SIUnit units)
+    cpdef get_as(Quantity self, SIUnit units)
     cpdef Quantity cvt_to(Quantity self, SIUnit units)
     cpdef Quantity round_to(Quantity self, SIUnit units)
 

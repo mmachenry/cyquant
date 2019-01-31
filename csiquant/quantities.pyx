@@ -51,7 +51,7 @@ cdef class SIUnit:
     def cd(self):
         return self.data.dimensions.exponents[6]
 
-    def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
+    def __init__(SIUnit self, double scale=1.0, d.Dimensions dims not None=d.dimensionless_t):
         if scale <= 0:
             raise ValueError("scale must be greater than 0")
         self.data.scale = scale
@@ -81,7 +81,7 @@ cdef class SIUnit:
         ret.data.units = self.data
         return ret
 
-    cpdef demote(SIUnit self, Quantity value):
+    cpdef demote(SIUnit self, Quantity value not None):
         cdef double ret
         if not c.extract_quantity(ret, value.data, self.data):
             raise ValueError("unit mismatch")
@@ -103,7 +103,7 @@ cdef class SIUnit:
         except ValueError:
             return NotImplemented
 
-    cpdef int cmp(SIUnit self, SIUnit other):
+    cpdef cmp(SIUnit self, SIUnit other not None):
         cdef int signum
         if not c.cmp_udata(signum, self.data, other.data):
             raise ValueError("units mismatch")
@@ -173,30 +173,34 @@ cdef class Quantity:
         units.data = self.data.units
         return units
 
-    def __init__(Quantity self, double quantity, SIUnit units):
+    def __init__(Quantity self, double quantity, SIUnit units not None):
         self.data.quantity = quantity
         self.data.units = units.data
 
-    cpdef bint is_of(Quantity self, d.Dimensions dims):
+    cpdef bint is_of(Quantity self, d.Dimensions dims not None):
         return c.eq_ddata(self.data.units.dimensions, dims.data)
 
-    cpdef double get_as(Quantity self, SIUnit units):
+    cpdef get_as(Quantity self, SIUnit units not None):
         cdef double value
         if not c.extract_quantity(value, self.data, units.data):
             raise ValueError("units mismatch")
         return value
 
-    cpdef Quantity cvt_to(Quantity self, SIUnit units):
-        if c.eq_ddata(self.data.units.dimensions, units.data.dimensions):
+    cpdef Quantity cvt_to(Quantity self, SIUnit units not None):
+        cdef int cmp
+        if not c.cmp_udata(cmp, self.data.units, units.data):
+            raise ValueError("units mismatch")
+        if cmp == 0:
             return self
 
         cdef Quantity ret = Quantity.__new__(Quantity)
         c.cvt_quantity(ret.data, self.data, units.data)
         return ret
 
-    cpdef Quantity round_to(Quantity self, SIUnit units):
+    cpdef Quantity round_to(Quantity self, SIUnit units not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
-        c.cvt_quantity(ret.data, self.data, units.data)
+        if not c.cvt_quantity(ret.data, self.data, units.data):
+            raise ValueError("units mismatch")
         ret.data.quantity = round(ret.data.quantity)
         return ret
 
@@ -229,16 +233,16 @@ cdef class Quantity:
     def __ge__(lhs, rhs):
         return lhs.cmp(rhs) >= 0
 
-    cpdef int cmp(Quantity self, Quantity other):
+    cpdef int cmp(Quantity self not None, Quantity other not None):
         cdef int signum
         if not c.cmp_qdata(signum, self.data, other.data):
             raise ValueError('unit mismatch')
         return signum
 
-    cpdef bint compatible(Quantity self, Quantity other):
+    cpdef bint compatible(Quantity self, Quantity other not None):
         return c.eq_ddata(self.data.units.dimensions, other.data.units.dimensions)
 
-    cpdef r_approx(Quantity self, Quantity other, double rtol=1e-9):
+    cpdef r_approx(Quantity self, Quantity other not None, double rtol=1e-9):
         cdef c.UData norm_units
         if self.data.units.scale < other.data.units.scale:
             norm_units = self.data.units
@@ -254,7 +258,7 @@ cdef class Quantity:
         epsilon = fmax(1, fmax(self_norm, other_norm)) * rtol
         return fabs(self_norm - other_norm) <= fabs(epsilon)
 
-    cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):
+    cpdef a_approx(Quantity self, Quantity other not None, double atol=1e-6):
         cdef c.UData norm_units
         if self.data.units.scale < other.data.units.scale:
             norm_units = self.data.units
@@ -269,7 +273,7 @@ cdef class Quantity:
 
         return fabs(self_norm - other_norm) <= fabs(atol)
 
-    cpdef q_approx(Quantity self, Quantity other, Quantity qtol):
+    cpdef q_approx(Quantity self, Quantity other not None, Quantity qtol not None):
         cdef double self_val, other_val
         if not c.extract_quantity(self_val, self.data, qtol.data.units):
             raise ValueError("unit mismatch")
@@ -281,13 +285,13 @@ cdef class Quantity:
     Arithmetic Methods
     """
 
-    def __add__(Quantity lhs, Quantity rhs):
+    def __add__(Quantity lhs not None, Quantity rhs not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
         if not c.add_qdata(ret.data, lhs.data, rhs.data):
             raise ValueError("units mismatch")
         return ret
 
-    def __sub__(Quantity lhs, Quantity rhs):
+    def __sub__(Quantity lhs not None, Quantity rhs not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
         if not c.sub_qdata(ret.data, lhs.data, rhs.data):
             raise ValueError("units mismatch")
@@ -324,7 +328,7 @@ cdef class Quantity:
         ret.data.units = self.data.units
         return self
 
-    def __invert__(self):
+    def __invert__(Quantity self):
         cdef Quantity ret = Quantity.__new__(Quantity)
         ret.data.quantity = 1.0
         ret.data.units.scale = 1
@@ -344,6 +348,12 @@ cdef class Quantity:
         cdef Quantity ret = Quantity.__new__(Quantity)
         c.pow_qdata(ret.data, self.data, power)
         return ret
+
+    def __copy__(self):
+        return self
+
+    def __deepcopy__(self, memodict={}):
+        return self
 
     def __bool__(Quantity self):
         return bool(self.data.quantity)

@@ -1,4 +1,5 @@
 import pytest
+import copy
 
 from csiquant import si
 
@@ -6,16 +7,57 @@ def test_create_quantity():
     assert False
 
 def test_copy_quantity():
-    assert False
+    in_m = 1000 * si.meters
+
+    copied = copy.copy(in_m)
+    assert copied.quantity == 1000
+    assert copied.units == si.meters
+
+    copied = copy.deepcopy(in_m)
+    assert copied.quantity == 1000
+    assert copied.units == si.meters
 
 def test_extract_quantity():
-    assert False
+    in_m = 1000 * si.meters
+
+    assert in_m.get_as(si.kilometers) == 1
+    assert in_m.get_as(si.millimeters) == 1000000
+
+    with pytest.raises(ValueError):
+        in_m.get_as(si.volts)
+
+    with pytest.raises(TypeError):
+        in_m.get_as(in_m)
 
 def test_cvt_quantity():
-    assert False
+    in_m = 1000 * si.meters
+
+    in_mm = in_m.cvt_to(si.millimeters)
+    assert in_mm.quantity == 1000000
+
+    in_km = in_m.cvt_to(si.kilometers)
+    assert in_km.quantity == 1
+
+    with pytest.raises(ValueError):
+        in_m.cvt_to(si.volts)
+
+    with pytest.raises(TypeError):
+        in_m.cvt_to(1)
 
 def test_round_quantity():
-    assert False
+    in_m = 1001 * si.meters
+
+    in_mm = in_m.round_to(si.millimeters)
+    assert in_mm.quantity == 1001000
+
+    in_km = in_m.round_to(si.kilometers)
+    assert in_km.quantity == 1
+
+    with pytest.raises(ValueError):
+        in_m.round_to(si.milligrams)
+
+    with pytest.raises(TypeError):
+        in_m.round_to(1000)
 
 def test_r_approx_quantity():
     in_gpa = 210 * si.gigapascals
@@ -68,7 +110,19 @@ def test_q_approx_quantity():
         in_km.q_approx(1000 * si.volts, 1 * si.millimeters)
 
 def test_is_of_quantity():
-    assert False
+    in_m = 1000 * si.meters
+
+    assert in_m.is_of(si.meters.dimensions)
+    assert in_m.is_of(si.millimeters.dimensions)
+
+    assert not in_m.is_of(si.milligrams.dimensions)
+    assert not in_m.is_of(None)
+
+    in_u = 1000 * si.unity
+    assert in_u.is_of(None)
+
+    with pytest.raises(TypeError):
+        in_m.is_of(1)
 
 def test_hash_quantity():
     assert False
