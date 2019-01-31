@@ -57,7 +57,7 @@ setup(
     name='csiquant',
     author="Greg Echelberger",
     author_email="gechelberger@gmail.com",
-    version="1.0.0b1",
+    version="1.0.0a1",
     description="cython dimensional analysis and unit tracking utility",
     packages=["csiquant"],
     cmdclass=CMDCLASS,
