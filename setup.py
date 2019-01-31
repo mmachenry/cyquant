@@ -35,15 +35,30 @@ if use_cython:
     CMDCLASS.update({'build_ext' : build_ext})
 
 INSTALL_REQUIRES = []
+
+TESTS_LIBS = ["pytest"]
+DEV_LIBS = ["cython", "bumpversion"]
 EXTRAS_REQUIRE = {
-    "tests" : ["coverage", "pytest"]
+    "tests" : TESTS_LIBS,
+    "dev" : TESTS_LIBS + DEV_LIBS
 }
 
-
+KEYWORDS = ["c-extension", "SI", "units", "quantities", "dimensional analysis"]
+CLASSIFIERS = [
+    "Programming Language :: Python",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+]
 
 setup(
     name='csiquant',
-    version='0.0.0b3',
+    author="Greg Echelberger",
+    author_email="gechelberger@gmail.com",
+    version="1.0.0b1",
+    description="cython dimensional analysis and unit tracking utility",
     packages=["csiquant"],
     cmdclass=CMDCLASS,
     extras_require=EXTRAS_REQUIRE,
@@ -51,5 +66,7 @@ setup(
     package_data={
         'csiquant': ['*.pyx', '*.pxd', '*.cpp']
     },
-    zip_safe=False
+    keywords=KEYWORDS,
+    classifiers=CLASSIFIERS,
+    zip_safe=False,
 )
