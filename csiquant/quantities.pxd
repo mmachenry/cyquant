@@ -10,7 +10,12 @@ cdef class SIUnit:
     cpdef promote(SIUnit self, double value)
     cpdef demote(SIUnit self, Quantity value)
 
+
+    cpdef bint compatible(SIUnit self, SIUnit other)
+    cpdef approx(SIUnit self, SIUnit other, double rtol=*, double atol=*)
     cpdef cmp(SIUnit self, SIUnit other)
+
+
     cpdef SIUnit exp(SIUnit self, double power)
 
 cdef class Quantity:

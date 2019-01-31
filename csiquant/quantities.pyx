@@ -115,6 +115,22 @@ cdef class SIUnit:
         except ValueError:
             return NotImplemented
 
+    def __ne__(lhs, rhs):
+        return not lhs == rhs
+
+    def __lt__(SIUnit lhs not None, SIUnit rhs not None):
+        return lhs.cmp(rhs) < 0
+
+    def __le__(SIUnit lhs not None, SIUnit rhs not None):
+        return lhs.cmp(rhs) <= 0
+
+    def __gt__(SIUnit lhs not None, SIUnit rhs not None):
+        return lhs.cmp(rhs) > 0
+
+    def __ge__(SIUnit lhs not None, SIUnit rhs not None):
+        return lhs.cmp(rhs) >= 0
+
+
     cpdef cmp(SIUnit self, SIUnit other):
         cdef int signum, error_code
         error_code = c.cmp_udata(signum, self.data, other.data)
@@ -125,6 +141,17 @@ cdef class SIUnit:
             raise ValueError("units mismatch")
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
+        if not self.compatible(other):
+            raise ValueError("unit mismatch")
+
+        cdef double epsilon
+        epsilon = fabs(fmax(atol, fmax(1.0, fmax(self.scale, other.scale)) * rtol))
+        return fabs(self.scale - other.scale) < epsilon
+
+    cpdef bint compatible(SIUnit self, SIUnit other):
+        return c.eq_ddata(self.data.dimensions, other.data.dimensions)
 
     """
     Arithmetic Methods
@@ -184,6 +211,10 @@ cdef class SIUnit:
 
     def __deepcopy__(self, memodict={}):
         return self
+
+    def __hash__(self):
+        data_tuple = (self.data.scale, tuple(self.data.dimensions.exponents))
+        return hash(data_tuple)
 
     def __repr__(self):
         return 'SIUnit(%f, %r)' % (self.scale, self.dimensions)
@@ -278,16 +309,16 @@ cdef class Quantity:
     def __ne__(lhs, rhs):
         return not lhs == rhs
 
-    def __lt__(lhs not None, rhs not None):
+    def __lt__(Quantity lhs not None, Quantity rhs not None):
         return lhs.cmp(rhs) < 0
 
-    def __le__(lhs not None, rhs not None):
+    def __le__(Quantity lhs not None, Quantity rhs not None):
         return lhs.cmp(rhs) <= 0
 
-    def __gt__(lhs not None, rhs not None):
+    def __gt__(Quantity lhs not None, Quantity rhs not None):
         return lhs.cmp(rhs) > 0
 
-    def __ge__(lhs not None, rhs not None):
+    def __ge__(Quantity lhs not None, Quantity rhs not None):
         return lhs.cmp(rhs) >= 0
 
     cpdef cmp(Quantity self, Quantity other):
@@ -361,7 +392,7 @@ cdef class Quantity:
     Arithmetic Methods
     """
 
-    def __add__(Quantity lhs, Quantity rhs):
+    def __add__(Quantity lhs not None, Quantity rhs not None):
         cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
@@ -373,7 +404,7 @@ cdef class Quantity:
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    def __sub__(Quantity lhs, Quantity rhs):
+    def __sub__(Quantity lhs not None, Quantity rhs not None):
         cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
@@ -385,7 +416,7 @@ cdef class Quantity:
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    def __mul__(lhs, rhs):
+    def __mul__(lhs not None, rhs not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
         cdef c.QData other
         cdef int operand_code, error_code
@@ -399,7 +430,7 @@ cdef class Quantity:
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    def __truediv__(lhs, rhs):
+    def __truediv__(lhs not None, rhs not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
         cdef c.QData other
         cdef int operand_code, error_code
