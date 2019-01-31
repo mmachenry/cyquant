@@ -47,6 +47,8 @@ cdef class Dimensions:
         return ret_val
 
     def __pow__(lhs, rhs, modulo):
+        if type(lhs) is not Dimensions:
+            raise TypeError("Expected Dimensions ** Number")
         return lhs.exp(rhs)
 
     def __eq__(self, other):
@@ -64,9 +66,20 @@ cdef class Dimensions:
         c.pow_ddata(ret_val.data, self.data, exp)
         return ret_val
 
+    def __copy__(self):
+        return self
+
+    def __deepcopy__(self, memodict={}):
+        return self
+
+    def __hash__(self):
+        etuple = (self.kg, self.m, self.s, self.k, self.a, self.mol, self.cd)
+        return hash(etuple)
+
     def __repr__(self):
         return 'Dimensions(kg=%f, m=%f, s=%f, k=%f, a=%f, mol=%f, cd=%f)' % (
             self.kg, self.m, self.s, self.k, self.a, self.mol, self.cd
         )
+
 
 dimensionless_t = Dimensions()

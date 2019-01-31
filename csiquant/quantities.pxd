@@ -5,6 +5,10 @@ import csiquant.dimensions as d
 cdef class SIUnit:
     cdef c.UData data
 
+    cpdef promote(SIUnit self, double value)
+    cpdef demote(SIUnit self, Quantity value)
+
+    cpdef int cmp(SIUnit self, SIUnit other)
     cpdef SIUnit exp(SIUnit self, double power)
 
 cdef class Quantity:
@@ -17,8 +21,15 @@ cdef class Quantity:
 
     #TODO: think abuot how best to handle approximation
 
-    cpdef Quantity exp(Quantity self, double power)
+    cpdef r_approx(Quantity self, Quantity other, double rtol=*)
+    cpdef a_approx(Quantity self, Quantity other, double atol=*)
+    cpdef q_approx(Quantity self, Quantity other, Quantity qtol)
 
+    cpdef bint compatible(Quantity self, Quantity other)
+
+    cpdef int cmp(Quantity self, Quantity other)
+
+    cpdef Quantity exp(Quantity self, double power)
 
 cdef inline Quantity mul_quantities(const c.QData& lhs, const c.QData& rhs):
     cdef Quantity ret = Quantity.__new__(Quantity)
