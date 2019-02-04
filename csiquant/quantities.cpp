@@ -848,7 +848,7 @@ struct __pyx_t_8csiquant_6ctypes_DData;
 struct __pyx_t_8csiquant_6ctypes_UData;
 struct __pyx_t_8csiquant_6ctypes_QData;
 
-/* "csiquant/ctypes.pxd":14
+/* "csiquant/ctypes.pxd":15
  *     UData units
  * 
  * cdef enum Operand:             # <<<<<<<<<<<<<<
@@ -861,7 +861,7 @@ enum __pyx_t_8csiquant_6ctypes_Operand {
   __pyx_e_8csiquant_6ctypes_QUANTITY = 4
 };
 
-/* "csiquant/ctypes.pxd":28
+/* "csiquant/ctypes.pxd":33
  * # begin error code convention interface
  * 
  * cdef enum Error:             # <<<<<<<<<<<<<<
@@ -875,8 +875,8 @@ enum __pyx_t_8csiquant_6ctypes_Error {
   __pyx_e_8csiquant_6ctypes_Unknown = 0x80000000
 };
 
-/* "csiquant/ctypes.pxd":3
- * from libc.string cimport memcmp
+/* "csiquant/ctypes.pxd":4
+ * from libc.math cimport fabs, fmax
  * 
  * cdef struct DData:             # <<<<<<<<<<<<<<
  *     double exponents[7]
@@ -886,7 +886,7 @@ struct __pyx_t_8csiquant_6ctypes_DData {
   double exponents[7];
 };
 
-/* "csiquant/ctypes.pxd":6
+/* "csiquant/ctypes.pxd":7
  *     double exponents[7]
  * 
  * cdef struct UData:             # <<<<<<<<<<<<<<
@@ -898,7 +898,7 @@ struct __pyx_t_8csiquant_6ctypes_UData {
   struct __pyx_t_8csiquant_6ctypes_DData dimensions;
 };
 
-/* "csiquant/ctypes.pxd":10
+/* "csiquant/ctypes.pxd":11
  *     DData dimensions
  * 
  * cdef struct QData:             # <<<<<<<<<<<<<<
@@ -992,7 +992,7 @@ struct __pyx_obj_8csiquant_10quantities_Quantity {
 };
 
 
-/* "csiquant/quantities.pyx":72
+/* "csiquant/quantities.pyx":74
  *         return self.values(args)
  * 
  *     def quantities(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -1010,7 +1010,7 @@ struct __pyx_obj_8csiquant_10quantities___pyx_scope_struct__quantities {
 };
 
 
-/* "csiquant/quantities.pyx":76
+/* "csiquant/quantities.pyx":78
  *             yield self.promote(value)
  * 
  *     def values(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -1049,7 +1049,7 @@ static struct __pyx_vtabstruct_8csiquant_10dimensions_Dimensions *__pyx_vtabptr_
  * 
  * cdef class SIUnit:             # <<<<<<<<<<<<<<
  * 
- *     @staticmethod
+ *     SCALE_RTOL = 1e-9
  */
 
 struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit {
@@ -1064,7 +1064,7 @@ struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit {
 static struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *__pyx_vtabptr_8csiquant_10quantities_SIUnit;
 
 
-/* "csiquant/quantities.pyx":224
+/* "csiquant/quantities.pyx":220
  *         return 'SIUnit(%f, %r)' % (self.scale, self.dimensions)
  * 
  * cdef class Quantity:             # <<<<<<<<<<<<<<
@@ -1284,6 +1284,29 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
 #define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
 #endif
 
+/* WriteUnraisableException.proto */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil);
+
+/* IncludeStringH.proto */
+#include <string.h>
+
+/* PyObjectFormat.proto */
+#if CYTHON_USE_UNICODE_WRITER
+static PyObject* __Pyx_PyObject_Format(PyObject* s, PyObject* f);
+#else
+#define __Pyx_PyObject_Format(s, f) PyObject_Format(s, f)
+#endif
+
+/* PyObjectFormatAndDecref.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f);
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f);
+
+/* JoinPyUnicode.proto */
+static PyObject* __Pyx_PyUnicode_Join(PyObject* value_tuple, Py_ssize_t value_count, Py_ssize_t result_ulength,
+                                      Py_UCS4 max_char);
+
 /* PyIntCompare.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, long intval, long inplace);
 
@@ -1318,29 +1341,6 @@ static int __Pyx__GetException(PyThreadState *tstate, PyObject **type, PyObject 
 #else
 static int __Pyx_GetException(PyObject **type, PyObject **value, PyObject **tb);
 #endif
-
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
-
-/* IncludeStringH.proto */
-#include <string.h>
-
-/* PyObjectFormat.proto */
-#if CYTHON_USE_UNICODE_WRITER
-static PyObject* __Pyx_PyObject_Format(PyObject* s, PyObject* f);
-#else
-#define __Pyx_PyObject_Format(s, f) PyObject_Format(s, f)
-#endif
-
-/* PyObjectFormatAndDecref.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f);
-static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f);
-
-/* JoinPyUnicode.proto */
-static PyObject* __Pyx_PyUnicode_Join(PyObject* value_tuple, Py_ssize_t value_count, Py_ssize_t result_ulength,
-                                      Py_UCS4 max_char);
 
 /* PyIntFromDouble.proto */
 #if PY_MAJOR_VERSION < 3
@@ -1586,7 +1586,10 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
 
 /* Module declarations from 'libc.string' */
 
+/* Module declarations from 'libc.math' */
+
 /* Module declarations from 'csiquant.ctypes' */
+static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_fapprox(double, double, double, double); /*proto*/
 static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
 static CYTHON_INLINE double __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(struct __pyx_t_8csiquant_6ctypes_QData const &, struct __pyx_t_8csiquant_6ctypes_UData const &); /*proto*/
 static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &, struct __pyx_t_8csiquant_6ctypes_DData const &, struct __pyx_t_8csiquant_6ctypes_DData const &); /*proto*/
@@ -1608,8 +1611,6 @@ static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6cty
 
 /* Module declarations from 'csiquant.dimensions' */
 static PyTypeObject *__pyx_ptype_8csiquant_10dimensions_Dimensions = 0;
-
-/* Module declarations from 'libc.math' */
 
 /* Module declarations from 'csiquant.quantities' */
 static PyTypeObject *__pyx_ptype_8csiquant_10quantities_SIUnit = 0;
@@ -1692,6 +1693,7 @@ static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_TypeError[] = "TypeError";
 static const char __pyx_k_reduce_ex[] = "__reduce_ex__";
 static const char __pyx_k_Quantity_2[] = "Quantity";
+static const char __pyx_k_SCALE_RTOL[] = "SCALE_RTOL";
 static const char __pyx_k_ValueError[] = "ValueError";
 static const char __pyx_k_compatible[] = "compatible";
 static const char __pyx_k_dimensions[] = "dimensions";
@@ -1730,6 +1732,7 @@ static PyObject *__pyx_kp_s_Pickling_of_struct_members_such;
 static PyObject *__pyx_kp_u_Quantity;
 static PyObject *__pyx_n_s_Quantity_2;
 static PyObject *__pyx_n_s_RuntimeError;
+static PyObject *__pyx_n_s_SCALE_RTOL;
 static PyObject *__pyx_kp_u_SIUnit;
 static PyObject *__pyx_n_s_SIUnit_2;
 static PyObject *__pyx_n_s_SIUnit_quantities;
@@ -1885,6 +1888,7 @@ static PyObject *__pyx_tp_new_8csiquant_10quantities_SIUnit(PyTypeObject *t, PyO
 static PyObject *__pyx_tp_new_8csiquant_10quantities_Quantity(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_8csiquant_10quantities___pyx_scope_struct__quantities(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_8csiquant_10quantities___pyx_scope_struct_1_values(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_float_1eneg_9;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
 static struct __pyx_obj_8csiquant_10dimensions_Dimensions *__pyx_k_;
@@ -1906,7 +1910,7 @@ static PyObject *__pyx_tuple__19;
 static PyObject *__pyx_codeobj__20;
 /* Late includes */
 
-/* "csiquant/quantities.pyx":13
+/* "csiquant/quantities.pyx":15
  * 
  *     @staticmethod
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):             # <<<<<<<<<<<<<<
@@ -2014,7 +2018,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_1Unit(CYTHON_UNUSED PyO
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Unit") < 0)) __PYX_ERR(1, 13, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "Unit") < 0)) __PYX_ERR(1, 15, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2049,7 +2053,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_1Unit(CYTHON_UNUSED PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("Unit", 0, 0, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 13, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("Unit", 0, 0, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 15, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.SIUnit.Unit", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2069,7 +2073,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_Unit(PyObject *__pyx_v_
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("Unit", 0);
 
-  /* "csiquant/quantities.pyx":14
+  /* "csiquant/quantities.pyx":16
  *     @staticmethod
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):
  *         return SIUnit(scale, d.Dimensions(kg, m, s, k, a, mol, cd))             # <<<<<<<<<<<<<<
@@ -2077,7 +2081,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_Unit(PyObject *__pyx_v_
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_kg);
   __Pyx_GIVEREF(__pyx_v_kg);
@@ -2100,10 +2104,10 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_Unit(PyObject *__pyx_v_
   __Pyx_INCREF(__pyx_v_cd);
   __Pyx_GIVEREF(__pyx_v_cd);
   PyTuple_SET_ITEM(__pyx_t_1, 6, __pyx_v_cd);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8csiquant_10dimensions_Dimensions), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8csiquant_10dimensions_Dimensions), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_scale);
   __Pyx_GIVEREF(__pyx_v_scale);
@@ -2111,14 +2115,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_Unit(PyObject *__pyx_v_
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":13
+  /* "csiquant/quantities.pyx":15
  * 
  *     @staticmethod
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):             # <<<<<<<<<<<<<<
@@ -2138,7 +2142,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_Unit(PyObject *__pyx_v_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":17
+/* "csiquant/quantities.pyx":19
  * 
  *     @property
  *     def scale(self):             # <<<<<<<<<<<<<<
@@ -2165,7 +2169,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_5scale___get__(struct _
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":18
+  /* "csiquant/quantities.pyx":20
  *     @property
  *     def scale(self):
  *         return self.data.scale             # <<<<<<<<<<<<<<
@@ -2173,13 +2177,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_5scale___get__(struct _
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 18, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":17
+  /* "csiquant/quantities.pyx":19
  * 
  *     @property
  *     def scale(self):             # <<<<<<<<<<<<<<
@@ -2198,7 +2202,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_5scale___get__(struct _
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":21
+/* "csiquant/quantities.pyx":23
  * 
  *     @property
  *     def dimensions(self):             # <<<<<<<<<<<<<<
@@ -2227,20 +2231,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_10dimensions___get__(st
   struct __pyx_t_8csiquant_6ctypes_DData __pyx_t_2;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":22
+  /* "csiquant/quantities.pyx":24
  *     @property
  *     def dimensions(self):
  *         cdef d.Dimensions dims = d.Dimensions.__new__(d.Dimensions)             # <<<<<<<<<<<<<<
  *         dims.data = self.data.dimensions
  *         return dims
  */
-  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_8csiquant_10dimensions_Dimensions), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_tp_new(((PyObject *)__pyx_ptype_8csiquant_10dimensions_Dimensions), __pyx_empty_tuple); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_8csiquant_10dimensions_Dimensions)))) __PYX_ERR(1, 22, __pyx_L1_error)
+  if (!(likely(__Pyx_TypeTest(__pyx_t_1, __pyx_ptype_8csiquant_10dimensions_Dimensions)))) __PYX_ERR(1, 24, __pyx_L1_error)
   __pyx_v_dims = ((struct __pyx_obj_8csiquant_10dimensions_Dimensions *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":23
+  /* "csiquant/quantities.pyx":25
  *     def dimensions(self):
  *         cdef d.Dimensions dims = d.Dimensions.__new__(d.Dimensions)
  *         dims.data = self.data.dimensions             # <<<<<<<<<<<<<<
@@ -2250,7 +2254,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_10dimensions___get__(st
   __pyx_t_2 = __pyx_v_self->data.dimensions;
   __pyx_v_dims->data = __pyx_t_2;
 
-  /* "csiquant/quantities.pyx":24
+  /* "csiquant/quantities.pyx":26
  *         cdef d.Dimensions dims = d.Dimensions.__new__(d.Dimensions)
  *         dims.data = self.data.dimensions
  *         return dims             # <<<<<<<<<<<<<<
@@ -2262,7 +2266,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_10dimensions___get__(st
   __pyx_r = ((PyObject *)__pyx_v_dims);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":21
+  /* "csiquant/quantities.pyx":23
  * 
  *     @property
  *     def dimensions(self):             # <<<<<<<<<<<<<<
@@ -2282,7 +2286,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_10dimensions___get__(st
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":27
+/* "csiquant/quantities.pyx":29
  * 
  *     @property
  *     def kg(self):             # <<<<<<<<<<<<<<
@@ -2309,7 +2313,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2kg___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":28
+  /* "csiquant/quantities.pyx":30
  *     @property
  *     def kg(self):
  *         return self.data.dimensions.exponents[0]             # <<<<<<<<<<<<<<
@@ -2317,13 +2321,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2kg___get__(struct __py
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[0])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[0])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":27
+  /* "csiquant/quantities.pyx":29
  * 
  *     @property
  *     def kg(self):             # <<<<<<<<<<<<<<
@@ -2342,7 +2346,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2kg___get__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":31
+/* "csiquant/quantities.pyx":33
  * 
  *     @property
  *     def m(self):             # <<<<<<<<<<<<<<
@@ -2369,7 +2373,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1m___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":32
+  /* "csiquant/quantities.pyx":34
  *     @property
  *     def m(self):
  *         return self.data.dimensions.exponents[1]             # <<<<<<<<<<<<<<
@@ -2377,13 +2381,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1m___get__(struct __pyx
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[1])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 32, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[1])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":31
+  /* "csiquant/quantities.pyx":33
  * 
  *     @property
  *     def m(self):             # <<<<<<<<<<<<<<
@@ -2402,7 +2406,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1m___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":35
+/* "csiquant/quantities.pyx":37
  * 
  *     @property
  *     def s(self):             # <<<<<<<<<<<<<<
@@ -2429,7 +2433,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1s___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":36
+  /* "csiquant/quantities.pyx":38
  *     @property
  *     def s(self):
  *         return self.data.dimensions.exponents[2]             # <<<<<<<<<<<<<<
@@ -2437,13 +2441,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1s___get__(struct __pyx
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[2])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 36, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[2])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":35
+  /* "csiquant/quantities.pyx":37
  * 
  *     @property
  *     def s(self):             # <<<<<<<<<<<<<<
@@ -2462,7 +2466,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1s___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":39
+/* "csiquant/quantities.pyx":41
  * 
  *     @property
  *     def k(self):             # <<<<<<<<<<<<<<
@@ -2489,7 +2493,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1k___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":40
+  /* "csiquant/quantities.pyx":42
  *     @property
  *     def k(self):
  *         return self.data.dimensions.exponents[3]             # <<<<<<<<<<<<<<
@@ -2497,13 +2501,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1k___get__(struct __pyx
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[3])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 40, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[3])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":39
+  /* "csiquant/quantities.pyx":41
  * 
  *     @property
  *     def k(self):             # <<<<<<<<<<<<<<
@@ -2522,7 +2526,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1k___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":43
+/* "csiquant/quantities.pyx":45
  * 
  *     @property
  *     def a(self):             # <<<<<<<<<<<<<<
@@ -2549,7 +2553,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1a___get__(struct __pyx
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":44
+  /* "csiquant/quantities.pyx":46
  *     @property
  *     def a(self):
  *         return self.data.dimensions.exponents[4]             # <<<<<<<<<<<<<<
@@ -2557,13 +2561,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1a___get__(struct __pyx
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[4])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[4])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 46, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":43
+  /* "csiquant/quantities.pyx":45
  * 
  *     @property
  *     def a(self):             # <<<<<<<<<<<<<<
@@ -2582,7 +2586,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_1a___get__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":47
+/* "csiquant/quantities.pyx":49
  * 
  *     @property
  *     def mol(self):             # <<<<<<<<<<<<<<
@@ -2609,7 +2613,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_3mol___get__(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":48
+  /* "csiquant/quantities.pyx":50
  *     @property
  *     def mol(self):
  *         return self.data.dimensions.exponents[5]             # <<<<<<<<<<<<<<
@@ -2617,13 +2621,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_3mol___get__(struct __p
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[5])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 48, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[5])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":47
+  /* "csiquant/quantities.pyx":49
  * 
  *     @property
  *     def mol(self):             # <<<<<<<<<<<<<<
@@ -2642,7 +2646,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_3mol___get__(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":51
+/* "csiquant/quantities.pyx":53
  * 
  *     @property
  *     def cd(self):             # <<<<<<<<<<<<<<
@@ -2669,7 +2673,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2cd___get__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":52
+  /* "csiquant/quantities.pyx":54
  *     @property
  *     def cd(self):
  *         return self.data.dimensions.exponents[6]             # <<<<<<<<<<<<<<
@@ -2677,13 +2681,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2cd___get__(struct __py
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[6])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 52, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble((__pyx_v_self->data.dimensions.exponents[6])); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":51
+  /* "csiquant/quantities.pyx":53
  * 
  *     @property
  *     def cd(self):             # <<<<<<<<<<<<<<
@@ -2702,7 +2706,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_2cd___get__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":54
+/* "csiquant/quantities.pyx":56
  *         return self.data.dimensions.exponents[6]
  * 
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):             # <<<<<<<<<<<<<<
@@ -2748,7 +2752,7 @@ static int __pyx_pw_8csiquant_10quantities_6SIUnit_3__init__(PyObject *__pyx_v_s
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 54, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 56, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2761,7 +2765,7 @@ static int __pyx_pw_8csiquant_10quantities_6SIUnit_3__init__(PyObject *__pyx_v_s
       }
     }
     if (values[0]) {
-      __pyx_v_scale = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_scale == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 54, __pyx_L3_error)
+      __pyx_v_scale = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_scale == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 56, __pyx_L3_error)
     } else {
       __pyx_v_scale = ((double)1.0);
     }
@@ -2769,13 +2773,13 @@ static int __pyx_pw_8csiquant_10quantities_6SIUnit_3__init__(PyObject *__pyx_v_s
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 54, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 56, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.SIUnit.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 54, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 56, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), __pyx_v_scale, __pyx_v_dims);
 
   /* function exit code */
@@ -2796,7 +2800,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
   struct __pyx_t_8csiquant_6ctypes_DData __pyx_t_4;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "csiquant/quantities.pyx":55
+  /* "csiquant/quantities.pyx":57
  * 
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
  *         if scale <= 0:             # <<<<<<<<<<<<<<
@@ -2806,20 +2810,20 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
   __pyx_t_1 = ((__pyx_v_scale <= 0.0) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "csiquant/quantities.pyx":56
+    /* "csiquant/quantities.pyx":58
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
  *         if scale <= 0:
  *             raise ValueError("arg 'scale' must be greater than 0")             # <<<<<<<<<<<<<<
  *         if type(dims) is not d.Dimensions:
  *             raise TypeError("Expected Dimensions")
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 56, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(1, 56, __pyx_L1_error)
+    __PYX_ERR(1, 58, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":55
+    /* "csiquant/quantities.pyx":57
  * 
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
  *         if scale <= 0:             # <<<<<<<<<<<<<<
@@ -2828,7 +2832,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
  */
   }
 
-  /* "csiquant/quantities.pyx":57
+  /* "csiquant/quantities.pyx":59
  *         if scale <= 0:
  *             raise ValueError("arg 'scale' must be greater than 0")
  *         if type(dims) is not d.Dimensions:             # <<<<<<<<<<<<<<
@@ -2839,20 +2843,20 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
   __pyx_t_3 = (__pyx_t_1 != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "csiquant/quantities.pyx":58
+    /* "csiquant/quantities.pyx":60
  *             raise ValueError("arg 'scale' must be greater than 0")
  *         if type(dims) is not d.Dimensions:
  *             raise TypeError("Expected Dimensions")             # <<<<<<<<<<<<<<
  *         self.data.scale = scale
  *         self.data.dimensions = dims.data
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(1, 58, __pyx_L1_error)
+    __PYX_ERR(1, 60, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":57
+    /* "csiquant/quantities.pyx":59
  *         if scale <= 0:
  *             raise ValueError("arg 'scale' must be greater than 0")
  *         if type(dims) is not d.Dimensions:             # <<<<<<<<<<<<<<
@@ -2861,7 +2865,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
  */
   }
 
-  /* "csiquant/quantities.pyx":59
+  /* "csiquant/quantities.pyx":61
  *         if type(dims) is not d.Dimensions:
  *             raise TypeError("Expected Dimensions")
  *         self.data.scale = scale             # <<<<<<<<<<<<<<
@@ -2870,7 +2874,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
  */
   __pyx_v_self->data.scale = __pyx_v_scale;
 
-  /* "csiquant/quantities.pyx":60
+  /* "csiquant/quantities.pyx":62
  *             raise TypeError("Expected Dimensions")
  *         self.data.scale = scale
  *         self.data.dimensions = dims.data             # <<<<<<<<<<<<<<
@@ -2880,7 +2884,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
   __pyx_t_4 = __pyx_v_dims->data;
   __pyx_v_self->data.dimensions = __pyx_t_4;
 
-  /* "csiquant/quantities.pyx":54
+  /* "csiquant/quantities.pyx":56
  *         return self.data.dimensions.exponents[6]
  * 
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):             # <<<<<<<<<<<<<<
@@ -2900,7 +2904,7 @@ static int __pyx_pf_8csiquant_10quantities_6SIUnit_2__init__(struct __pyx_obj_8c
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":66
+/* "csiquant/quantities.pyx":68
  *     """
  * 
  *     def pack(SIUnit self, *args):             # <<<<<<<<<<<<<<
@@ -2934,7 +2938,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_4pack(struct __pyx_obj_
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("pack", 0);
 
-  /* "csiquant/quantities.pyx":67
+  /* "csiquant/quantities.pyx":69
  * 
  *     def pack(SIUnit self, *args):
  *         return self.quantities(args)             # <<<<<<<<<<<<<<
@@ -2942,7 +2946,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_4pack(struct __pyx_obj_
  *     def unpack(SIUnit self, *args):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 67, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -2956,14 +2960,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_4pack(struct __pyx_obj_
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_args) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_args);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 67, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":66
+  /* "csiquant/quantities.pyx":68
  *     """
  * 
  *     def pack(SIUnit self, *args):             # <<<<<<<<<<<<<<
@@ -2984,7 +2988,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_4pack(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":69
+/* "csiquant/quantities.pyx":71
  *         return self.quantities(args)
  * 
  *     def unpack(SIUnit self, *args):             # <<<<<<<<<<<<<<
@@ -3018,7 +3022,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_6unpack(struct __pyx_ob
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("unpack", 0);
 
-  /* "csiquant/quantities.pyx":70
+  /* "csiquant/quantities.pyx":72
  * 
  *     def unpack(SIUnit self, *args):
  *         return self.values(args)             # <<<<<<<<<<<<<<
@@ -3026,7 +3030,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_6unpack(struct __pyx_ob
  *     def quantities(SIUnit self, iterable):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_values); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 70, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_values); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -3040,14 +3044,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_6unpack(struct __pyx_ob
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_args) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_args);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 70, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":69
+  /* "csiquant/quantities.pyx":71
  *         return self.quantities(args)
  * 
  *     def unpack(SIUnit self, *args):             # <<<<<<<<<<<<<<
@@ -3069,7 +3073,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_6unpack(struct __pyx_ob
 }
 static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "csiquant/quantities.pyx":72
+/* "csiquant/quantities.pyx":74
  *         return self.values(args)
  * 
  *     def quantities(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -3099,7 +3103,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_8quantities(struct __py
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_8csiquant_10quantities___pyx_scope_struct__quantities *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(1, 72, __pyx_L1_error)
+    __PYX_ERR(1, 74, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3110,7 +3114,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_8quantities(struct __py
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_iterable);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_iterable);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8csiquant_10quantities_6SIUnit_10generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_quantities, __pyx_n_s_SIUnit_quantities, __pyx_n_s_csiquant_quantities); if (unlikely(!gen)) __PYX_ERR(1, 72, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8csiquant_10quantities_6SIUnit_10generator, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_quantities, __pyx_n_s_SIUnit_quantities, __pyx_n_s_csiquant_quantities); if (unlikely(!gen)) __PYX_ERR(1, 74, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3145,9 +3149,9 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 72, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 74, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":73
+  /* "csiquant/quantities.pyx":75
  * 
  *     def quantities(SIUnit self, iterable):
  *         for value in iterable:             # <<<<<<<<<<<<<<
@@ -3158,26 +3162,26 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
     __pyx_t_1 = __pyx_cur_scope->__pyx_v_iterable; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_v_iterable); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 73, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_v_iterable); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 75, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 73, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 75, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 73, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 75, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 73, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 73, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 75, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 73, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 75, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -3187,7 +3191,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(1, 73, __pyx_L1_error)
+          else __PYX_ERR(1, 75, __pyx_L1_error)
         }
         break;
       }
@@ -3198,15 +3202,15 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "csiquant/quantities.pyx":74
+    /* "csiquant/quantities.pyx":76
  *     def quantities(SIUnit self, iterable):
  *         for value in iterable:
  *             yield self.promote(value)             # <<<<<<<<<<<<<<
  * 
  *     def values(SIUnit self, iterable):
  */
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_cur_scope->__pyx_v_value); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 74, __pyx_L1_error)
-    __pyx_t_4 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_cur_scope->__pyx_v_self->__pyx_vtab)->promote(__pyx_cur_scope->__pyx_v_self, __pyx_t_5, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 74, __pyx_L1_error)
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_cur_scope->__pyx_v_value); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 76, __pyx_L1_error)
+    __pyx_t_4 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_cur_scope->__pyx_v_self->__pyx_vtab)->promote(__pyx_cur_scope->__pyx_v_self, __pyx_t_5, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
@@ -3226,9 +3230,9 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
     __Pyx_XGOTREF(__pyx_t_1);
     __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 74, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 76, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":73
+    /* "csiquant/quantities.pyx":75
  * 
  *     def quantities(SIUnit self, iterable):
  *         for value in iterable:             # <<<<<<<<<<<<<<
@@ -3239,7 +3243,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "csiquant/quantities.pyx":72
+  /* "csiquant/quantities.pyx":74
  *         return self.values(args)
  * 
  *     def quantities(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -3266,7 +3270,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_10generator(__pyx_Corou
 }
 static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_CoroutineObject *__pyx_generator, CYTHON_UNUSED PyThreadState *__pyx_tstate, PyObject *__pyx_sent_value); /* proto */
 
-/* "csiquant/quantities.pyx":76
+/* "csiquant/quantities.pyx":78
  *             yield self.promote(value)
  * 
  *     def values(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -3296,7 +3300,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_11values(struct __pyx_o
   if (unlikely(!__pyx_cur_scope)) {
     __pyx_cur_scope = ((struct __pyx_obj_8csiquant_10quantities___pyx_scope_struct_1_values *)Py_None);
     __Pyx_INCREF(Py_None);
-    __PYX_ERR(1, 76, __pyx_L1_error)
+    __PYX_ERR(1, 78, __pyx_L1_error)
   } else {
     __Pyx_GOTREF(__pyx_cur_scope);
   }
@@ -3307,7 +3311,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_11values(struct __pyx_o
   __Pyx_INCREF(__pyx_cur_scope->__pyx_v_iterable);
   __Pyx_GIVEREF(__pyx_cur_scope->__pyx_v_iterable);
   {
-    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8csiquant_10quantities_6SIUnit_13generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_values, __pyx_n_s_SIUnit_values, __pyx_n_s_csiquant_quantities); if (unlikely(!gen)) __PYX_ERR(1, 76, __pyx_L1_error)
+    __pyx_CoroutineObject *gen = __Pyx_Generator_New((__pyx_coroutine_body_t) __pyx_gb_8csiquant_10quantities_6SIUnit_13generator1, NULL, (PyObject *) __pyx_cur_scope, __pyx_n_s_values, __pyx_n_s_SIUnit_values, __pyx_n_s_csiquant_quantities); if (unlikely(!gen)) __PYX_ERR(1, 78, __pyx_L1_error)
     __Pyx_DECREF(__pyx_cur_scope);
     __Pyx_RefNannyFinishContext();
     return (PyObject *) gen;
@@ -3341,9 +3345,9 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
     return NULL;
   }
   __pyx_L3_first_run:;
-  if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 76, __pyx_L1_error)
+  if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 78, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":77
+  /* "csiquant/quantities.pyx":79
  * 
  *     def values(SIUnit self, iterable):
  *         for quantity in iterable:             # <<<<<<<<<<<<<<
@@ -3354,26 +3358,26 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
     __pyx_t_1 = __pyx_cur_scope->__pyx_v_iterable; __Pyx_INCREF(__pyx_t_1); __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_v_iterable); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 77, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_cur_scope->__pyx_v_iterable); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 77, __pyx_L1_error)
+    __pyx_t_3 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 79, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
       if (likely(PyList_CheckExact(__pyx_t_1))) {
         if (__pyx_t_2 >= PyList_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 77, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 79, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 77, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 79, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         if (__pyx_t_2 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 77, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely(0 < 0)) __PYX_ERR(1, 79, __pyx_L1_error)
         #else
-        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 77, __pyx_L1_error)
+        __pyx_t_4 = PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 79, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -3383,7 +3387,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(1, 77, __pyx_L1_error)
+          else __PYX_ERR(1, 79, __pyx_L1_error)
         }
         break;
       }
@@ -3394,15 +3398,15 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
     __Pyx_GIVEREF(__pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "csiquant/quantities.pyx":78
+    /* "csiquant/quantities.pyx":80
  *     def values(SIUnit self, iterable):
  *         for quantity in iterable:
  *             yield self.demote(quantity)             # <<<<<<<<<<<<<<
  * 
  *     cpdef promote(SIUnit self, double value):
  */
-    if (!(likely(((__pyx_cur_scope->__pyx_v_quantity) == Py_None) || likely(__Pyx_TypeTest(__pyx_cur_scope->__pyx_v_quantity, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 78, __pyx_L1_error)
-    __pyx_t_4 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_cur_scope->__pyx_v_self->__pyx_vtab)->demote(__pyx_cur_scope->__pyx_v_self, ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_cur_scope->__pyx_v_quantity), 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 78, __pyx_L1_error)
+    if (!(likely(((__pyx_cur_scope->__pyx_v_quantity) == Py_None) || likely(__Pyx_TypeTest(__pyx_cur_scope->__pyx_v_quantity, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 80, __pyx_L1_error)
+    __pyx_t_4 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_cur_scope->__pyx_v_self->__pyx_vtab)->demote(__pyx_cur_scope->__pyx_v_self, ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_cur_scope->__pyx_v_quantity), 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 80, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_r = __pyx_t_4;
     __pyx_t_4 = 0;
@@ -3422,9 +3426,9 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
     __Pyx_XGOTREF(__pyx_t_1);
     __pyx_t_2 = __pyx_cur_scope->__pyx_t_1;
     __pyx_t_3 = __pyx_cur_scope->__pyx_t_2;
-    if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 78, __pyx_L1_error)
+    if (unlikely(!__pyx_sent_value)) __PYX_ERR(1, 80, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":77
+    /* "csiquant/quantities.pyx":79
  * 
  *     def values(SIUnit self, iterable):
  *         for quantity in iterable:             # <<<<<<<<<<<<<<
@@ -3435,7 +3439,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   CYTHON_MAYBE_UNUSED_VAR(__pyx_cur_scope);
 
-  /* "csiquant/quantities.pyx":76
+  /* "csiquant/quantities.pyx":78
  *             yield self.promote(value)
  * 
  *     def values(SIUnit self, iterable):             # <<<<<<<<<<<<<<
@@ -3461,7 +3465,7 @@ static PyObject *__pyx_gb_8csiquant_10quantities_6SIUnit_13generator1(__pyx_Coro
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":80
+/* "csiquant/quantities.pyx":82
  *             yield self.demote(quantity)
  * 
  *     cpdef promote(SIUnit self, double value):             # <<<<<<<<<<<<<<
@@ -3491,11 +3495,11 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_promote); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_promote); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 82, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_15promote)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 80, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 82, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -3511,7 +3515,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
         __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 80, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 82, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_r = __pyx_t_2;
@@ -3532,19 +3536,19 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
     #endif
   }
 
-  /* "csiquant/quantities.pyx":81
+  /* "csiquant/quantities.pyx":83
  * 
  *     cpdef promote(SIUnit self, double value):
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         ret.data.quantity = value
  *         ret.data.units = self.data
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 83, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":82
+  /* "csiquant/quantities.pyx":84
  *     cpdef promote(SIUnit self, double value):
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = value             # <<<<<<<<<<<<<<
@@ -3553,7 +3557,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
  */
   __pyx_v_ret->data.quantity = __pyx_v_value;
 
-  /* "csiquant/quantities.pyx":83
+  /* "csiquant/quantities.pyx":85
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = value
  *         ret.data.units = self.data             # <<<<<<<<<<<<<<
@@ -3563,7 +3567,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
   __pyx_t_6 = __pyx_v_self->data;
   __pyx_v_ret->data.units = __pyx_t_6;
 
-  /* "csiquant/quantities.pyx":84
+  /* "csiquant/quantities.pyx":86
  *         ret.data.quantity = value
  *         ret.data.units = self.data
  *         return ret             # <<<<<<<<<<<<<<
@@ -3575,7 +3579,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_promote(struct __pyx_obj
   __pyx_r = ((PyObject *)__pyx_v_ret);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":80
+  /* "csiquant/quantities.pyx":82
  *             yield self.demote(quantity)
  * 
  *     cpdef promote(SIUnit self, double value):             # <<<<<<<<<<<<<<
@@ -3607,7 +3611,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_15promote(PyObject *__p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("promote (wrapper)", 0);
   assert(__pyx_arg_value); {
-    __pyx_v_value = __pyx_PyFloat_AsDouble(__pyx_arg_value); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 80, __pyx_L3_error)
+    __pyx_v_value = __pyx_PyFloat_AsDouble(__pyx_arg_value); if (unlikely((__pyx_v_value == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 82, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3628,7 +3632,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_14promote(struct __pyx_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("promote", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_promote(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 80, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_promote(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 82, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3645,7 +3649,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_14promote(struct __pyx_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":86
+/* "csiquant/quantities.pyx":88
  *         return ret
  * 
  *     cpdef demote(SIUnit self, Quantity value):             # <<<<<<<<<<<<<<
@@ -3675,7 +3679,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_demote); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_demote); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 88, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_17demote)) {
         __Pyx_XDECREF(__pyx_r);
@@ -3692,7 +3696,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_value)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_value));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 86, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 88, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -3713,7 +3717,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":89
+  /* "csiquant/quantities.pyx":91
  *         cdef int error_code
  *         cdef double ret
  *         error_code = c.extract_quantity(ret, value.data, self.data)             # <<<<<<<<<<<<<<
@@ -3722,7 +3726,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_ret, __pyx_v_value->data, __pyx_v_self->data);
 
-  /* "csiquant/quantities.pyx":90
+  /* "csiquant/quantities.pyx":92
  *         cdef double ret
  *         error_code = c.extract_quantity(ret, value.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -3732,7 +3736,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_5) {
 
-    /* "csiquant/quantities.pyx":91
+    /* "csiquant/quantities.pyx":93
  *         error_code = c.extract_quantity(ret, value.data, self.data)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -3740,13 +3744,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_ret); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 91, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_ret); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":90
+    /* "csiquant/quantities.pyx":92
  *         cdef double ret
  *         error_code = c.extract_quantity(ret, value.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -3755,7 +3759,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
  */
   }
 
-  /* "csiquant/quantities.pyx":93
+  /* "csiquant/quantities.pyx":95
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -3765,20 +3769,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_5)) {
 
-    /* "csiquant/quantities.pyx":94
+    /* "csiquant/quantities.pyx":96
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 94, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 96, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 94, __pyx_L1_error)
+    __PYX_ERR(1, 96, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":93
+    /* "csiquant/quantities.pyx":95
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -3787,26 +3791,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_demote(struct __pyx_obj_
  */
   }
 
-  /* "csiquant/quantities.pyx":97
+  /* "csiquant/quantities.pyx":99
  * 
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     __call__ = quantities
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 97, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 97, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 97, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 97, __pyx_L1_error)
+  __PYX_ERR(1, 99, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":86
+  /* "csiquant/quantities.pyx":88
  *         return ret
  * 
  *     cpdef demote(SIUnit self, Quantity value):             # <<<<<<<<<<<<<<
@@ -3834,7 +3838,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_17demote(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("demote (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "value", 0))) __PYX_ERR(1, 86, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_value), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "value", 0))) __PYX_ERR(1, 88, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_16demote(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_value));
 
   /* function exit code */
@@ -3852,7 +3856,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_16demote(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("demote", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_demote(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 86, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_demote(__pyx_v_self, __pyx_v_value, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3869,7 +3873,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_16demote(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":105
+/* "csiquant/quantities.pyx":107
  *     """
  * 
  *     cpdef is_of(SIUnit self, d.Dimensions dims):             # <<<<<<<<<<<<<<
@@ -3898,7 +3902,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_of); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 105, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_of); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_19is_of)) {
         __Pyx_XDECREF(__pyx_r);
@@ -3915,7 +3919,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_dims)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_dims));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 105, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 107, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -3936,7 +3940,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
     #endif
   }
 
-  /* "csiquant/quantities.pyx":106
+  /* "csiquant/quantities.pyx":108
  * 
  *     cpdef is_of(SIUnit self, d.Dimensions dims):
  *         if dims is None:             # <<<<<<<<<<<<<<
@@ -3947,20 +3951,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":107
+    /* "csiquant/quantities.pyx":109
  *     cpdef is_of(SIUnit self, d.Dimensions dims):
  *         if dims is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  *         return c.eq_ddata(self.data.dimensions, dims.data)
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 107, __pyx_L1_error)
+    __PYX_ERR(1, 109, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":106
+    /* "csiquant/quantities.pyx":108
  * 
  *     cpdef is_of(SIUnit self, d.Dimensions dims):
  *         if dims is None:             # <<<<<<<<<<<<<<
@@ -3969,7 +3973,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
  */
   }
 
-  /* "csiquant/quantities.pyx":108
+  /* "csiquant/quantities.pyx":110
  *         if dims is None:
  *             raise TypeError()
  *         return c.eq_ddata(self.data.dimensions, dims.data)             # <<<<<<<<<<<<<<
@@ -3977,13 +3981,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_is_of(struct __pyx_obj_8
  *     def __eq__(lhs, rhs):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.dimensions, __pyx_v_dims->data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 108, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.dimensions, __pyx_v_dims->data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 110, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":105
+  /* "csiquant/quantities.pyx":107
  *     """
  * 
  *     cpdef is_of(SIUnit self, d.Dimensions dims):             # <<<<<<<<<<<<<<
@@ -4011,7 +4015,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_19is_of(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_of (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 105, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 107, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_18is_of(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10dimensions_Dimensions *)__pyx_v_dims));
 
   /* function exit code */
@@ -4029,7 +4033,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_18is_of(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("is_of", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_is_of(__pyx_v_self, __pyx_v_dims, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 105, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_is_of(__pyx_v_self, __pyx_v_dims, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4046,7 +4050,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_18is_of(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":110
+/* "csiquant/quantities.pyx":112
  *         return c.eq_ddata(self.data.dimensions, dims.data)
  * 
  *     def __eq__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -4073,15 +4077,11 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
   int __pyx_t_1;
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
-  int __pyx_t_8;
-  PyObject *__pyx_t_9 = NULL;
+  double __pyx_t_4;
+  struct __pyx_opt_args_8csiquant_10quantities_6SIUnit_approx __pyx_t_5;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "csiquant/quantities.pyx":111
+  /* "csiquant/quantities.pyx":113
  * 
  *     def __eq__(lhs, rhs):
  *         if not type(lhs) is SIUnit:             # <<<<<<<<<<<<<<
@@ -4092,7 +4092,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":112
+    /* "csiquant/quantities.pyx":114
  *     def __eq__(lhs, rhs):
  *         if not type(lhs) is SIUnit:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -4104,7 +4104,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":111
+    /* "csiquant/quantities.pyx":113
  * 
  *     def __eq__(lhs, rhs):
  *         if not type(lhs) is SIUnit:             # <<<<<<<<<<<<<<
@@ -4113,144 +4113,60 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
  */
   }
 
-  /* "csiquant/quantities.pyx":113
+  /* "csiquant/quantities.pyx":115
  *         if not type(lhs) is SIUnit:
  *             return NotImplemented
  *         if not type(rhs) is SIUnit:             # <<<<<<<<<<<<<<
  *             return NotImplemented
- *         try:
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
  */
   __pyx_t_2 = (((PyObject *)Py_TYPE(__pyx_v_rhs)) != ((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit));
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":114
+    /* "csiquant/quantities.pyx":116
  *             return NotImplemented
  *         if not type(rhs) is SIUnit:
  *             return NotImplemented             # <<<<<<<<<<<<<<
- *         try:
- *             return lhs.cmp(rhs) == 0
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
+ * 
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_builtin_NotImplemented);
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":113
+    /* "csiquant/quantities.pyx":115
  *         if not type(lhs) is SIUnit:
  *             return NotImplemented
  *         if not type(rhs) is SIUnit:             # <<<<<<<<<<<<<<
  *             return NotImplemented
- *         try:
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
  */
   }
 
-  /* "csiquant/quantities.pyx":115
+  /* "csiquant/quantities.pyx":117
  *         if not type(rhs) is SIUnit:
  *             return NotImplemented
- *         try:             # <<<<<<<<<<<<<<
- *             return lhs.cmp(rhs) == 0
- *         except ValueError:
- */
-  {
-    __Pyx_PyThreadState_declare
-    __Pyx_PyThreadState_assign
-    __Pyx_ExceptionSave(&__pyx_t_3, &__pyx_t_4, &__pyx_t_5);
-    __Pyx_XGOTREF(__pyx_t_3);
-    __Pyx_XGOTREF(__pyx_t_4);
-    __Pyx_XGOTREF(__pyx_t_5);
-    /*try:*/ {
-
-      /* "csiquant/quantities.pyx":116
- *             return NotImplemented
- *         try:
- *             return lhs.cmp(rhs) == 0             # <<<<<<<<<<<<<<
- *         except ValueError:
- *             return NotImplemented
- */
-      __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_rhs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_rhs, __pyx_ptype_8csiquant_10quantities_SIUnit))))) __PYX_ERR(1, 116, __pyx_L5_error)
-      __pyx_t_6 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs), 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 116, __pyx_L5_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyInt_EqObjC(__pyx_t_6, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 116, __pyx_L5_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_r = __pyx_t_7;
-      __pyx_t_7 = 0;
-      goto __pyx_L9_try_return;
-
-      /* "csiquant/quantities.pyx":115
- *         if not type(rhs) is SIUnit:
- *             return NotImplemented
- *         try:             # <<<<<<<<<<<<<<
- *             return lhs.cmp(rhs) == 0
- *         except ValueError:
- */
-    }
-    __pyx_L5_error:;
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-
-    /* "csiquant/quantities.pyx":117
- *         try:
- *             return lhs.cmp(rhs) == 0
- *         except ValueError:             # <<<<<<<<<<<<<<
- *             return NotImplemented
- * 
- */
-    __pyx_t_8 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
-    if (__pyx_t_8) {
-      __Pyx_AddTraceback("csiquant.quantities.SIUnit.__eq__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_9) < 0) __PYX_ERR(1, 117, __pyx_L7_except_error)
-      __Pyx_GOTREF(__pyx_t_7);
-      __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_GOTREF(__pyx_t_9);
-
-      /* "csiquant/quantities.pyx":118
- *             return lhs.cmp(rhs) == 0
- *         except ValueError:
- *             return NotImplemented             # <<<<<<<<<<<<<<
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)             # <<<<<<<<<<<<<<
  * 
  *     def __ne__(lhs, rhs):
  */
-      __Pyx_XDECREF(__pyx_r);
-      __Pyx_INCREF(__pyx_builtin_NotImplemented);
-      __pyx_r = __pyx_builtin_NotImplemented;
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      goto __pyx_L8_except_return;
-    }
-    goto __pyx_L7_except_error;
-    __pyx_L7_except_error:;
+  __Pyx_XDECREF(__pyx_r);
+  if (!(likely(((__pyx_v_rhs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_rhs, __pyx_ptype_8csiquant_10quantities_SIUnit))))) __PYX_ERR(1, 117, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_n_s_SCALE_RTOL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 117, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 117, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_5.__pyx_n = 1;
+  __pyx_t_5.rtol = __pyx_t_4;
+  __pyx_t_3 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->approx(__pyx_v_lhs, ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs), 0, &__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 117, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_r = __pyx_t_3;
+  __pyx_t_3 = 0;
+  goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":115
- *         if not type(rhs) is SIUnit:
- *             return NotImplemented
- *         try:             # <<<<<<<<<<<<<<
- *             return lhs.cmp(rhs) == 0
- *         except ValueError:
- */
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_XGIVEREF(__pyx_t_5);
-    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
-    goto __pyx_L1_error;
-    __pyx_L9_try_return:;
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_XGIVEREF(__pyx_t_5);
-    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
-    goto __pyx_L0;
-    __pyx_L8_except_return:;
-    __Pyx_XGIVEREF(__pyx_t_3);
-    __Pyx_XGIVEREF(__pyx_t_4);
-    __Pyx_XGIVEREF(__pyx_t_5);
-    __Pyx_ExceptionReset(__pyx_t_3, __pyx_t_4, __pyx_t_5);
-    goto __pyx_L0;
-  }
-
-  /* "csiquant/quantities.pyx":110
+  /* "csiquant/quantities.pyx":112
  *         return c.eq_ddata(self.data.dimensions, dims.data)
  * 
  *     def __eq__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -4260,9 +4176,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_AddTraceback("csiquant.quantities.SIUnit.__eq__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -4271,8 +4185,8 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_20__eq__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":120
- *             return NotImplemented
+/* "csiquant/quantities.pyx":119
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
  * 
  *     def __ne__(lhs, rhs):             # <<<<<<<<<<<<<<
  *         return not lhs == rhs
@@ -4299,7 +4213,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_22__ne__(struct __pyx_o
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("__ne__", 0);
 
-  /* "csiquant/quantities.pyx":121
+  /* "csiquant/quantities.pyx":120
  * 
  *     def __ne__(lhs, rhs):
  *         return not lhs == rhs             # <<<<<<<<<<<<<<
@@ -4307,17 +4221,17 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_22__ne__(struct __pyx_o
  *     def __lt__(SIUnit lhs not None, SIUnit rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyObject_RichCompare(((PyObject *)__pyx_v_lhs), __pyx_v_rhs, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 121, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 121, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(((PyObject *)__pyx_v_lhs), __pyx_v_rhs, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 120, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 120, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong((!__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 121, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((!__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":120
- *             return NotImplemented
+  /* "csiquant/quantities.pyx":119
+ *         return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
  * 
  *     def __ne__(lhs, rhs):             # <<<<<<<<<<<<<<
  *         return not lhs == rhs
@@ -4335,7 +4249,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_22__ne__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":123
+/* "csiquant/quantities.pyx":122
  *         return not lhs == rhs
  * 
  *     def __lt__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4350,9 +4264,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_25__lt__(PyObject *__py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__lt__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 123, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 122, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 123, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 122, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_24__lt__(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs));
 
   /* function exit code */
@@ -4371,7 +4285,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_24__lt__(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__lt__", 0);
 
-  /* "csiquant/quantities.pyx":124
+  /* "csiquant/quantities.pyx":123
  * 
  *     def __lt__(SIUnit lhs not None, SIUnit rhs not None):
  *         return lhs.cmp(rhs) < 0             # <<<<<<<<<<<<<<
@@ -4379,15 +4293,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_24__lt__(struct __pyx_o
  *     def __le__(SIUnit lhs not None, SIUnit rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 124, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 123, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 124, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 123, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":123
+  /* "csiquant/quantities.pyx":122
  *         return not lhs == rhs
  * 
  *     def __lt__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4407,7 +4321,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_24__lt__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":126
+/* "csiquant/quantities.pyx":125
  *         return lhs.cmp(rhs) < 0
  * 
  *     def __le__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4422,9 +4336,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_27__le__(PyObject *__py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__le__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 126, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 125, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 126, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 125, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_26__le__(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs));
 
   /* function exit code */
@@ -4443,7 +4357,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_26__le__(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__le__", 0);
 
-  /* "csiquant/quantities.pyx":127
+  /* "csiquant/quantities.pyx":126
  * 
  *     def __le__(SIUnit lhs not None, SIUnit rhs not None):
  *         return lhs.cmp(rhs) <= 0             # <<<<<<<<<<<<<<
@@ -4451,15 +4365,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_26__le__(struct __pyx_o
  *     def __gt__(SIUnit lhs not None, SIUnit rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 127, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 126, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 127, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 126, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":126
+  /* "csiquant/quantities.pyx":125
  *         return lhs.cmp(rhs) < 0
  * 
  *     def __le__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4479,7 +4393,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_26__le__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":129
+/* "csiquant/quantities.pyx":128
  *         return lhs.cmp(rhs) <= 0
  * 
  *     def __gt__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4494,9 +4408,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_29__gt__(PyObject *__py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__gt__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 129, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 128, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 129, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 128, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_28__gt__(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs));
 
   /* function exit code */
@@ -4515,7 +4429,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_28__gt__(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__gt__", 0);
 
-  /* "csiquant/quantities.pyx":130
+  /* "csiquant/quantities.pyx":129
  * 
  *     def __gt__(SIUnit lhs not None, SIUnit rhs not None):
  *         return lhs.cmp(rhs) > 0             # <<<<<<<<<<<<<<
@@ -4523,15 +4437,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_28__gt__(struct __pyx_o
  *     def __ge__(SIUnit lhs not None, SIUnit rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 130, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 129, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 130, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 129, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":129
+  /* "csiquant/quantities.pyx":128
  *         return lhs.cmp(rhs) <= 0
  * 
  *     def __gt__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4551,7 +4465,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_28__gt__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":132
+/* "csiquant/quantities.pyx":131
  *         return lhs.cmp(rhs) > 0
  * 
  *     def __ge__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4566,9 +4480,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_31__ge__(PyObject *__py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__ge__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 132, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 131, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 132, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_SIUnit, 0, "rhs", 0))) __PYX_ERR(1, 131, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_30__ge__(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_rhs));
 
   /* function exit code */
@@ -4587,7 +4501,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_30__ge__(struct __pyx_o
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__ge__", 0);
 
-  /* "csiquant/quantities.pyx":133
+  /* "csiquant/quantities.pyx":132
  * 
  *     def __ge__(SIUnit lhs not None, SIUnit rhs not None):
  *         return lhs.cmp(rhs) >= 0             # <<<<<<<<<<<<<<
@@ -4595,15 +4509,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_30__ge__(struct __pyx_o
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 133, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 132, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 133, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 132, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":132
+  /* "csiquant/quantities.pyx":131
  *         return lhs.cmp(rhs) > 0
  * 
  *     def __ge__(SIUnit lhs not None, SIUnit rhs not None):             # <<<<<<<<<<<<<<
@@ -4623,7 +4537,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_30__ge__(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":136
+/* "csiquant/quantities.pyx":135
  * 
  * 
  *     cpdef cmp(SIUnit self, SIUnit other):             # <<<<<<<<<<<<<<
@@ -4653,7 +4567,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 136, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 135, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_33cmp)) {
         __Pyx_XDECREF(__pyx_r);
@@ -4670,7 +4584,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_other)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_other));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 136, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 135, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -4691,7 +4605,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
     #endif
   }
 
-  /* "csiquant/quantities.pyx":138
+  /* "csiquant/quantities.pyx":137
  *     cpdef cmp(SIUnit self, SIUnit other):
  *         cdef int signum, error_code
  *         error_code = c.cmp_udata(signum, self.data, other.data)             # <<<<<<<<<<<<<<
@@ -4700,7 +4614,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_cmp_udata(__pyx_v_signum, __pyx_v_self->data, __pyx_v_other->data);
 
-  /* "csiquant/quantities.pyx":139
+  /* "csiquant/quantities.pyx":138
  *         cdef int signum, error_code
  *         error_code = c.cmp_udata(signum, self.data, other.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -4710,7 +4624,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_5) {
 
-    /* "csiquant/quantities.pyx":140
+    /* "csiquant/quantities.pyx":139
  *         error_code = c.cmp_udata(signum, self.data, other.data)
  *         if error_code == c.Success:
  *             return signum             # <<<<<<<<<<<<<<
@@ -4718,13 +4632,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_signum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 140, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_signum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":139
+    /* "csiquant/quantities.pyx":138
  *         cdef int signum, error_code
  *         error_code = c.cmp_udata(signum, self.data, other.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -4733,7 +4647,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
  */
   }
 
-  /* "csiquant/quantities.pyx":142
+  /* "csiquant/quantities.pyx":141
  *             return signum
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -4743,20 +4657,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_5)) {
 
-    /* "csiquant/quantities.pyx":143
+    /* "csiquant/quantities.pyx":142
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("units mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 143, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 142, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 143, __pyx_L1_error)
+    __PYX_ERR(1, 142, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":142
+    /* "csiquant/quantities.pyx":141
  *             return signum
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -4765,26 +4679,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_cmp(struct __pyx_obj_8cs
  */
   }
 
-  /* "csiquant/quantities.pyx":145
+  /* "csiquant/quantities.pyx":144
  *             raise ValueError("units mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 145, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 145, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 145, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 144, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 145, __pyx_L1_error)
+  __PYX_ERR(1, 144, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":136
+  /* "csiquant/quantities.pyx":135
  * 
  * 
  *     cpdef cmp(SIUnit self, SIUnit other):             # <<<<<<<<<<<<<<
@@ -4812,7 +4726,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_33cmp(PyObject *__pyx_v
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cmp (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 136, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 135, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_32cmp(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_other));
 
   /* function exit code */
@@ -4830,7 +4744,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_32cmp(struct __pyx_obj_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("cmp", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_cmp(__pyx_v_self, __pyx_v_other, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 136, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_6SIUnit_cmp(__pyx_v_self, __pyx_v_other, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 135, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4847,7 +4761,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_32cmp(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":147
+/* "csiquant/quantities.pyx":146
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):             # <<<<<<<<<<<<<<
@@ -4859,7 +4773,6 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_35approx(PyObject *__py
 static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_v_self, struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_v_other, int __pyx_skip_dispatch, struct __pyx_opt_args_8csiquant_10quantities_6SIUnit_approx *__pyx_optional_args) {
   double __pyx_v_rtol = ((double)1e-9);
   double __pyx_v_atol = ((double)0.0);
-  double __pyx_v_epsilon;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4871,8 +4784,6 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
   int __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   int __pyx_t_9;
-  double __pyx_t_10;
-  double __pyx_t_11;
   __Pyx_RefNannySetupContext("approx", 0);
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
@@ -4892,13 +4803,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 147, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 146, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_35approx)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rtol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 147, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rtol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 146, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_atol); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 147, __pyx_L1_error)
+        __pyx_t_4 = PyFloat_FromDouble(__pyx_v_atol); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 146, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_5 = __pyx_t_1; __pyx_t_6 = NULL;
@@ -4916,7 +4827,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_5)) {
           PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_other), __pyx_t_3, __pyx_t_4};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 147, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 146, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4926,7 +4837,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_5)) {
           PyObject *__pyx_temp[4] = {__pyx_t_6, ((PyObject *)__pyx_v_other), __pyx_t_3, __pyx_t_4};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 147, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_5, __pyx_temp+1-__pyx_t_7, 3+__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 146, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4934,7 +4845,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
         } else
         #endif
         {
-          __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 147, __pyx_L1_error)
+          __pyx_t_8 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(1, 146, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           if (__pyx_t_6) {
             __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -4948,7 +4859,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
           PyTuple_SET_ITEM(__pyx_t_8, 2+__pyx_t_7, __pyx_t_4);
           __pyx_t_3 = 0;
           __pyx_t_4 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 147, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 146, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         }
@@ -4971,80 +4882,53 @@ static PyObject *__pyx_f_8csiquant_10quantities_6SIUnit_approx(struct __pyx_obj_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":148
+  /* "csiquant/quantities.pyx":147
  * 
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
  *         if not self.compatible(other):             # <<<<<<<<<<<<<<
  *             raise ValueError("unit mismatch")
- * 
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
  */
   __pyx_t_9 = ((!(((struct __pyx_vtabstruct_8csiquant_10quantities_SIUnit *)__pyx_v_self->__pyx_vtab)->compatible(__pyx_v_self, __pyx_v_other, 0) != 0)) != 0);
   if (unlikely(__pyx_t_9)) {
 
-    /* "csiquant/quantities.pyx":149
+    /* "csiquant/quantities.pyx":148
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
  *         if not self.compatible(other):
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
  * 
- *         cdef double epsilon
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 149, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 148, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 149, __pyx_L1_error)
+    __PYX_ERR(1, 148, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":148
+    /* "csiquant/quantities.pyx":147
  * 
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
  *         if not self.compatible(other):             # <<<<<<<<<<<<<<
  *             raise ValueError("unit mismatch")
- * 
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
  */
   }
 
-  /* "csiquant/quantities.pyx":152
- * 
- *         cdef double epsilon
- *         epsilon = fabs(fmax(atol, fmax(1.0, fmax(self.scale, other.scale)) * rtol))             # <<<<<<<<<<<<<<
- *         return fabs(self.scale - other.scale) < epsilon
- * 
- */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 152, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 152, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 152, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 152, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_epsilon = fabs(fmax(__pyx_v_atol, (fmax(1.0, fmax(__pyx_t_10, __pyx_t_11)) * __pyx_v_rtol)));
-
-  /* "csiquant/quantities.pyx":153
- *         cdef double epsilon
- *         epsilon = fabs(fmax(atol, fmax(1.0, fmax(self.scale, other.scale)) * rtol))
- *         return fabs(self.scale - other.scale) < epsilon             # <<<<<<<<<<<<<<
+  /* "csiquant/quantities.pyx":149
+ *         if not self.compatible(other):
+ *             raise ValueError("unit mismatch")
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)             # <<<<<<<<<<<<<<
  * 
  *     cpdef bint compatible(SIUnit self, SIUnit other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 153, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_6ctypes_fapprox(__pyx_v_self->data.scale, __pyx_v_other->data.scale, __pyx_v_rtol, __pyx_v_atol)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 149, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_other), __pyx_n_s_scale); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 153, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyNumber_Subtract(__pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 153, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_11 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_11 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 153, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyBool_FromLong((fabs(__pyx_t_11) < __pyx_v_epsilon)); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 153, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_r = __pyx_t_5;
-  __pyx_t_5 = 0;
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":147
+  /* "csiquant/quantities.pyx":146
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):             # <<<<<<<<<<<<<<
@@ -5113,7 +4997,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_35approx(PyObject *__py
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "approx") < 0)) __PYX_ERR(1, 147, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "approx") < 0)) __PYX_ERR(1, 146, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -5128,25 +5012,25 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_35approx(PyObject *__py
     }
     __pyx_v_other = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)values[0]);
     if (values[1]) {
-      __pyx_v_rtol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_rtol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 147, __pyx_L3_error)
+      __pyx_v_rtol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_rtol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 146, __pyx_L3_error)
     } else {
       __pyx_v_rtol = ((double)1e-9);
     }
     if (values[2]) {
-      __pyx_v_atol = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_atol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 147, __pyx_L3_error)
+      __pyx_v_atol = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_atol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 146, __pyx_L3_error)
     } else {
       __pyx_v_atol = ((double)0.0);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("approx", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 147, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("approx", 0, 1, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 146, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.SIUnit.approx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 147, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 146, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_34approx(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), __pyx_v_other, __pyx_v_rtol, __pyx_v_atol);
 
   /* function exit code */
@@ -5168,7 +5052,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_34approx(struct __pyx_o
   __pyx_t_2.__pyx_n = 2;
   __pyx_t_2.rtol = __pyx_v_rtol;
   __pyx_t_2.atol = __pyx_v_atol;
-  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_SIUnit->approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 147, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_SIUnit->approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 146, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5185,8 +5069,8 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_34approx(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":155
- *         return fabs(self.scale - other.scale) < epsilon
+/* "csiquant/quantities.pyx":151
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
  * 
  *     cpdef bint compatible(SIUnit self, SIUnit other):             # <<<<<<<<<<<<<<
  *         return c.eq_ddata(self.data.dimensions, other.data.dimensions)
@@ -5213,7 +5097,7 @@ static int __pyx_f_8csiquant_10quantities_6SIUnit_compatible(struct __pyx_obj_8c
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_compatible); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 155, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_compatible); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_37compatible)) {
         __Pyx_INCREF(__pyx_t_1);
@@ -5229,10 +5113,10 @@ static int __pyx_f_8csiquant_10quantities_6SIUnit_compatible(struct __pyx_obj_8c
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_other)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_other));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 155, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 151, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 155, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 151, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_5;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5251,7 +5135,7 @@ static int __pyx_f_8csiquant_10quantities_6SIUnit_compatible(struct __pyx_obj_8c
     #endif
   }
 
-  /* "csiquant/quantities.pyx":156
+  /* "csiquant/quantities.pyx":152
  * 
  *     cpdef bint compatible(SIUnit self, SIUnit other):
  *         return c.eq_ddata(self.data.dimensions, other.data.dimensions)             # <<<<<<<<<<<<<<
@@ -5261,8 +5145,8 @@ static int __pyx_f_8csiquant_10quantities_6SIUnit_compatible(struct __pyx_obj_8c
   __pyx_r = __pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.dimensions, __pyx_v_other->data.dimensions);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":155
- *         return fabs(self.scale - other.scale) < epsilon
+  /* "csiquant/quantities.pyx":151
+ *         return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
  * 
  *     cpdef bint compatible(SIUnit self, SIUnit other):             # <<<<<<<<<<<<<<
  *         return c.eq_ddata(self.data.dimensions, other.data.dimensions)
@@ -5288,7 +5172,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_37compatible(PyObject *
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("compatible (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 155, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "other", 0))) __PYX_ERR(1, 151, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_6SIUnit_36compatible(((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_other));
 
   /* function exit code */
@@ -5306,7 +5190,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_36compatible(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("compatible", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_10quantities_6SIUnit_compatible(__pyx_v_self, __pyx_v_other, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 155, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_10quantities_6SIUnit_compatible(__pyx_v_self, __pyx_v_other, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5323,7 +5207,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_36compatible(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":162
+/* "csiquant/quantities.pyx":158
  *     """
  * 
  *     def __mul__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -5354,7 +5238,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__mul__", 0);
 
-  /* "csiquant/quantities.pyx":165
+  /* "csiquant/quantities.pyx":161
  *         cdef c.QData lhs_data, rhs_data
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)             # <<<<<<<<<<<<<<
@@ -5363,7 +5247,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
  */
   __pyx_v_operand_code = (__pyx_f_8csiquant_10quantities_parse_uoperand(__pyx_v_lhs_data, __pyx_v_lhs) | __pyx_f_8csiquant_10quantities_parse_uoperand(__pyx_v_rhs_data, __pyx_v_rhs));
 
-  /* "csiquant/quantities.pyx":166
+  /* "csiquant/quantities.pyx":162
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -5373,7 +5257,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
   __pyx_t_1 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_OBJECT) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":167
+    /* "csiquant/quantities.pyx":163
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -5385,7 +5269,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":166
+    /* "csiquant/quantities.pyx":162
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -5394,7 +5278,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
  */
   }
 
-  /* "csiquant/quantities.pyx":168
+  /* "csiquant/quantities.pyx":164
  *         if operand_code & c.OBJECT:
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:             # <<<<<<<<<<<<<<
@@ -5404,7 +5288,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
   __pyx_t_1 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_QUANTITY) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":169
+    /* "csiquant/quantities.pyx":165
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:
  *             return mul_quantities(lhs_data, rhs_data)             # <<<<<<<<<<<<<<
@@ -5412,13 +5296,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_mul_quantities(__pyx_v_lhs_data, __pyx_v_rhs_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 169, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_mul_quantities(__pyx_v_lhs_data, __pyx_v_rhs_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 165, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":168
+    /* "csiquant/quantities.pyx":164
  *         if operand_code & c.OBJECT:
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:             # <<<<<<<<<<<<<<
@@ -5427,7 +5311,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
  */
   }
 
-  /* "csiquant/quantities.pyx":170
+  /* "csiquant/quantities.pyx":166
  *         if operand_code & c.QUANTITY:
  *             return mul_quantities(lhs_data, rhs_data)
  *         return mul_units(lhs_data.units, rhs_data.units)             # <<<<<<<<<<<<<<
@@ -5435,13 +5319,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_mul_units(__pyx_v_lhs_data.units, __pyx_v_rhs_data.units)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 170, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_mul_units(__pyx_v_lhs_data.units, __pyx_v_rhs_data.units)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":162
+  /* "csiquant/quantities.pyx":158
  *     """
  * 
  *     def __mul__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -5460,7 +5344,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_38__mul__(PyObject *__p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":173
+/* "csiquant/quantities.pyx":169
  * 
  * 
  *     def __truediv__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -5491,7 +5375,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__truediv__", 0);
 
-  /* "csiquant/quantities.pyx":176
+  /* "csiquant/quantities.pyx":172
  *         cdef c.QData lhs_data, rhs_data
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)             # <<<<<<<<<<<<<<
@@ -5500,7 +5384,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
  */
   __pyx_v_operand_code = (__pyx_f_8csiquant_10quantities_parse_uoperand(__pyx_v_lhs_data, __pyx_v_lhs) | __pyx_f_8csiquant_10quantities_parse_uoperand(__pyx_v_rhs_data, __pyx_v_rhs));
 
-  /* "csiquant/quantities.pyx":177
+  /* "csiquant/quantities.pyx":173
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -5510,7 +5394,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
   __pyx_t_1 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_OBJECT) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":178
+    /* "csiquant/quantities.pyx":174
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -5522,7 +5406,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":177
+    /* "csiquant/quantities.pyx":173
  *         cdef int operand_code
  *         operand_code = parse_uoperand(lhs_data, lhs) | parse_uoperand(rhs_data, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -5531,7 +5415,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
  */
   }
 
-  /* "csiquant/quantities.pyx":179
+  /* "csiquant/quantities.pyx":175
  *         if operand_code & c.OBJECT:
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:             # <<<<<<<<<<<<<<
@@ -5541,7 +5425,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
   __pyx_t_1 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_QUANTITY) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":180
+    /* "csiquant/quantities.pyx":176
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:
  *             return div_quantities(lhs_data, rhs_data)             # <<<<<<<<<<<<<<
@@ -5549,13 +5433,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_div_quantities(__pyx_v_lhs_data, __pyx_v_rhs_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 180, __pyx_L1_error)
+    __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_div_quantities(__pyx_v_lhs_data, __pyx_v_rhs_data)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 176, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":179
+    /* "csiquant/quantities.pyx":175
  *         if operand_code & c.OBJECT:
  *             return NotImplemented
  *         if operand_code & c.QUANTITY:             # <<<<<<<<<<<<<<
@@ -5564,7 +5448,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
  */
   }
 
-  /* "csiquant/quantities.pyx":181
+  /* "csiquant/quantities.pyx":177
  *         if operand_code & c.QUANTITY:
  *             return div_quantities(lhs_data, rhs_data)
  *         return div_units(lhs_data.units, rhs_data.units)             # <<<<<<<<<<<<<<
@@ -5572,13 +5456,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
  *     def __invert__(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_div_units(__pyx_v_lhs_data.units, __pyx_v_rhs_data.units)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 181, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_8csiquant_10quantities_div_units(__pyx_v_lhs_data.units, __pyx_v_rhs_data.units)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 177, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":173
+  /* "csiquant/quantities.pyx":169
  * 
  * 
  *     def __truediv__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -5597,7 +5481,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_40__truediv__(PyObject 
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":183
+/* "csiquant/quantities.pyx":179
  *         return div_units(lhs_data.units, rhs_data.units)
  * 
  *     def __invert__(self):             # <<<<<<<<<<<<<<
@@ -5629,19 +5513,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("__invert__", 0);
 
-  /* "csiquant/quantities.pyx":185
+  /* "csiquant/quantities.pyx":181
  *     def __invert__(self):
  *         cdef c.Error error_code
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)             # <<<<<<<<<<<<<<
  *         ret.data.scale = 1.0
  *         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 185, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 181, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":186
+  /* "csiquant/quantities.pyx":182
  *         cdef c.Error error_code
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)
  *         ret.data.scale = 1.0             # <<<<<<<<<<<<<<
@@ -5650,7 +5534,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
  */
   __pyx_v_ret->data.scale = 1.0;
 
-  /* "csiquant/quantities.pyx":187
+  /* "csiquant/quantities.pyx":183
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)
  *         ret.data.scale = 1.0
  *         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]             # <<<<<<<<<<<<<<
@@ -5666,7 +5550,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
   __pyx_t_2[6] = 0.0;
   memcpy(&(__pyx_v_ret->data.dimensions.exponents[0]), __pyx_t_2, sizeof(__pyx_v_ret->data.dimensions.exponents[0]) * (7));
 
-  /* "csiquant/quantities.pyx":188
+  /* "csiquant/quantities.pyx":184
  *         ret.data.scale = 1.0
  *         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
  *         error_code = c.div_udata(ret.data, ret.data, self.data)             # <<<<<<<<<<<<<<
@@ -5675,7 +5559,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_udata(__pyx_v_ret->data, __pyx_v_ret->data, __pyx_v_self->data);
 
-  /* "csiquant/quantities.pyx":189
+  /* "csiquant/quantities.pyx":185
  *         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
  *         error_code = c.div_udata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -5685,7 +5569,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
   __pyx_t_3 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_3) {
 
-    /* "csiquant/quantities.pyx":190
+    /* "csiquant/quantities.pyx":186
  *         error_code = c.div_udata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -5697,7 +5581,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":189
+    /* "csiquant/quantities.pyx":185
  *         ret.data.dimensions.exponents[:] = [0,0,0,0,0,0,0]
  *         error_code = c.div_udata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -5706,7 +5590,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
  */
   }
 
-  /* "csiquant/quantities.pyx":192
+  /* "csiquant/quantities.pyx":188
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -5716,20 +5600,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
   __pyx_t_3 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_ZeroDiv) != 0);
   if (unlikely(__pyx_t_3)) {
 
-    /* "csiquant/quantities.pyx":193
+    /* "csiquant/quantities.pyx":189
  * 
  *         if error_code == c.ZeroDiv:
  *             raise ZeroDivisionError()             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 193, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 189, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 193, __pyx_L1_error)
+    __PYX_ERR(1, 189, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":192
+    /* "csiquant/quantities.pyx":188
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -5738,26 +5622,26 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
  */
   }
 
-  /* "csiquant/quantities.pyx":195
+  /* "csiquant/quantities.pyx":191
  *             raise ZeroDivisionError()
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __pow__(lhs, rhs, modulo):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 195, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 195, __pyx_L1_error)
+  __pyx_t_4 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 195, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 195, __pyx_L1_error)
+  __PYX_ERR(1, 191, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":183
+  /* "csiquant/quantities.pyx":179
  *         return div_units(lhs_data.units, rhs_data.units)
  * 
  *     def __invert__(self):             # <<<<<<<<<<<<<<
@@ -5778,7 +5662,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_42__invert__(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":197
+/* "csiquant/quantities.pyx":193
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __pow__(lhs, rhs, modulo):             # <<<<<<<<<<<<<<
@@ -5809,7 +5693,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__pow__", 0);
 
-  /* "csiquant/quantities.pyx":198
+  /* "csiquant/quantities.pyx":194
  * 
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not SIUnit:             # <<<<<<<<<<<<<<
@@ -5820,20 +5704,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":199
+    /* "csiquant/quantities.pyx":195
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not SIUnit:
  *             raise TypeError("Expected SIUnit ** Number")             # <<<<<<<<<<<<<<
  *         return lhs.exp(rhs)
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 199, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 195, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(1, 199, __pyx_L1_error)
+    __PYX_ERR(1, 195, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":198
+    /* "csiquant/quantities.pyx":194
  * 
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not SIUnit:             # <<<<<<<<<<<<<<
@@ -5842,7 +5726,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
  */
   }
 
-  /* "csiquant/quantities.pyx":200
+  /* "csiquant/quantities.pyx":196
  *         if type(lhs) is not SIUnit:
  *             raise TypeError("Expected SIUnit ** Number")
  *         return lhs.exp(rhs)             # <<<<<<<<<<<<<<
@@ -5850,7 +5734,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
  *     cpdef SIUnit exp(SIUnit self, double power):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_lhs, __pyx_n_s_exp); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 200, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_lhs, __pyx_n_s_exp); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -5864,14 +5748,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
   }
   __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_rhs) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_rhs);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 200, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 196, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":197
+  /* "csiquant/quantities.pyx":193
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __pow__(lhs, rhs, modulo):             # <<<<<<<<<<<<<<
@@ -5892,7 +5776,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_44__pow__(PyObject *__p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":202
+/* "csiquant/quantities.pyx":198
  *         return lhs.exp(rhs)
  * 
  *     cpdef SIUnit exp(SIUnit self, double power):             # <<<<<<<<<<<<<<
@@ -5923,11 +5807,11 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_exp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 202, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_exp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 198, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_6SIUnit_47exp)) {
         __Pyx_XDECREF(((PyObject *)__pyx_r));
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_power); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 202, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_power); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 198, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -5943,10 +5827,10 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
         __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 202, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 198, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_SIUnit))))) __PYX_ERR(1, 202, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_SIUnit))))) __PYX_ERR(1, 198, __pyx_L1_error)
         __pyx_r = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5965,19 +5849,19 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
     #endif
   }
 
-  /* "csiquant/quantities.pyx":204
+  /* "csiquant/quantities.pyx":200
  *     cpdef SIUnit exp(SIUnit self, double power):
  *         cdef c.Error error_code
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)             # <<<<<<<<<<<<<<
  *         error_code = c.pow_udata(ret.data, self.data, power)
  *         if error_code == c.Success:
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 204, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 200, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":205
+  /* "csiquant/quantities.pyx":201
  *         cdef c.Error error_code
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)
  *         error_code = c.pow_udata(ret.data, self.data, power)             # <<<<<<<<<<<<<<
@@ -5986,7 +5870,7 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_pow_udata(__pyx_v_ret->data, __pyx_v_self->data, __pyx_v_power);
 
-  /* "csiquant/quantities.pyx":206
+  /* "csiquant/quantities.pyx":202
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)
  *         error_code = c.pow_udata(ret.data, self.data, power)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -5996,7 +5880,7 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_6) {
 
-    /* "csiquant/quantities.pyx":207
+    /* "csiquant/quantities.pyx":203
  *         error_code = c.pow_udata(ret.data, self.data, power)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -6008,7 +5892,7 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
     __pyx_r = __pyx_v_ret;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":206
+    /* "csiquant/quantities.pyx":202
  *         cdef SIUnit ret = SIUnit.__new__(SIUnit)
  *         error_code = c.pow_udata(ret.data, self.data, power)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -6017,26 +5901,26 @@ static struct __pyx_obj_8csiquant_10quantities_SIUnit *__pyx_f_8csiquant_10quant
  */
   }
 
-  /* "csiquant/quantities.pyx":209
+  /* "csiquant/quantities.pyx":205
  *             return ret
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __copy__(self):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 209, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 209, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 209, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 209, __pyx_L1_error)
+  __PYX_ERR(1, 205, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":202
+  /* "csiquant/quantities.pyx":198
  *         return lhs.exp(rhs)
  * 
  *     cpdef SIUnit exp(SIUnit self, double power):             # <<<<<<<<<<<<<<
@@ -6068,7 +5952,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_47exp(PyObject *__pyx_v
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("exp (wrapper)", 0);
   assert(__pyx_arg_power); {
-    __pyx_v_power = __pyx_PyFloat_AsDouble(__pyx_arg_power); if (unlikely((__pyx_v_power == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 202, __pyx_L3_error)
+    __pyx_v_power = __pyx_PyFloat_AsDouble(__pyx_arg_power); if (unlikely((__pyx_v_power == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 198, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6089,7 +5973,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_46exp(struct __pyx_obj_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("exp", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_6SIUnit_exp(__pyx_v_self, __pyx_v_power, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 202, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_6SIUnit_exp(__pyx_v_self, __pyx_v_power, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6106,7 +5990,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_46exp(struct __pyx_obj_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":211
+/* "csiquant/quantities.pyx":207
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __copy__(self):             # <<<<<<<<<<<<<<
@@ -6132,7 +6016,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_48__copy__(struct __pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__copy__", 0);
 
-  /* "csiquant/quantities.pyx":212
+  /* "csiquant/quantities.pyx":208
  * 
  *     def __copy__(self):
  *         return self             # <<<<<<<<<<<<<<
@@ -6144,7 +6028,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_48__copy__(struct __pyx
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":211
+  /* "csiquant/quantities.pyx":207
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __copy__(self):             # <<<<<<<<<<<<<<
@@ -6159,7 +6043,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_48__copy__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":214
+/* "csiquant/quantities.pyx":210
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
@@ -6196,7 +6080,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_51__deepcopy__(PyObject
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__deepcopy__") < 0)) __PYX_ERR(1, 214, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__deepcopy__") < 0)) __PYX_ERR(1, 210, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -6210,7 +6094,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_6SIUnit_51__deepcopy__(PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__deepcopy__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 214, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__deepcopy__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 210, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.SIUnit.__deepcopy__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -6228,7 +6112,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_50__deepcopy__(struct _
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__deepcopy__", 0);
 
-  /* "csiquant/quantities.pyx":215
+  /* "csiquant/quantities.pyx":211
  * 
  *     def __deepcopy__(self, memodict={}):
  *         return self             # <<<<<<<<<<<<<<
@@ -6240,7 +6124,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_50__deepcopy__(struct _
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":214
+  /* "csiquant/quantities.pyx":210
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
@@ -6255,7 +6139,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_50__deepcopy__(struct _
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":217
+/* "csiquant/quantities.pyx":213
  *         return self
  * 
  *     def __hash__(self):             # <<<<<<<<<<<<<<
@@ -6286,21 +6170,21 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_6SIUnit_52__hash__(struct __pyx
   Py_hash_t __pyx_t_4;
   __Pyx_RefNannySetupContext("__hash__", 0);
 
-  /* "csiquant/quantities.pyx":218
+  /* "csiquant/quantities.pyx":214
  * 
  *     def __hash__(self):
  *         data_tuple = (self.data.scale, tuple(self.data.dimensions.exponents))             # <<<<<<<<<<<<<<
  *         return hash(data_tuple)
  * 
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 218, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_carray_to_py_double(__pyx_v_self->data.dimensions.exponents, 7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 218, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_carray_to_py_double(__pyx_v_self->data.dimensions.exponents, 7); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PySequence_Tuple(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 218, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PySequence_Tuple(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 218, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
@@ -6311,18 +6195,18 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_6SIUnit_52__hash__(struct __pyx
   __pyx_v_data_tuple = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":219
+  /* "csiquant/quantities.pyx":215
  *     def __hash__(self):
  *         data_tuple = (self.data.scale, tuple(self.data.dimensions.exponents))
  *         return hash(data_tuple)             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __pyx_t_4 = PyObject_Hash(__pyx_v_data_tuple); if (unlikely(__pyx_t_4 == ((Py_hash_t)-1))) __PYX_ERR(1, 219, __pyx_L1_error)
+  __pyx_t_4 = PyObject_Hash(__pyx_v_data_tuple); if (unlikely(__pyx_t_4 == ((Py_hash_t)-1))) __PYX_ERR(1, 215, __pyx_L1_error)
   __pyx_r = __pyx_t_4;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":217
+  /* "csiquant/quantities.pyx":213
  *         return self
  * 
  *     def __hash__(self):             # <<<<<<<<<<<<<<
@@ -6344,7 +6228,7 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_6SIUnit_52__hash__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":221
+/* "csiquant/quantities.pyx":217
  *         return hash(data_tuple)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -6375,7 +6259,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_54__repr__(struct __pyx
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "csiquant/quantities.pyx":222
+  /* "csiquant/quantities.pyx":218
  * 
  *     def __repr__(self):
  *         return 'SIUnit(%f, %r)' % (self.scale, self.dimensions)             # <<<<<<<<<<<<<<
@@ -6383,7 +6267,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_54__repr__(struct __pyx
  * cdef class Quantity:
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -6391,9 +6275,9 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_54__repr__(struct __pyx
   __pyx_t_2 += 7;
   __Pyx_GIVEREF(__pyx_kp_u_SIUnit);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_SIUnit);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_scale); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_scale); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_n_u_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_n_u_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_3;
@@ -6405,9 +6289,9 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_54__repr__(struct __pyx
   __pyx_t_2 += 2;
   __Pyx_GIVEREF(__pyx_kp_u__8);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__8);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_dimensions); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_dimensions); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Repr(__pyx_t_5), __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Repr(__pyx_t_5), __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -6419,14 +6303,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_54__repr__(struct __pyx
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__9);
   PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u__9);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 222, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 218, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":221
+  /* "csiquant/quantities.pyx":217
  *         return hash(data_tuple)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -6554,7 +6438,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_6SIUnit_58__setstate_cython__(C
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":227
+/* "csiquant/quantities.pyx":223
  * 
  *     @property
  *     def quantity(self):             # <<<<<<<<<<<<<<
@@ -6581,7 +6465,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_8quantity___get__(str
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":228
+  /* "csiquant/quantities.pyx":224
  *     @property
  *     def quantity(self):
  *         return self.data.quantity             # <<<<<<<<<<<<<<
@@ -6589,13 +6473,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_8quantity___get__(str
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 228, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":227
+  /* "csiquant/quantities.pyx":223
  * 
  *     @property
  *     def quantity(self):             # <<<<<<<<<<<<<<
@@ -6614,7 +6498,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_8quantity___get__(str
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":231
+/* "csiquant/quantities.pyx":227
  * 
  *     @property
  *     def units(self):             # <<<<<<<<<<<<<<
@@ -6643,19 +6527,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_5units___get__(struct
   struct __pyx_t_8csiquant_6ctypes_UData __pyx_t_2;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "csiquant/quantities.pyx":232
+  /* "csiquant/quantities.pyx":228
  *     @property
  *     def units(self):
  *         cdef SIUnit units = SIUnit.__new__(SIUnit)             # <<<<<<<<<<<<<<
  *         units.data = self.data.units
  *         return units
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 232, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_SIUnit(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_SIUnit), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 228, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_units = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":233
+  /* "csiquant/quantities.pyx":229
  *     def units(self):
  *         cdef SIUnit units = SIUnit.__new__(SIUnit)
  *         units.data = self.data.units             # <<<<<<<<<<<<<<
@@ -6665,7 +6549,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_5units___get__(struct
   __pyx_t_2 = __pyx_v_self->data.units;
   __pyx_v_units->data = __pyx_t_2;
 
-  /* "csiquant/quantities.pyx":234
+  /* "csiquant/quantities.pyx":230
  *         cdef SIUnit units = SIUnit.__new__(SIUnit)
  *         units.data = self.data.units
  *         return units             # <<<<<<<<<<<<<<
@@ -6677,7 +6561,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_5units___get__(struct
   __pyx_r = ((PyObject *)__pyx_v_units);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":231
+  /* "csiquant/quantities.pyx":227
  * 
  *     @property
  *     def units(self):             # <<<<<<<<<<<<<<
@@ -6697,7 +6581,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_5units___get__(struct
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":236
+/* "csiquant/quantities.pyx":232
  *         return units
  * 
  *     def __init__(Quantity self, double quantity, SIUnit units):             # <<<<<<<<<<<<<<
@@ -6736,11 +6620,11 @@ static int __pyx_pw_8csiquant_10quantities_8Quantity_1__init__(PyObject *__pyx_v
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_units)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(1, 236, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, 1); __PYX_ERR(1, 232, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 236, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 232, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -6748,18 +6632,18 @@ static int __pyx_pw_8csiquant_10quantities_8Quantity_1__init__(PyObject *__pyx_v
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_quantity = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_quantity == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 236, __pyx_L3_error)
+    __pyx_v_quantity = __pyx_PyFloat_AsDouble(values[0]); if (unlikely((__pyx_v_quantity == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 232, __pyx_L3_error)
     __pyx_v_units = ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)values[1]);
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 236, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 232, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.Quantity.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 236, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 232, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity___init__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), __pyx_v_quantity, __pyx_v_units);
 
   /* function exit code */
@@ -6780,7 +6664,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
   struct __pyx_t_8csiquant_6ctypes_UData __pyx_t_4;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "csiquant/quantities.pyx":237
+  /* "csiquant/quantities.pyx":233
  * 
  *     def __init__(Quantity self, double quantity, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -6791,20 +6675,20 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":238
+    /* "csiquant/quantities.pyx":234
  *     def __init__(Quantity self, double quantity, SIUnit units):
  *         if units is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  *         self.data.quantity = quantity
  *         self.data.units = units.data
  */
-    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 238, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 234, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(1, 238, __pyx_L1_error)
+    __PYX_ERR(1, 234, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":237
+    /* "csiquant/quantities.pyx":233
  * 
  *     def __init__(Quantity self, double quantity, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -6813,7 +6697,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
  */
   }
 
-  /* "csiquant/quantities.pyx":239
+  /* "csiquant/quantities.pyx":235
  *         if units is None:
  *             raise TypeError()
  *         self.data.quantity = quantity             # <<<<<<<<<<<<<<
@@ -6822,7 +6706,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
  */
   __pyx_v_self->data.quantity = __pyx_v_quantity;
 
-  /* "csiquant/quantities.pyx":240
+  /* "csiquant/quantities.pyx":236
  *             raise TypeError()
  *         self.data.quantity = quantity
  *         self.data.units = units.data             # <<<<<<<<<<<<<<
@@ -6832,7 +6716,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
   __pyx_t_4 = __pyx_v_units->data;
   __pyx_v_self->data.units = __pyx_t_4;
 
-  /* "csiquant/quantities.pyx":236
+  /* "csiquant/quantities.pyx":232
  *         return units
  * 
  *     def __init__(Quantity self, double quantity, SIUnit units):             # <<<<<<<<<<<<<<
@@ -6852,7 +6736,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity___init__(struct __pyx_obj_8
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":242
+/* "csiquant/quantities.pyx":238
  *         self.data.units = units.data
  * 
  *     cpdef is_of(Quantity self, d.Dimensions dims):             # <<<<<<<<<<<<<<
@@ -6881,7 +6765,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_of); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 242, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_is_of); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 238, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_3is_of)) {
         __Pyx_XDECREF(__pyx_r);
@@ -6898,7 +6782,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_dims)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_dims));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 242, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 238, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -6919,7 +6803,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
     #endif
   }
 
-  /* "csiquant/quantities.pyx":243
+  /* "csiquant/quantities.pyx":239
  * 
  *     cpdef is_of(Quantity self, d.Dimensions dims):
  *         if dims is None:             # <<<<<<<<<<<<<<
@@ -6930,20 +6814,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":244
+    /* "csiquant/quantities.pyx":240
  *     cpdef is_of(Quantity self, d.Dimensions dims):
  *         if dims is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  * 
  *         return c.eq_ddata(self.data.units.dimensions, dims.data)
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 244, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 240, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 244, __pyx_L1_error)
+    __PYX_ERR(1, 240, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":243
+    /* "csiquant/quantities.pyx":239
  * 
  *     cpdef is_of(Quantity self, d.Dimensions dims):
  *         if dims is None:             # <<<<<<<<<<<<<<
@@ -6952,7 +6836,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
  */
   }
 
-  /* "csiquant/quantities.pyx":246
+  /* "csiquant/quantities.pyx":242
  *             raise TypeError()
  * 
  *         return c.eq_ddata(self.data.units.dimensions, dims.data)             # <<<<<<<<<<<<<<
@@ -6960,13 +6844,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_is_of(struct __pyx_obj
  *     cpdef get_as(Quantity self, SIUnit units):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.units.dimensions, __pyx_v_dims->data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 246, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.units.dimensions, __pyx_v_dims->data)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":242
+  /* "csiquant/quantities.pyx":238
  *         self.data.units = units.data
  * 
  *     cpdef is_of(Quantity self, d.Dimensions dims):             # <<<<<<<<<<<<<<
@@ -6994,7 +6878,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_3is_of(PyObject *__py
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("is_of (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 242, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dims), __pyx_ptype_8csiquant_10dimensions_Dimensions, 1, "dims", 0))) __PYX_ERR(1, 238, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_2is_of(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10dimensions_Dimensions *)__pyx_v_dims));
 
   /* function exit code */
@@ -7012,7 +6896,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_2is_of(struct __pyx_o
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("is_of", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_is_of(__pyx_v_self, __pyx_v_dims, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 242, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_is_of(__pyx_v_self, __pyx_v_dims, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 238, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7029,7 +6913,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_2is_of(struct __pyx_o
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":248
+/* "csiquant/quantities.pyx":244
  *         return c.eq_ddata(self.data.units.dimensions, dims.data)
  * 
  *     cpdef get_as(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7060,7 +6944,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_as); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 248, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_get_as); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 244, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_5get_as)) {
         __Pyx_XDECREF(__pyx_r);
@@ -7077,7 +6961,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_units)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_units));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 248, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 244, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -7098,7 +6982,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
     #endif
   }
 
-  /* "csiquant/quantities.pyx":249
+  /* "csiquant/quantities.pyx":245
  * 
  *     cpdef get_as(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7109,20 +6993,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":250
+    /* "csiquant/quantities.pyx":246
  *     cpdef get_as(Quantity self, SIUnit units):
  *         if units is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  * 
  *         cdef c.Error error_code
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 250, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 246, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 250, __pyx_L1_error)
+    __PYX_ERR(1, 246, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":249
+    /* "csiquant/quantities.pyx":245
  * 
  *     cpdef get_as(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7131,7 +7015,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
  */
   }
 
-  /* "csiquant/quantities.pyx":254
+  /* "csiquant/quantities.pyx":250
  *         cdef c.Error error_code
  *         cdef double value
  *         error_code = c.extract_quantity(value, self.data, units.data)             # <<<<<<<<<<<<<<
@@ -7140,7 +7024,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_value, __pyx_v_self->data, __pyx_v_units->data);
 
-  /* "csiquant/quantities.pyx":255
+  /* "csiquant/quantities.pyx":251
  *         cdef double value
  *         error_code = c.extract_quantity(value, self.data, units.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -7150,7 +7034,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_6) {
 
-    /* "csiquant/quantities.pyx":256
+    /* "csiquant/quantities.pyx":252
  *         error_code = c.extract_quantity(value, self.data, units.data)
  *         if error_code == c.Success:
  *             return value             # <<<<<<<<<<<<<<
@@ -7158,13 +7042,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 256, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_value); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 252, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":255
+    /* "csiquant/quantities.pyx":251
  *         cdef double value
  *         error_code = c.extract_quantity(value, self.data, units.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -7173,7 +7057,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
  */
   }
 
-  /* "csiquant/quantities.pyx":258
+  /* "csiquant/quantities.pyx":254
  *             return value
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7183,20 +7067,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":259
+    /* "csiquant/quantities.pyx":255
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("units mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 259, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 255, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 259, __pyx_L1_error)
+    __PYX_ERR(1, 255, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":258
+    /* "csiquant/quantities.pyx":254
  *             return value
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7205,26 +7089,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_get_as(struct __pyx_ob
  */
   }
 
-  /* "csiquant/quantities.pyx":261
+  /* "csiquant/quantities.pyx":257
  *             raise ValueError("units mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 261, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 261, __pyx_L1_error)
+  __PYX_ERR(1, 257, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":248
+  /* "csiquant/quantities.pyx":244
  *         return c.eq_ddata(self.data.units.dimensions, dims.data)
  * 
  *     cpdef get_as(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7252,7 +7136,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_5get_as(PyObject *__p
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get_as (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 248, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 244, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_4get_as(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_units));
 
   /* function exit code */
@@ -7270,7 +7154,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_4get_as(struct __pyx_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("get_as", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_get_as(__pyx_v_self, __pyx_v_units, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 248, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_get_as(__pyx_v_self, __pyx_v_units, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 244, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7287,7 +7171,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_4get_as(struct __pyx_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":263
+/* "csiquant/quantities.pyx":259
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7319,7 +7203,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cvt_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 263, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cvt_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 259, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_7cvt_to)) {
         __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -7336,10 +7220,10 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_units)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_units));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 263, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 259, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 263, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 259, __pyx_L1_error)
         __pyx_r = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7358,7 +7242,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     #endif
   }
 
-  /* "csiquant/quantities.pyx":264
+  /* "csiquant/quantities.pyx":260
  * 
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7369,20 +7253,20 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":265
+    /* "csiquant/quantities.pyx":261
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):
  *         if units is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  * 
  *         cdef c.Error error_code
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 265, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 261, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 265, __pyx_L1_error)
+    __PYX_ERR(1, 261, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":264
+    /* "csiquant/quantities.pyx":260
  * 
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7391,7 +7275,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":270
+  /* "csiquant/quantities.pyx":266
  *         cdef int cmp
  * 
  *         error_code = c.cmp_udata(cmp, self.data.units, units.data)             # <<<<<<<<<<<<<<
@@ -7400,7 +7284,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_cmp_udata(__pyx_v_cmp, __pyx_v_self->data.units, __pyx_v_units->data);
 
-  /* "csiquant/quantities.pyx":271
+  /* "csiquant/quantities.pyx":267
  * 
  *         error_code = c.cmp_udata(cmp, self.data.units, units.data)
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7410,20 +7294,20 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":272
+    /* "csiquant/quantities.pyx":268
  *         error_code = c.cmp_udata(cmp, self.data.units, units.data)
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("units mismatch")             # <<<<<<<<<<<<<<
  * 
  *         if cmp == 0:
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 272, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 268, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 272, __pyx_L1_error)
+    __PYX_ERR(1, 268, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":271
+    /* "csiquant/quantities.pyx":267
  * 
  *         error_code = c.cmp_udata(cmp, self.data.units, units.data)
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7432,7 +7316,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":274
+  /* "csiquant/quantities.pyx":270
  *             raise ValueError("units mismatch")
  * 
  *         if cmp == 0:             # <<<<<<<<<<<<<<
@@ -7442,7 +7326,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = ((__pyx_v_cmp == 0) != 0);
   if (__pyx_t_6) {
 
-    /* "csiquant/quantities.pyx":275
+    /* "csiquant/quantities.pyx":271
  * 
  *         if cmp == 0:
  *             return self             # <<<<<<<<<<<<<<
@@ -7454,7 +7338,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     __pyx_r = __pyx_v_self;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":274
+    /* "csiquant/quantities.pyx":270
  *             raise ValueError("units mismatch")
  * 
  *         if cmp == 0:             # <<<<<<<<<<<<<<
@@ -7463,19 +7347,19 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":277
+  /* "csiquant/quantities.pyx":273
  *             return self
  * 
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         c.cvt_quantity(ret.data, self.data, units.data)
  *         return ret
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 277, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 273, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":278
+  /* "csiquant/quantities.pyx":274
  * 
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         c.cvt_quantity(ret.data, self.data, units.data)             # <<<<<<<<<<<<<<
@@ -7484,7 +7368,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   (void)(__pyx_f_8csiquant_6ctypes_cvt_quantity(__pyx_v_ret->data, __pyx_v_self->data, __pyx_v_units->data));
 
-  /* "csiquant/quantities.pyx":279
+  /* "csiquant/quantities.pyx":275
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         c.cvt_quantity(ret.data, self.data, units.data)
  *         return ret             # <<<<<<<<<<<<<<
@@ -7496,7 +7380,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":263
+  /* "csiquant/quantities.pyx":259
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef Quantity cvt_to(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7525,7 +7409,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_7cvt_to(PyObject *__p
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cvt_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 263, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 259, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_6cvt_to(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_units));
 
   /* function exit code */
@@ -7543,7 +7427,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_6cvt_to(struct __pyx_
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("cvt_to", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_cvt_to(__pyx_v_self, __pyx_v_units, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 263, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_cvt_to(__pyx_v_self, __pyx_v_units, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 259, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7560,7 +7444,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_6cvt_to(struct __pyx_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":281
+/* "csiquant/quantities.pyx":277
  *         return ret
  * 
  *     cpdef Quantity round_to(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7591,7 +7475,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_round_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 281, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_round_to); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 277, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_9round_to)) {
         __Pyx_XDECREF(((PyObject *)__pyx_r));
@@ -7608,10 +7492,10 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_units)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_units));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 281, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 277, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 281, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 277, __pyx_L1_error)
         __pyx_r = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -7630,7 +7514,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     #endif
   }
 
-  /* "csiquant/quantities.pyx":282
+  /* "csiquant/quantities.pyx":278
  * 
  *     cpdef Quantity round_to(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7641,20 +7525,20 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = (__pyx_t_5 != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":283
+    /* "csiquant/quantities.pyx":279
  *     cpdef Quantity round_to(Quantity self, SIUnit units):
  *         if units is None:
  *             raise TypeError()             # <<<<<<<<<<<<<<
  * 
  *         cdef c.Error error_code
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 283, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_TypeError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 279, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 283, __pyx_L1_error)
+    __PYX_ERR(1, 279, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":282
+    /* "csiquant/quantities.pyx":278
  * 
  *     cpdef Quantity round_to(Quantity self, SIUnit units):
  *         if units is None:             # <<<<<<<<<<<<<<
@@ -7663,19 +7547,19 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":286
+  /* "csiquant/quantities.pyx":282
  * 
  *         cdef c.Error error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  * 
  *         error_code = c.cvt_quantity(ret.data, self.data, units.data)
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 286, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 282, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":288
+  /* "csiquant/quantities.pyx":284
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  * 
  *         error_code = c.cvt_quantity(ret.data, self.data, units.data)             # <<<<<<<<<<<<<<
@@ -7684,7 +7568,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_cvt_quantity(__pyx_v_ret->data, __pyx_v_self->data, __pyx_v_units->data);
 
-  /* "csiquant/quantities.pyx":289
+  /* "csiquant/quantities.pyx":285
  * 
  *         error_code = c.cvt_quantity(ret.data, self.data, units.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -7694,7 +7578,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_6) {
 
-    /* "csiquant/quantities.pyx":290
+    /* "csiquant/quantities.pyx":286
  *         error_code = c.cvt_quantity(ret.data, self.data, units.data)
  *         if error_code == c.Success:
  *             ret.data.quantity = round(ret.data.quantity)             # <<<<<<<<<<<<<<
@@ -7703,7 +7587,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
     __pyx_v_ret->data.quantity = round(__pyx_v_ret->data.quantity);
 
-    /* "csiquant/quantities.pyx":291
+    /* "csiquant/quantities.pyx":287
  *         if error_code == c.Success:
  *             ret.data.quantity = round(ret.data.quantity)
  *             return ret             # <<<<<<<<<<<<<<
@@ -7715,7 +7599,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     __pyx_r = __pyx_v_ret;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":289
+    /* "csiquant/quantities.pyx":285
  * 
  *         error_code = c.cvt_quantity(ret.data, self.data, units.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -7724,7 +7608,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":293
+  /* "csiquant/quantities.pyx":289
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7734,20 +7618,20 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_6)) {
 
-    /* "csiquant/quantities.pyx":294
+    /* "csiquant/quantities.pyx":290
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("units mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 294, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 290, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 294, __pyx_L1_error)
+    __PYX_ERR(1, 290, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":293
+    /* "csiquant/quantities.pyx":289
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -7756,26 +7640,26 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":296
+  /* "csiquant/quantities.pyx":292
  *             raise ValueError("units mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     """
  */
-  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 296, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_enum____pyx_t_8csiquant_6ctypes_Error(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 296, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 296, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 292, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 296, __pyx_L1_error)
+  __PYX_ERR(1, 292, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":281
+  /* "csiquant/quantities.pyx":277
  *         return ret
  * 
  *     cpdef Quantity round_to(Quantity self, SIUnit units):             # <<<<<<<<<<<<<<
@@ -7804,7 +7688,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_9round_to(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("round_to (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 281, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_units), __pyx_ptype_8csiquant_10quantities_SIUnit, 1, "units", 0))) __PYX_ERR(1, 277, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_8round_to(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_SIUnit *)__pyx_v_units));
 
   /* function exit code */
@@ -7822,7 +7706,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_8round_to(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("round_to", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_round_to(__pyx_v_self, __pyx_v_units, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 281, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_round_to(__pyx_v_self, __pyx_v_units, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 277, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -7839,7 +7723,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_8round_to(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":302
+/* "csiquant/quantities.pyx":298
  *     """
  * 
  *     def __eq__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -7874,7 +7758,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
   PyObject *__pyx_t_9 = NULL;
   __Pyx_RefNannySetupContext("__eq__", 0);
 
-  /* "csiquant/quantities.pyx":303
+  /* "csiquant/quantities.pyx":299
  * 
  *     def __eq__(lhs, rhs):
  *         if type(lhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -7885,7 +7769,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":304
+    /* "csiquant/quantities.pyx":300
  *     def __eq__(lhs, rhs):
  *         if type(lhs) is not Quantity:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -7897,7 +7781,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":303
+    /* "csiquant/quantities.pyx":299
  * 
  *     def __eq__(lhs, rhs):
  *         if type(lhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -7906,7 +7790,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
  */
   }
 
-  /* "csiquant/quantities.pyx":305
+  /* "csiquant/quantities.pyx":301
  *         if type(lhs) is not Quantity:
  *             return NotImplemented
  *         if type(rhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -7917,7 +7801,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
   __pyx_t_1 = (__pyx_t_2 != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":306
+    /* "csiquant/quantities.pyx":302
  *             return NotImplemented
  *         if type(rhs) is not Quantity:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -7929,7 +7813,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":305
+    /* "csiquant/quantities.pyx":301
  *         if type(lhs) is not Quantity:
  *             return NotImplemented
  *         if type(rhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -7938,7 +7822,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
  */
   }
 
-  /* "csiquant/quantities.pyx":308
+  /* "csiquant/quantities.pyx":304
  *             return NotImplemented
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -7954,7 +7838,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     __Pyx_XGOTREF(__pyx_t_5);
     /*try:*/ {
 
-      /* "csiquant/quantities.pyx":309
+      /* "csiquant/quantities.pyx":305
  * 
  *         try:
  *             return lhs.cmp(rhs) == 0             # <<<<<<<<<<<<<<
@@ -7962,17 +7846,17 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
  *             return NotImplemented
  */
       __Pyx_XDECREF(__pyx_r);
-      if (!(likely(((__pyx_v_rhs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_rhs, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 309, __pyx_L5_error)
-      __pyx_t_6 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs), 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 309, __pyx_L5_error)
+      if (!(likely(((__pyx_v_rhs) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_rhs, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 305, __pyx_L5_error)
+      __pyx_t_6 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs), 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 305, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_7 = __Pyx_PyInt_EqObjC(__pyx_t_6, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 309, __pyx_L5_error)
+      __pyx_t_7 = __Pyx_PyInt_EqObjC(__pyx_t_6, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 305, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_r = __pyx_t_7;
       __pyx_t_7 = 0;
       goto __pyx_L9_try_return;
 
-      /* "csiquant/quantities.pyx":308
+      /* "csiquant/quantities.pyx":304
  *             return NotImplemented
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -7984,7 +7868,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-    /* "csiquant/quantities.pyx":310
+    /* "csiquant/quantities.pyx":306
  *         try:
  *             return lhs.cmp(rhs) == 0
  *         except ValueError:             # <<<<<<<<<<<<<<
@@ -7994,12 +7878,12 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     __pyx_t_8 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_ValueError);
     if (__pyx_t_8) {
       __Pyx_AddTraceback("csiquant.quantities.Quantity.__eq__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_9) < 0) __PYX_ERR(1, 310, __pyx_L7_except_error)
+      if (__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_9) < 0) __PYX_ERR(1, 306, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GOTREF(__pyx_t_9);
 
-      /* "csiquant/quantities.pyx":311
+      /* "csiquant/quantities.pyx":307
  *             return lhs.cmp(rhs) == 0
  *         except ValueError:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -8017,7 +7901,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     goto __pyx_L7_except_error;
     __pyx_L7_except_error:;
 
-    /* "csiquant/quantities.pyx":308
+    /* "csiquant/quantities.pyx":304
  *             return NotImplemented
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -8043,7 +7927,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
     goto __pyx_L0;
   }
 
-  /* "csiquant/quantities.pyx":302
+  /* "csiquant/quantities.pyx":298
  *     """
  * 
  *     def __eq__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -8064,7 +7948,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_10__eq__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":313
+/* "csiquant/quantities.pyx":309
  *             return NotImplemented
  * 
  *     def __ne__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -8092,7 +7976,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_12__ne__(struct __pyx
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("__ne__", 0);
 
-  /* "csiquant/quantities.pyx":314
+  /* "csiquant/quantities.pyx":310
  * 
  *     def __ne__(lhs, rhs):
  *         return not lhs == rhs             # <<<<<<<<<<<<<<
@@ -8100,16 +7984,16 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_12__ne__(struct __pyx
  *     def __lt__(Quantity lhs not None, Quantity rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyObject_RichCompare(((PyObject *)__pyx_v_lhs), __pyx_v_rhs, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 314, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 314, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(((PyObject *)__pyx_v_lhs), __pyx_v_rhs, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 310, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 310, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyBool_FromLong((!__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 314, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong((!__pyx_t_2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 310, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":313
+  /* "csiquant/quantities.pyx":309
  *             return NotImplemented
  * 
  *     def __ne__(lhs, rhs):             # <<<<<<<<<<<<<<
@@ -8128,7 +8012,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_12__ne__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":316
+/* "csiquant/quantities.pyx":312
  *         return not lhs == rhs
  * 
  *     def __lt__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8143,9 +8027,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_15__lt__(PyObject *__
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__lt__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 316, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 312, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 316, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 312, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_14__lt__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -8164,7 +8048,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_14__lt__(struct __pyx
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__lt__", 0);
 
-  /* "csiquant/quantities.pyx":317
+  /* "csiquant/quantities.pyx":313
  * 
  *     def __lt__(Quantity lhs not None, Quantity rhs not None):
  *         return lhs.cmp(rhs) < 0             # <<<<<<<<<<<<<<
@@ -8172,15 +8056,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_14__lt__(struct __pyx
  *     def __le__(Quantity lhs not None, Quantity rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 317, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 313, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 317, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 313, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":316
+  /* "csiquant/quantities.pyx":312
  *         return not lhs == rhs
  * 
  *     def __lt__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8200,7 +8084,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_14__lt__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":319
+/* "csiquant/quantities.pyx":315
  *         return lhs.cmp(rhs) < 0
  * 
  *     def __le__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8215,9 +8099,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_17__le__(PyObject *__
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__le__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 319, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 315, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 319, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 315, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_16__le__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -8236,7 +8120,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_16__le__(struct __pyx
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__le__", 0);
 
-  /* "csiquant/quantities.pyx":320
+  /* "csiquant/quantities.pyx":316
  * 
  *     def __le__(Quantity lhs not None, Quantity rhs not None):
  *         return lhs.cmp(rhs) <= 0             # <<<<<<<<<<<<<<
@@ -8244,15 +8128,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_16__le__(struct __pyx
  *     def __gt__(Quantity lhs not None, Quantity rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 320, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 320, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_LE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 316, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":319
+  /* "csiquant/quantities.pyx":315
  *         return lhs.cmp(rhs) < 0
  * 
  *     def __le__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8272,7 +8156,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_16__le__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":322
+/* "csiquant/quantities.pyx":318
  *         return lhs.cmp(rhs) <= 0
  * 
  *     def __gt__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8287,9 +8171,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_19__gt__(PyObject *__
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__gt__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 322, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 318, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 322, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 318, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_18__gt__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -8308,7 +8192,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_18__gt__(struct __pyx
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__gt__", 0);
 
-  /* "csiquant/quantities.pyx":323
+  /* "csiquant/quantities.pyx":319
  * 
  *     def __gt__(Quantity lhs not None, Quantity rhs not None):
  *         return lhs.cmp(rhs) > 0             # <<<<<<<<<<<<<<
@@ -8316,15 +8200,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_18__gt__(struct __pyx
  *     def __ge__(Quantity lhs not None, Quantity rhs not None):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 319, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 323, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 319, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":322
+  /* "csiquant/quantities.pyx":318
  *         return lhs.cmp(rhs) <= 0
  * 
  *     def __gt__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8344,7 +8228,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_18__gt__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":325
+/* "csiquant/quantities.pyx":321
  *         return lhs.cmp(rhs) > 0
  * 
  *     def __ge__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8359,9 +8243,9 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_21__ge__(PyObject *__
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__ge__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 325, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 321, __pyx_L1_error)
   }
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 325, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 321, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_20__ge__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -8380,7 +8264,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_20__ge__(struct __pyx
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__ge__", 0);
 
-  /* "csiquant/quantities.pyx":326
+  /* "csiquant/quantities.pyx":322
  * 
  *     def __ge__(Quantity lhs not None, Quantity rhs not None):
  *         return lhs.cmp(rhs) >= 0             # <<<<<<<<<<<<<<
@@ -8388,15 +8272,15 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_20__ge__(struct __pyx
  *     cpdef cmp(Quantity self, Quantity other):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 326, __pyx_L1_error)
+  __pyx_t_1 = ((struct __pyx_vtabstruct_8csiquant_10quantities_Quantity *)__pyx_v_lhs->__pyx_vtab)->cmp(__pyx_v_lhs, __pyx_v_rhs, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 322, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 326, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_int_0, Py_GE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 322, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":325
+  /* "csiquant/quantities.pyx":321
  *         return lhs.cmp(rhs) > 0
  * 
  *     def __ge__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -8416,7 +8300,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_20__ge__(struct __pyx
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":328
+/* "csiquant/quantities.pyx":324
  *         return lhs.cmp(rhs) >= 0
  * 
  *     cpdef cmp(Quantity self, Quantity other):             # <<<<<<<<<<<<<<
@@ -8446,7 +8330,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 328, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_cmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 324, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_23cmp)) {
         __Pyx_XDECREF(__pyx_r);
@@ -8463,7 +8347,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_other)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_other));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 328, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 324, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_r = __pyx_t_2;
@@ -8484,7 +8368,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
     #endif
   }
 
-  /* "csiquant/quantities.pyx":330
+  /* "csiquant/quantities.pyx":326
  *     cpdef cmp(Quantity self, Quantity other):
  *         cdef int signum, error_code
  *         error_code = c.cmp_qdata(signum, self.data, other.data)             # <<<<<<<<<<<<<<
@@ -8493,7 +8377,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_cmp_qdata(__pyx_v_signum, __pyx_v_self->data, __pyx_v_other->data);
 
-  /* "csiquant/quantities.pyx":331
+  /* "csiquant/quantities.pyx":327
  *         cdef int signum, error_code
  *         error_code = c.cmp_qdata(signum, self.data, other.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -8503,7 +8387,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_5) {
 
-    /* "csiquant/quantities.pyx":332
+    /* "csiquant/quantities.pyx":328
  *         error_code = c.cmp_qdata(signum, self.data, other.data)
  *         if error_code == c.Success:
  *             return signum             # <<<<<<<<<<<<<<
@@ -8511,13 +8395,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_signum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 332, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_signum); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 328, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":331
+    /* "csiquant/quantities.pyx":327
  *         cdef int signum, error_code
  *         error_code = c.cmp_qdata(signum, self.data, other.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -8526,7 +8410,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
  */
   }
 
-  /* "csiquant/quantities.pyx":334
+  /* "csiquant/quantities.pyx":330
  *             return signum
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -8536,20 +8420,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
   __pyx_t_5 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_5)) {
 
-    /* "csiquant/quantities.pyx":335
+    /* "csiquant/quantities.pyx":331
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError('unit mismatch')             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 335, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 331, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 335, __pyx_L1_error)
+    __PYX_ERR(1, 331, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":334
+    /* "csiquant/quantities.pyx":330
  *             return signum
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -8558,26 +8442,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_cmp(struct __pyx_obj_8
  */
   }
 
-  /* "csiquant/quantities.pyx":337
+  /* "csiquant/quantities.pyx":333
  *             raise ValueError('unit mismatch')
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     cpdef bint compatible(Quantity self, Quantity other):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 337, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 333, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 337, __pyx_L1_error)
+  __PYX_ERR(1, 333, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":328
+  /* "csiquant/quantities.pyx":324
  *         return lhs.cmp(rhs) >= 0
  * 
  *     cpdef cmp(Quantity self, Quantity other):             # <<<<<<<<<<<<<<
@@ -8605,7 +8489,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_23cmp(PyObject *__pyx
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("cmp (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 328, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 324, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_22cmp(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_other));
 
   /* function exit code */
@@ -8623,7 +8507,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_22cmp(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("cmp", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_cmp(__pyx_v_self, __pyx_v_other, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 328, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_cmp(__pyx_v_self, __pyx_v_other, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 324, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8640,7 +8524,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_22cmp(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":339
+/* "csiquant/quantities.pyx":335
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef bint compatible(Quantity self, Quantity other):             # <<<<<<<<<<<<<<
@@ -8668,7 +8552,7 @@ static int __pyx_f_8csiquant_10quantities_8Quantity_compatible(struct __pyx_obj_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_compatible); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 339, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_compatible); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 335, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_25compatible)) {
         __Pyx_INCREF(__pyx_t_1);
@@ -8684,10 +8568,10 @@ static int __pyx_f_8csiquant_10quantities_8Quantity_compatible(struct __pyx_obj_
         }
         __pyx_t_2 = (__pyx_t_4) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_4, ((PyObject *)__pyx_v_other)) : __Pyx_PyObject_CallOneArg(__pyx_t_3, ((PyObject *)__pyx_v_other));
         __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 339, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 335, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 339, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 335, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_r = __pyx_t_5;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -8706,7 +8590,7 @@ static int __pyx_f_8csiquant_10quantities_8Quantity_compatible(struct __pyx_obj_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":340
+  /* "csiquant/quantities.pyx":336
  * 
  *     cpdef bint compatible(Quantity self, Quantity other):
  *         return c.eq_ddata(self.data.units.dimensions, other.data.units.dimensions)             # <<<<<<<<<<<<<<
@@ -8716,7 +8600,7 @@ static int __pyx_f_8csiquant_10quantities_8Quantity_compatible(struct __pyx_obj_
   __pyx_r = __pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_self->data.units.dimensions, __pyx_v_other->data.units.dimensions);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":339
+  /* "csiquant/quantities.pyx":335
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef bint compatible(Quantity self, Quantity other):             # <<<<<<<<<<<<<<
@@ -8743,7 +8627,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_25compatible(PyObject
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("compatible (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 339, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 335, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_24compatible(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_other));
 
   /* function exit code */
@@ -8761,7 +8645,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_24compatible(struct _
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("compatible", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_10quantities_8Quantity_compatible(__pyx_v_self, __pyx_v_other, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 339, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8csiquant_10quantities_8Quantity_compatible(__pyx_v_self, __pyx_v_other, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -8778,7 +8662,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_24compatible(struct _
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":342
+/* "csiquant/quantities.pyx":338
  *         return c.eq_ddata(self.data.units.dimensions, other.data.units.dimensions)
  * 
  *     cpdef r_approx(Quantity self, Quantity other, double rtol=1e-9):             # <<<<<<<<<<<<<<
@@ -8820,11 +8704,11 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_r_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 342, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_r_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 338, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_27r_approx)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rtol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 342, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_rtol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 338, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -8842,7 +8726,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, ((PyObject *)__pyx_v_other), __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 342, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 338, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -8851,14 +8735,14 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, ((PyObject *)__pyx_v_other), __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 342, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 338, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 342, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 338, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           if (__pyx_t_5) {
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -8869,7 +8753,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 342, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 338, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
@@ -8892,7 +8776,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":347
+  /* "csiquant/quantities.pyx":343
  *         cdef double self_norm, other_norm, epsilon
  * 
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)             # <<<<<<<<<<<<<<
@@ -8901,7 +8785,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_norm_udata, __pyx_v_self->data.units, __pyx_v_other->data.units);
 
-  /* "csiquant/quantities.pyx":349
+  /* "csiquant/quantities.pyx":345
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
  * 
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -8911,7 +8795,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
   __pyx_t_8 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_8) {
 
-    /* "csiquant/quantities.pyx":351
+    /* "csiquant/quantities.pyx":347
  *         if error_code == c.Success:
  * 
  *             self_norm = c.unsafe_extract_quantity(self.data, norm_udata)             # <<<<<<<<<<<<<<
@@ -8920,7 +8804,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
     __pyx_v_self_norm = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_self->data, __pyx_v_norm_udata);
 
-    /* "csiquant/quantities.pyx":352
+    /* "csiquant/quantities.pyx":348
  * 
  *             self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
  *             other_norm = c.unsafe_extract_quantity(other.data, norm_udata)             # <<<<<<<<<<<<<<
@@ -8929,7 +8813,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
     __pyx_v_other_norm = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_other->data, __pyx_v_norm_udata);
 
-    /* "csiquant/quantities.pyx":354
+    /* "csiquant/quantities.pyx":350
  *             other_norm = c.unsafe_extract_quantity(other.data, norm_udata)
  * 
  *             epsilon = fmax(1.0, fmax(self_norm, other_norm)) * rtol             # <<<<<<<<<<<<<<
@@ -8938,7 +8822,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
     __pyx_v_epsilon = (fmax(1.0, fmax(__pyx_v_self_norm, __pyx_v_other_norm)) * __pyx_v_rtol);
 
-    /* "csiquant/quantities.pyx":355
+    /* "csiquant/quantities.pyx":351
  * 
  *             epsilon = fmax(1.0, fmax(self_norm, other_norm)) * rtol
  *             return fabs(self_norm - other_norm) <= fabs(epsilon)             # <<<<<<<<<<<<<<
@@ -8946,13 +8830,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_norm - __pyx_v_other_norm)) <= fabs(__pyx_v_epsilon))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 355, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_norm - __pyx_v_other_norm)) <= fabs(__pyx_v_epsilon))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 351, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":349
+    /* "csiquant/quantities.pyx":345
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
  * 
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -8961,7 +8845,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":357
+  /* "csiquant/quantities.pyx":353
  *             return fabs(self_norm - other_norm) <= fabs(epsilon)
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -8971,20 +8855,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
   __pyx_t_8 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_8)) {
 
-    /* "csiquant/quantities.pyx":358
+    /* "csiquant/quantities.pyx":354
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 358, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 354, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 358, __pyx_L1_error)
+    __PYX_ERR(1, 354, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":357
+    /* "csiquant/quantities.pyx":353
  *             return fabs(self_norm - other_norm) <= fabs(epsilon)
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -8993,26 +8877,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_r_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":360
+  /* "csiquant/quantities.pyx":356
  *             raise ValueError("unit mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 360, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 356, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 360, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 356, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 360, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 356, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 360, __pyx_L1_error)
+  __PYX_ERR(1, 356, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":342
+  /* "csiquant/quantities.pyx":338
  *         return c.eq_ddata(self.data.units.dimensions, other.data.units.dimensions)
  * 
  *     cpdef r_approx(Quantity self, Quantity other, double rtol=1e-9):             # <<<<<<<<<<<<<<
@@ -9071,7 +8955,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_27r_approx(PyObject *
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "r_approx") < 0)) __PYX_ERR(1, 342, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "r_approx") < 0)) __PYX_ERR(1, 338, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -9084,20 +8968,20 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_27r_approx(PyObject *
     }
     __pyx_v_other = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)values[0]);
     if (values[1]) {
-      __pyx_v_rtol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_rtol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 342, __pyx_L3_error)
+      __pyx_v_rtol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_rtol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 338, __pyx_L3_error)
     } else {
       __pyx_v_rtol = ((double)1e-9);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("r_approx", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 342, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("r_approx", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 338, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.Quantity.r_approx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 342, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 338, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_26r_approx(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), __pyx_v_other, __pyx_v_rtol);
 
   /* function exit code */
@@ -9118,7 +9002,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_26r_approx(struct __p
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.rtol = __pyx_v_rtol;
-  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_Quantity->r_approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 342, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_Quantity->r_approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 338, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9135,7 +9019,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_26r_approx(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":362
+/* "csiquant/quantities.pyx":358
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):             # <<<<<<<<<<<<<<
@@ -9176,11 +9060,11 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_a_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 362, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_a_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 358, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_29a_approx)) {
         __Pyx_XDECREF(__pyx_r);
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_atol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 362, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_atol); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 358, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -9198,7 +9082,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, ((PyObject *)__pyx_v_other), __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 362, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -9207,14 +9091,14 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
           PyObject *__pyx_temp[3] = {__pyx_t_5, ((PyObject *)__pyx_v_other), __pyx_t_3};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 362, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-__pyx_t_6, 2+__pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         } else
         #endif
         {
-          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 362, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_New(2+__pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 358, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           if (__pyx_t_5) {
             __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -9225,7 +9109,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
           __Pyx_GIVEREF(__pyx_t_3);
           PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_6, __pyx_t_3);
           __pyx_t_3 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 362, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 358, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         }
@@ -9248,7 +9132,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":367
+  /* "csiquant/quantities.pyx":363
  *         cdef double self_norm, other_norm
  * 
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)             # <<<<<<<<<<<<<<
@@ -9257,7 +9141,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_norm_udata, __pyx_v_self->data.units, __pyx_v_other->data.units);
 
-  /* "csiquant/quantities.pyx":368
+  /* "csiquant/quantities.pyx":364
  * 
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -9267,7 +9151,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
   __pyx_t_8 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_8) {
 
-    /* "csiquant/quantities.pyx":369
+    /* "csiquant/quantities.pyx":365
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
  *         if error_code == c.Success:
  *             self_norm = c.unsafe_extract_quantity(self.data, norm_udata)             # <<<<<<<<<<<<<<
@@ -9276,7 +9160,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  */
     __pyx_v_self_norm = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_self->data, __pyx_v_norm_udata);
 
-    /* "csiquant/quantities.pyx":370
+    /* "csiquant/quantities.pyx":366
  *         if error_code == c.Success:
  *             self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
  *             other_norm = c.unsafe_extract_quantity(other.data, norm_udata)             # <<<<<<<<<<<<<<
@@ -9285,7 +9169,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  */
     __pyx_v_other_norm = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_other->data, __pyx_v_norm_udata);
 
-    /* "csiquant/quantities.pyx":371
+    /* "csiquant/quantities.pyx":367
  *             self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
  *             other_norm = c.unsafe_extract_quantity(other.data, norm_udata)
  *             return fabs(self_norm - other_norm) <= fabs(atol)             # <<<<<<<<<<<<<<
@@ -9293,13 +9177,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  *         if error_code == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_norm - __pyx_v_other_norm)) <= fabs(__pyx_v_atol))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 371, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_norm - __pyx_v_other_norm)) <= fabs(__pyx_v_atol))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 367, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":368
+    /* "csiquant/quantities.pyx":364
  * 
  *         error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -9308,7 +9192,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":373
+  /* "csiquant/quantities.pyx":369
  *             return fabs(self_norm - other_norm) <= fabs(atol)
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9318,20 +9202,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
   __pyx_t_8 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_8)) {
 
-    /* "csiquant/quantities.pyx":374
+    /* "csiquant/quantities.pyx":370
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 374, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 370, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 374, __pyx_L1_error)
+    __PYX_ERR(1, 370, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":373
+    /* "csiquant/quantities.pyx":369
  *             return fabs(self_norm - other_norm) <= fabs(atol)
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9340,26 +9224,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_a_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":376
+  /* "csiquant/quantities.pyx":372
  *             raise ValueError("unit mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 376, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 372, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 376, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 372, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 376, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 372, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 376, __pyx_L1_error)
+  __PYX_ERR(1, 372, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":362
+  /* "csiquant/quantities.pyx":358
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):             # <<<<<<<<<<<<<<
@@ -9418,7 +9302,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_29a_approx(PyObject *
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "a_approx") < 0)) __PYX_ERR(1, 362, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "a_approx") < 0)) __PYX_ERR(1, 358, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -9431,20 +9315,20 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_29a_approx(PyObject *
     }
     __pyx_v_other = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)values[0]);
     if (values[1]) {
-      __pyx_v_atol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_atol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 362, __pyx_L3_error)
+      __pyx_v_atol = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_atol == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 358, __pyx_L3_error)
     } else {
       __pyx_v_atol = ((double)1e-6);
     }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("a_approx", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 362, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("a_approx", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 358, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.Quantity.a_approx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 362, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 358, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_28a_approx(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), __pyx_v_other, __pyx_v_atol);
 
   /* function exit code */
@@ -9465,7 +9349,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_28a_approx(struct __p
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_2.__pyx_n = 1;
   __pyx_t_2.atol = __pyx_v_atol;
-  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_Quantity->a_approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 362, __pyx_L1_error)
+  __pyx_t_1 = __pyx_vtabptr_8csiquant_10quantities_Quantity->a_approx(__pyx_v_self, __pyx_v_other, 1, &__pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9482,7 +9366,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_28a_approx(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":379
+/* "csiquant/quantities.pyx":375
  * 
  * 
  *     cpdef q_approx(Quantity self, Quantity other, Quantity qtol):             # <<<<<<<<<<<<<<
@@ -9516,7 +9400,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_q_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 379, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_q_approx); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 375, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_31q_approx)) {
         __Pyx_XDECREF(__pyx_r);
@@ -9536,7 +9420,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
         #if CYTHON_FAST_PYCALL
         if (PyFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[3] = {__pyx_t_4, ((PyObject *)__pyx_v_other), ((PyObject *)__pyx_v_qtol)};
-          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 379, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 375, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
@@ -9544,13 +9428,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
         #if CYTHON_FAST_PYCCALL
         if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
           PyObject *__pyx_temp[3] = {__pyx_t_4, ((PyObject *)__pyx_v_other), ((PyObject *)__pyx_v_qtol)};
-          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 379, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-__pyx_t_5, 2+__pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 375, __pyx_L1_error)
           __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_2);
         } else
         #endif
         {
-          __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 379, __pyx_L1_error)
+          __pyx_t_6 = PyTuple_New(2+__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 375, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_6);
           if (__pyx_t_4) {
             __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -9561,7 +9445,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
           __Pyx_INCREF(((PyObject *)__pyx_v_qtol));
           __Pyx_GIVEREF(((PyObject *)__pyx_v_qtol));
           PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_5, ((PyObject *)__pyx_v_qtol));
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 379, __pyx_L1_error)
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_6, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 375, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
@@ -9584,7 +9468,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
     #endif
   }
 
-  /* "csiquant/quantities.pyx":382
+  /* "csiquant/quantities.pyx":378
  *         cdef int error_code1, error_code2
  *         cdef double self_val, other_val
  *         error_code1 = c.extract_quantity(self_val, self.data, qtol.data.units)             # <<<<<<<<<<<<<<
@@ -9593,7 +9477,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  */
   __pyx_v_error_code1 = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_self_val, __pyx_v_self->data, __pyx_v_qtol->data.units);
 
-  /* "csiquant/quantities.pyx":383
+  /* "csiquant/quantities.pyx":379
  *         cdef double self_val, other_val
  *         error_code1 = c.extract_quantity(self_val, self.data, qtol.data.units)
  *         error_code2 = c.extract_quantity(other_val, other.data, qtol.data.units)             # <<<<<<<<<<<<<<
@@ -9602,7 +9486,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  */
   __pyx_v_error_code2 = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_other_val, __pyx_v_other->data, __pyx_v_qtol->data.units);
 
-  /* "csiquant/quantities.pyx":385
+  /* "csiquant/quantities.pyx":381
  *         error_code2 = c.extract_quantity(other_val, other.data, qtol.data.units)
  * 
  *         if error_code1 | error_code2 == c.Success:             # <<<<<<<<<<<<<<
@@ -9612,7 +9496,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
   __pyx_t_7 = (((__pyx_v_error_code1 | __pyx_v_error_code2) == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_7) {
 
-    /* "csiquant/quantities.pyx":386
+    /* "csiquant/quantities.pyx":382
  * 
  *         if error_code1 | error_code2 == c.Success:
  *             return fabs(self_val - other_val) <= fabs(qtol.data.quantity)             # <<<<<<<<<<<<<<
@@ -9620,13 +9504,13 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  *         if error_code1 == c.DimensionMismatch:
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_val - __pyx_v_other_val)) <= fabs(__pyx_v_qtol->data.quantity))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 386, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong((fabs((__pyx_v_self_val - __pyx_v_other_val)) <= fabs(__pyx_v_qtol->data.quantity))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 382, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":385
+    /* "csiquant/quantities.pyx":381
  *         error_code2 = c.extract_quantity(other_val, other.data, qtol.data.units)
  * 
  *         if error_code1 | error_code2 == c.Success:             # <<<<<<<<<<<<<<
@@ -9635,7 +9519,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":388
+  /* "csiquant/quantities.pyx":384
  *             return fabs(self_val - other_val) <= fabs(qtol.data.quantity)
  * 
  *         if error_code1 == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9645,20 +9529,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
   __pyx_t_7 = ((__pyx_v_error_code1 == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_7)) {
 
-    /* "csiquant/quantities.pyx":389
+    /* "csiquant/quantities.pyx":385
  * 
  *         if error_code1 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (lhs)")             # <<<<<<<<<<<<<<
  *         if error_code2 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (rhs)")
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 389, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 385, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 389, __pyx_L1_error)
+    __PYX_ERR(1, 385, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":388
+    /* "csiquant/quantities.pyx":384
  *             return fabs(self_val - other_val) <= fabs(qtol.data.quantity)
  * 
  *         if error_code1 == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9667,7 +9551,7 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":390
+  /* "csiquant/quantities.pyx":386
  *         if error_code1 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (lhs)")
  *         if error_code2 == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9677,20 +9561,20 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
   __pyx_t_7 = ((__pyx_v_error_code2 == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_7)) {
 
-    /* "csiquant/quantities.pyx":391
+    /* "csiquant/quantities.pyx":387
  *             raise ValueError("unit mismatch (lhs)")
  *         if error_code2 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (rhs)")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % (error_code1 | error_code2))
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 391, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 387, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 391, __pyx_L1_error)
+    __PYX_ERR(1, 387, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":390
+    /* "csiquant/quantities.pyx":386
  *         if error_code1 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (lhs)")
  *         if error_code2 == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9699,26 +9583,26 @@ static PyObject *__pyx_f_8csiquant_10quantities_8Quantity_q_approx(struct __pyx_
  */
   }
 
-  /* "csiquant/quantities.pyx":393
+  /* "csiquant/quantities.pyx":389
  *             raise ValueError("unit mismatch (rhs)")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % (error_code1 | error_code2))             # <<<<<<<<<<<<<<
  * 
  *     """
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_error_code1 | __pyx_v_error_code2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 393, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int((__pyx_v_error_code1 | __pyx_v_error_code2)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 393, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 393, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 389, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 393, __pyx_L1_error)
+  __PYX_ERR(1, 389, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":379
+  /* "csiquant/quantities.pyx":375
  * 
  * 
  *     cpdef q_approx(Quantity self, Quantity other, Quantity qtol):             # <<<<<<<<<<<<<<
@@ -9772,11 +9656,11 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_31q_approx(PyObject *
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_qtol)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("q_approx", 1, 2, 2, 1); __PYX_ERR(1, 379, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("q_approx", 1, 2, 2, 1); __PYX_ERR(1, 375, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "q_approx") < 0)) __PYX_ERR(1, 379, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "q_approx") < 0)) __PYX_ERR(1, 375, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -9789,14 +9673,14 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_31q_approx(PyObject *
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("q_approx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 379, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("q_approx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 375, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.Quantity.q_approx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 379, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_qtol), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "qtol", 0))) __PYX_ERR(1, 379, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_other), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "other", 0))) __PYX_ERR(1, 375, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_qtol), __pyx_ptype_8csiquant_10quantities_Quantity, 1, "qtol", 0))) __PYX_ERR(1, 375, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_30q_approx(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_self), __pyx_v_other, __pyx_v_qtol);
 
   /* function exit code */
@@ -9814,7 +9698,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_30q_approx(struct __p
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("q_approx", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_q_approx(__pyx_v_self, __pyx_v_other, __pyx_v_qtol, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 379, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8csiquant_10quantities_8Quantity_q_approx(__pyx_v_self, __pyx_v_other, __pyx_v_qtol, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 375, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -9831,7 +9715,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_30q_approx(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":399
+/* "csiquant/quantities.pyx":395
  *     """
  * 
  *     def __add__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -9845,8 +9729,8 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_33__add__(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__add__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "lhs", 0))) __PYX_ERR(1, 399, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 399, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "lhs", 0))) __PYX_ERR(1, 395, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 395, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_32__add__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -9868,19 +9752,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__add__", 0);
 
-  /* "csiquant/quantities.pyx":401
+  /* "csiquant/quantities.pyx":397
  *     def __add__(Quantity lhs not None, Quantity rhs not None):
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 401, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 397, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":402
+  /* "csiquant/quantities.pyx":398
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)             # <<<<<<<<<<<<<<
@@ -9889,7 +9773,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_add_qdata(__pyx_v_ret->data, __pyx_v_lhs->data, __pyx_v_rhs->data);
 
-  /* "csiquant/quantities.pyx":403
+  /* "csiquant/quantities.pyx":399
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -9899,7 +9783,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":404
+    /* "csiquant/quantities.pyx":400
  *         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -9911,7 +9795,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":403
+    /* "csiquant/quantities.pyx":399
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.add_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -9920,7 +9804,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
  */
   }
 
-  /* "csiquant/quantities.pyx":406
+  /* "csiquant/quantities.pyx":402
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9930,20 +9814,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":407
+    /* "csiquant/quantities.pyx":403
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 407, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 403, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 407, __pyx_L1_error)
+    __PYX_ERR(1, 403, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":406
+    /* "csiquant/quantities.pyx":402
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -9952,26 +9836,26 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
  */
   }
 
-  /* "csiquant/quantities.pyx":409
+  /* "csiquant/quantities.pyx":405
  *             raise ValueError("unit mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __sub__(Quantity lhs not None, Quantity rhs not None):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 409, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 405, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 409, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 405, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 409, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 405, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 409, __pyx_L1_error)
+  __PYX_ERR(1, 405, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":399
+  /* "csiquant/quantities.pyx":395
  *     """
  * 
  *     def __add__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -9992,7 +9876,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_32__add__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":411
+/* "csiquant/quantities.pyx":407
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __sub__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -10006,8 +9890,8 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_35__sub__(PyObject *_
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__sub__ (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "lhs", 0))) __PYX_ERR(1, 411, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 411, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_lhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "lhs", 0))) __PYX_ERR(1, 407, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_rhs), __pyx_ptype_8csiquant_10quantities_Quantity, 0, "rhs", 0))) __PYX_ERR(1, 407, __pyx_L1_error)
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_lhs), ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_v_rhs));
 
   /* function exit code */
@@ -10029,19 +9913,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__sub__", 0);
 
-  /* "csiquant/quantities.pyx":413
+  /* "csiquant/quantities.pyx":409
  *     def __sub__(Quantity lhs not None, Quantity rhs not None):
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 413, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 409, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":414
+  /* "csiquant/quantities.pyx":410
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)             # <<<<<<<<<<<<<<
@@ -10050,7 +9934,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_sub_qdata(__pyx_v_ret->data, __pyx_v_lhs->data, __pyx_v_rhs->data);
 
-  /* "csiquant/quantities.pyx":415
+  /* "csiquant/quantities.pyx":411
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10060,7 +9944,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":416
+    /* "csiquant/quantities.pyx":412
  *         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -10072,7 +9956,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":415
+    /* "csiquant/quantities.pyx":411
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.sub_qdata(ret.data, lhs.data, rhs.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10081,7 +9965,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
  */
   }
 
-  /* "csiquant/quantities.pyx":418
+  /* "csiquant/quantities.pyx":414
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -10091,20 +9975,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_DimensionMismatch) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":419
+    /* "csiquant/quantities.pyx":415
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 419, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 415, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 419, __pyx_L1_error)
+    __PYX_ERR(1, 415, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":418
+    /* "csiquant/quantities.pyx":414
  *             return ret
  * 
  *         if error_code == c.DimensionMismatch:             # <<<<<<<<<<<<<<
@@ -10113,26 +9997,26 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
  */
   }
 
-  /* "csiquant/quantities.pyx":421
+  /* "csiquant/quantities.pyx":417
  *             raise ValueError("unit mismatch")
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __mul__(lhs not None, rhs not None):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 421, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 421, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 421, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 417, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 421, __pyx_L1_error)
+  __PYX_ERR(1, 417, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":411
+  /* "csiquant/quantities.pyx":407
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __sub__(Quantity lhs not None, Quantity rhs not None):             # <<<<<<<<<<<<<<
@@ -10153,7 +10037,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_34__sub__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":423
+/* "csiquant/quantities.pyx":419
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __mul__(lhs not None, rhs not None):             # <<<<<<<<<<<<<<
@@ -10168,10 +10052,10 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_37__mul__(PyObject *_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__mul__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 423, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 419, __pyx_L1_error)
   }
   if (unlikely(((PyObject *)__pyx_v_rhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "rhs"); __PYX_ERR(1, 423, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "rhs"); __PYX_ERR(1, 419, __pyx_L1_error)
   }
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(((PyObject *)__pyx_v_lhs), ((PyObject *)__pyx_v_rhs));
 
@@ -10196,19 +10080,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__mul__", 0);
 
-  /* "csiquant/quantities.pyx":424
+  /* "csiquant/quantities.pyx":420
  * 
  *     def __mul__(lhs not None, rhs not None):
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         cdef c.QData other
  *         cdef int operand_code, error_code
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 424, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 420, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":427
+  /* "csiquant/quantities.pyx":423
  *         cdef c.QData other
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)             # <<<<<<<<<<<<<<
@@ -10217,7 +10101,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
  */
   __pyx_v_operand_code = (__pyx_f_8csiquant_10quantities_parse_qoperand(__pyx_v_ret->data, __pyx_v_lhs) | __pyx_f_8csiquant_10quantities_parse_qoperand(__pyx_v_other, __pyx_v_rhs));
 
-  /* "csiquant/quantities.pyx":428
+  /* "csiquant/quantities.pyx":424
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -10227,7 +10111,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
   __pyx_t_2 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_OBJECT) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":429
+    /* "csiquant/quantities.pyx":425
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -10239,7 +10123,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":428
+    /* "csiquant/quantities.pyx":424
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -10248,7 +10132,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
  */
   }
 
-  /* "csiquant/quantities.pyx":431
+  /* "csiquant/quantities.pyx":427
  *             return NotImplemented
  * 
  *         error_code = c.mul_qdata(ret.data, ret.data, other)             # <<<<<<<<<<<<<<
@@ -10257,7 +10141,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_mul_qdata(__pyx_v_ret->data, __pyx_v_ret->data, __pyx_v_other);
 
-  /* "csiquant/quantities.pyx":432
+  /* "csiquant/quantities.pyx":428
  * 
  *         error_code = c.mul_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10267,7 +10151,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":433
+    /* "csiquant/quantities.pyx":429
  *         error_code = c.mul_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -10279,7 +10163,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":432
+    /* "csiquant/quantities.pyx":428
  * 
  *         error_code = c.mul_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10288,26 +10172,26 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
  */
   }
 
-  /* "csiquant/quantities.pyx":435
+  /* "csiquant/quantities.pyx":431
  *             return ret
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __truediv__(lhs not None, rhs not None):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 435, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 431, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 435, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 431, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 435, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 431, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 435, __pyx_L1_error)
+  __PYX_ERR(1, 431, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":423
+  /* "csiquant/quantities.pyx":419
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __mul__(lhs not None, rhs not None):             # <<<<<<<<<<<<<<
@@ -10328,7 +10212,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_36__mul__(PyObject *_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":437
+/* "csiquant/quantities.pyx":433
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __truediv__(lhs not None, rhs not None):             # <<<<<<<<<<<<<<
@@ -10343,10 +10227,10 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_39__truediv__(PyObjec
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__truediv__ (wrapper)", 0);
   if (unlikely(((PyObject *)__pyx_v_lhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 437, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "lhs"); __PYX_ERR(1, 433, __pyx_L1_error)
   }
   if (unlikely(((PyObject *)__pyx_v_rhs) == Py_None)) {
-    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "rhs"); __PYX_ERR(1, 437, __pyx_L1_error)
+    PyErr_Format(PyExc_TypeError, "Argument '%.200s' must not be None", "rhs"); __PYX_ERR(1, 433, __pyx_L1_error)
   }
   __pyx_r = __pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(((PyObject *)__pyx_v_lhs), ((PyObject *)__pyx_v_rhs));
 
@@ -10371,19 +10255,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__truediv__", 0);
 
-  /* "csiquant/quantities.pyx":438
+  /* "csiquant/quantities.pyx":434
  * 
  *     def __truediv__(lhs not None, rhs not None):
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         cdef c.QData other
  *         cdef int operand_code, error_code
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 438, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 434, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":441
+  /* "csiquant/quantities.pyx":437
  *         cdef c.QData other
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)             # <<<<<<<<<<<<<<
@@ -10392,7 +10276,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  */
   __pyx_v_operand_code = (__pyx_f_8csiquant_10quantities_parse_qoperand(__pyx_v_ret->data, __pyx_v_lhs) | __pyx_f_8csiquant_10quantities_parse_qoperand(__pyx_v_other, __pyx_v_rhs));
 
-  /* "csiquant/quantities.pyx":442
+  /* "csiquant/quantities.pyx":438
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -10402,7 +10286,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
   __pyx_t_2 = ((__pyx_v_operand_code & __pyx_e_8csiquant_6ctypes_OBJECT) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":443
+    /* "csiquant/quantities.pyx":439
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:
  *             return NotImplemented             # <<<<<<<<<<<<<<
@@ -10414,7 +10298,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
     __pyx_r = __pyx_builtin_NotImplemented;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":442
+    /* "csiquant/quantities.pyx":438
  *         cdef int operand_code, error_code
  *         operand_code = parse_qoperand(ret.data, lhs) | parse_qoperand(other, rhs)
  *         if operand_code & c.OBJECT:             # <<<<<<<<<<<<<<
@@ -10423,7 +10307,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  */
   }
 
-  /* "csiquant/quantities.pyx":444
+  /* "csiquant/quantities.pyx":440
  *         if operand_code & c.OBJECT:
  *             return NotImplemented
  *         error_code = c.div_qdata(ret.data, ret.data, other)             # <<<<<<<<<<<<<<
@@ -10432,7 +10316,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_qdata(__pyx_v_ret->data, __pyx_v_ret->data, __pyx_v_other);
 
-  /* "csiquant/quantities.pyx":445
+  /* "csiquant/quantities.pyx":441
  *             return NotImplemented
  *         error_code = c.div_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10442,7 +10326,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":446
+    /* "csiquant/quantities.pyx":442
  *         error_code = c.div_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -10454,7 +10338,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":445
+    /* "csiquant/quantities.pyx":441
  *             return NotImplemented
  *         error_code = c.div_qdata(ret.data, ret.data, other)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10463,7 +10347,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  */
   }
 
-  /* "csiquant/quantities.pyx":448
+  /* "csiquant/quantities.pyx":444
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -10473,20 +10357,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_ZeroDiv) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":449
+    /* "csiquant/quantities.pyx":445
  * 
  *         if error_code == c.ZeroDiv:
  *             raise ZeroDivisionError()             # <<<<<<<<<<<<<<
  * 
  *         return RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 449, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 445, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 449, __pyx_L1_error)
+    __PYX_ERR(1, 445, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":448
+    /* "csiquant/quantities.pyx":444
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -10495,7 +10379,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  */
   }
 
-  /* "csiquant/quantities.pyx":451
+  /* "csiquant/quantities.pyx":447
  *             raise ZeroDivisionError()
  * 
  *         return RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
@@ -10503,19 +10387,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
  *     def __pow__(lhs, rhs, modulo):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 451, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 447, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 451, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 447, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 451, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 447, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":437
+  /* "csiquant/quantities.pyx":433
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __truediv__(lhs not None, rhs not None):             # <<<<<<<<<<<<<<
@@ -10536,7 +10420,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_38__truediv__(PyObjec
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":453
+/* "csiquant/quantities.pyx":449
  *         return RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __pow__(lhs, rhs, modulo):             # <<<<<<<<<<<<<<
@@ -10567,7 +10451,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__pow__", 0);
 
-  /* "csiquant/quantities.pyx":454
+  /* "csiquant/quantities.pyx":450
  * 
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -10578,20 +10462,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
   __pyx_t_2 = (__pyx_t_1 != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":455
+    /* "csiquant/quantities.pyx":451
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not Quantity:
  *             raise TypeError("Expected Quantity ** Number")             # <<<<<<<<<<<<<<
  *         return lhs.exp(rhs)
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 455, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__14, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 451, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(1, 455, __pyx_L1_error)
+    __PYX_ERR(1, 451, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":454
+    /* "csiquant/quantities.pyx":450
  * 
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not Quantity:             # <<<<<<<<<<<<<<
@@ -10600,7 +10484,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
  */
   }
 
-  /* "csiquant/quantities.pyx":456
+  /* "csiquant/quantities.pyx":452
  *         if type(lhs) is not Quantity:
  *             raise TypeError("Expected Quantity ** Number")
  *         return lhs.exp(rhs)             # <<<<<<<<<<<<<<
@@ -10608,7 +10492,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
  *     def __neg__(Quantity self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_lhs, __pyx_n_s_exp); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 456, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_lhs, __pyx_n_s_exp); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -10622,14 +10506,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
   }
   __pyx_t_3 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_v_rhs) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_rhs);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 456, __pyx_L1_error)
+  if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 452, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":453
+  /* "csiquant/quantities.pyx":449
  *         return RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __pow__(lhs, rhs, modulo):             # <<<<<<<<<<<<<<
@@ -10650,7 +10534,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_40__pow__(PyObject *_
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":458
+/* "csiquant/quantities.pyx":454
  *         return lhs.exp(rhs)
  * 
  *     def __neg__(Quantity self):             # <<<<<<<<<<<<<<
@@ -10679,19 +10563,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_42__neg__(struct __py
   struct __pyx_t_8csiquant_6ctypes_UData __pyx_t_2;
   __Pyx_RefNannySetupContext("__neg__", 0);
 
-  /* "csiquant/quantities.pyx":459
+  /* "csiquant/quantities.pyx":455
  * 
  *     def __neg__(Quantity self):
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         ret.data.quantity = -self.data.quantity
  *         ret.data.units = self.data.units
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 459, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 455, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":460
+  /* "csiquant/quantities.pyx":456
  *     def __neg__(Quantity self):
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = -self.data.quantity             # <<<<<<<<<<<<<<
@@ -10700,7 +10584,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_42__neg__(struct __py
  */
   __pyx_v_ret->data.quantity = (-__pyx_v_self->data.quantity);
 
-  /* "csiquant/quantities.pyx":461
+  /* "csiquant/quantities.pyx":457
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = -self.data.quantity
  *         ret.data.units = self.data.units             # <<<<<<<<<<<<<<
@@ -10710,7 +10594,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_42__neg__(struct __py
   __pyx_t_2 = __pyx_v_self->data.units;
   __pyx_v_ret->data.units = __pyx_t_2;
 
-  /* "csiquant/quantities.pyx":462
+  /* "csiquant/quantities.pyx":458
  *         ret.data.quantity = -self.data.quantity
  *         ret.data.units = self.data.units
  *         return ret             # <<<<<<<<<<<<<<
@@ -10722,7 +10606,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_42__neg__(struct __py
   __pyx_r = ((PyObject *)__pyx_v_ret);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":458
+  /* "csiquant/quantities.pyx":454
  *         return lhs.exp(rhs)
  * 
  *     def __neg__(Quantity self):             # <<<<<<<<<<<<<<
@@ -10742,7 +10626,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_42__neg__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":464
+/* "csiquant/quantities.pyx":460
  *         return ret
  * 
  *     def __invert__(Quantity self):             # <<<<<<<<<<<<<<
@@ -10773,19 +10657,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
   PyObject *__pyx_t_3 = NULL;
   __Pyx_RefNannySetupContext("__invert__", 0);
 
-  /* "csiquant/quantities.pyx":466
+  /* "csiquant/quantities.pyx":462
  *     def __invert__(Quantity self):
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         ret.data.quantity = 1.0
  *         ret.data.units.scale = 1.0
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 466, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 462, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":467
+  /* "csiquant/quantities.pyx":463
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = 1.0             # <<<<<<<<<<<<<<
@@ -10794,7 +10678,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
  */
   __pyx_v_ret->data.quantity = 1.0;
 
-  /* "csiquant/quantities.pyx":468
+  /* "csiquant/quantities.pyx":464
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = 1.0
  *         ret.data.units.scale = 1.0             # <<<<<<<<<<<<<<
@@ -10803,7 +10687,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
  */
   __pyx_v_ret->data.units.scale = 1.0;
 
-  /* "csiquant/quantities.pyx":469
+  /* "csiquant/quantities.pyx":465
  *         ret.data.quantity = 1.0
  *         ret.data.units.scale = 1.0
  *         error_code = c.div_qdata(ret.data, ret.data, self.data)             # <<<<<<<<<<<<<<
@@ -10812,7 +10696,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_qdata(__pyx_v_ret->data, __pyx_v_ret->data, __pyx_v_self->data);
 
-  /* "csiquant/quantities.pyx":470
+  /* "csiquant/quantities.pyx":466
  *         ret.data.units.scale = 1.0
  *         error_code = c.div_qdata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10822,7 +10706,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_2) {
 
-    /* "csiquant/quantities.pyx":471
+    /* "csiquant/quantities.pyx":467
  *         error_code = c.div_qdata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -10834,7 +10718,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
     __pyx_r = ((PyObject *)__pyx_v_ret);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":470
+    /* "csiquant/quantities.pyx":466
  *         ret.data.units.scale = 1.0
  *         error_code = c.div_qdata(ret.data, ret.data, self.data)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -10843,7 +10727,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
  */
   }
 
-  /* "csiquant/quantities.pyx":473
+  /* "csiquant/quantities.pyx":469
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -10853,20 +10737,20 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
   __pyx_t_2 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_ZeroDiv) != 0);
   if (unlikely(__pyx_t_2)) {
 
-    /* "csiquant/quantities.pyx":474
+    /* "csiquant/quantities.pyx":470
  * 
  *         if error_code == c.ZeroDiv:
  *             raise ZeroDivisionError()             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 474, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_builtin_ZeroDivisionError); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 470, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(1, 474, __pyx_L1_error)
+    __PYX_ERR(1, 470, __pyx_L1_error)
 
-    /* "csiquant/quantities.pyx":473
+    /* "csiquant/quantities.pyx":469
  *             return ret
  * 
  *         if error_code == c.ZeroDiv:             # <<<<<<<<<<<<<<
@@ -10875,26 +10759,26 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
  */
   }
 
-  /* "csiquant/quantities.pyx":476
+  /* "csiquant/quantities.pyx":472
  *             raise ZeroDivisionError()
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __abs__(Quantity self):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 476, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 476, __pyx_L1_error)
+  __pyx_t_3 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 476, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 472, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 476, __pyx_L1_error)
+  __PYX_ERR(1, 472, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":464
+  /* "csiquant/quantities.pyx":460
  *         return ret
  * 
  *     def __invert__(Quantity self):             # <<<<<<<<<<<<<<
@@ -10915,7 +10799,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_44__invert__(struct _
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":478
+/* "csiquant/quantities.pyx":474
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __abs__(Quantity self):             # <<<<<<<<<<<<<<
@@ -10945,7 +10829,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
   struct __pyx_t_8csiquant_6ctypes_UData __pyx_t_3;
   __Pyx_RefNannySetupContext("__abs__", 0);
 
-  /* "csiquant/quantities.pyx":479
+  /* "csiquant/quantities.pyx":475
  * 
  *     def __abs__(Quantity self):
  *         if self.data.quantity >= 0:             # <<<<<<<<<<<<<<
@@ -10955,7 +10839,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
   __pyx_t_1 = ((__pyx_v_self->data.quantity >= 0.0) != 0);
   if (__pyx_t_1) {
 
-    /* "csiquant/quantities.pyx":480
+    /* "csiquant/quantities.pyx":476
  *     def __abs__(Quantity self):
  *         if self.data.quantity >= 0:
  *             return self             # <<<<<<<<<<<<<<
@@ -10967,7 +10851,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
     __pyx_r = ((PyObject *)__pyx_v_self);
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":479
+    /* "csiquant/quantities.pyx":475
  * 
  *     def __abs__(Quantity self):
  *         if self.data.quantity >= 0:             # <<<<<<<<<<<<<<
@@ -10976,19 +10860,19 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
  */
   }
 
-  /* "csiquant/quantities.pyx":481
+  /* "csiquant/quantities.pyx":477
  *         if self.data.quantity >= 0:
  *             return self
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         ret.data.quantity = fabs(self.data.quantity)
  *         ret.data.units = self.data.units
  */
-  __pyx_t_2 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 481, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 477, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_2));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":482
+  /* "csiquant/quantities.pyx":478
  *             return self
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = fabs(self.data.quantity)             # <<<<<<<<<<<<<<
@@ -10997,7 +10881,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
  */
   __pyx_v_ret->data.quantity = fabs(__pyx_v_self->data.quantity);
 
-  /* "csiquant/quantities.pyx":483
+  /* "csiquant/quantities.pyx":479
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         ret.data.quantity = fabs(self.data.quantity)
  *         ret.data.units = self.data.units             # <<<<<<<<<<<<<<
@@ -11007,7 +10891,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
   __pyx_t_3 = __pyx_v_self->data.units;
   __pyx_v_ret->data.units = __pyx_t_3;
 
-  /* "csiquant/quantities.pyx":484
+  /* "csiquant/quantities.pyx":480
  *         ret.data.quantity = fabs(self.data.quantity)
  *         ret.data.units = self.data.units
  *         return ret             # <<<<<<<<<<<<<<
@@ -11019,7 +10903,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
   __pyx_r = ((PyObject *)__pyx_v_ret);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":478
+  /* "csiquant/quantities.pyx":474
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __abs__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11039,7 +10923,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_46__abs__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":486
+/* "csiquant/quantities.pyx":482
  *         return ret
  * 
  *     cpdef Quantity exp(Quantity self, double power):             # <<<<<<<<<<<<<<
@@ -11070,11 +10954,11 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     else {
       PY_UINT64_T type_dict_guard = (likely(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict)) ? __PYX_GET_DICT_VERSION(Py_TYPE(((PyObject *)__pyx_v_self))->tp_dict) : 0;
       #endif
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_exp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 486, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_exp); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 482, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (!PyCFunction_Check(__pyx_t_1) || (PyCFunction_GET_FUNCTION(__pyx_t_1) != (PyCFunction)(void*)__pyx_pw_8csiquant_10quantities_8Quantity_49exp)) {
         __Pyx_XDECREF(((PyObject *)__pyx_r));
-        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_power); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 486, __pyx_L1_error)
+        __pyx_t_3 = PyFloat_FromDouble(__pyx_v_power); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 482, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_INCREF(__pyx_t_1);
         __pyx_t_4 = __pyx_t_1; __pyx_t_5 = NULL;
@@ -11090,10 +10974,10 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
         __pyx_t_2 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_4, __pyx_t_5, __pyx_t_3) : __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3);
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 486, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 482, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 486, __pyx_L1_error)
+        if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10quantities_Quantity))))) __PYX_ERR(1, 482, __pyx_L1_error)
         __pyx_r = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_2);
         __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -11112,19 +10996,19 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     #endif
   }
 
-  /* "csiquant/quantities.pyx":488
+  /* "csiquant/quantities.pyx":484
  *     cpdef Quantity exp(Quantity self, double power):
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)             # <<<<<<<<<<<<<<
  *         error_code = c.pow_qdata(ret.data, self.data, power)
  *         if error_code == c.Success:
  */
-  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 488, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_tp_new_8csiquant_10quantities_Quantity(((PyTypeObject *)__pyx_ptype_8csiquant_10quantities_Quantity), __pyx_empty_tuple, NULL)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 484, __pyx_L1_error)
   __Pyx_GOTREF(((PyObject *)__pyx_t_1));
   __pyx_v_ret = ((struct __pyx_obj_8csiquant_10quantities_Quantity *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":489
+  /* "csiquant/quantities.pyx":485
  *         cdef int error_code
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.pow_qdata(ret.data, self.data, power)             # <<<<<<<<<<<<<<
@@ -11133,7 +11017,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_pow_qdata(__pyx_v_ret->data, __pyx_v_self->data, __pyx_v_power);
 
-  /* "csiquant/quantities.pyx":490
+  /* "csiquant/quantities.pyx":486
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.pow_qdata(ret.data, self.data, power)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -11143,7 +11027,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
   __pyx_t_6 = ((__pyx_v_error_code == __pyx_e_8csiquant_6ctypes_Success) != 0);
   if (__pyx_t_6) {
 
-    /* "csiquant/quantities.pyx":491
+    /* "csiquant/quantities.pyx":487
  *         error_code = c.pow_qdata(ret.data, self.data, power)
  *         if error_code == c.Success:
  *             return ret             # <<<<<<<<<<<<<<
@@ -11155,7 +11039,7 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
     __pyx_r = __pyx_v_ret;
     goto __pyx_L0;
 
-    /* "csiquant/quantities.pyx":490
+    /* "csiquant/quantities.pyx":486
  *         cdef Quantity ret = Quantity.__new__(Quantity)
  *         error_code = c.pow_qdata(ret.data, self.data, power)
  *         if error_code == c.Success:             # <<<<<<<<<<<<<<
@@ -11164,26 +11048,26 @@ static struct __pyx_obj_8csiquant_10quantities_Quantity *__pyx_f_8csiquant_10qua
  */
   }
 
-  /* "csiquant/quantities.pyx":493
+  /* "csiquant/quantities.pyx":489
  *             return ret
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)             # <<<<<<<<<<<<<<
  * 
  *     def __copy__(self):
  */
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 493, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_error_code); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 493, __pyx_L1_error)
+  __pyx_t_2 = PyUnicode_Format(__pyx_kp_u_Unknown_Error_Occurred_i, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 493, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_RuntimeError, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __PYX_ERR(1, 493, __pyx_L1_error)
+  __PYX_ERR(1, 489, __pyx_L1_error)
 
-  /* "csiquant/quantities.pyx":486
+  /* "csiquant/quantities.pyx":482
  *         return ret
  * 
  *     cpdef Quantity exp(Quantity self, double power):             # <<<<<<<<<<<<<<
@@ -11215,7 +11099,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_49exp(PyObject *__pyx
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("exp (wrapper)", 0);
   assert(__pyx_arg_power); {
-    __pyx_v_power = __pyx_PyFloat_AsDouble(__pyx_arg_power); if (unlikely((__pyx_v_power == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 486, __pyx_L3_error)
+    __pyx_v_power = __pyx_PyFloat_AsDouble(__pyx_arg_power); if (unlikely((__pyx_v_power == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 482, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -11236,7 +11120,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_48exp(struct __pyx_ob
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("exp", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_exp(__pyx_v_self, __pyx_v_power, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 486, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8csiquant_10quantities_8Quantity_exp(__pyx_v_self, __pyx_v_power, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 482, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -11253,7 +11137,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_48exp(struct __pyx_ob
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":495
+/* "csiquant/quantities.pyx":491
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __copy__(self):             # <<<<<<<<<<<<<<
@@ -11279,7 +11163,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_50__copy__(struct __p
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__copy__", 0);
 
-  /* "csiquant/quantities.pyx":496
+  /* "csiquant/quantities.pyx":492
  * 
  *     def __copy__(self):
  *         return self             # <<<<<<<<<<<<<<
@@ -11291,7 +11175,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_50__copy__(struct __p
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":495
+  /* "csiquant/quantities.pyx":491
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     def __copy__(self):             # <<<<<<<<<<<<<<
@@ -11306,7 +11190,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_50__copy__(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":498
+/* "csiquant/quantities.pyx":494
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
@@ -11343,7 +11227,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_53__deepcopy__(PyObje
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__deepcopy__") < 0)) __PYX_ERR(1, 498, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__deepcopy__") < 0)) __PYX_ERR(1, 494, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -11357,7 +11241,7 @@ static PyObject *__pyx_pw_8csiquant_10quantities_8Quantity_53__deepcopy__(PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__deepcopy__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 498, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__deepcopy__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 494, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("csiquant.quantities.Quantity.__deepcopy__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -11375,7 +11259,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_52__deepcopy__(struct
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__deepcopy__", 0);
 
-  /* "csiquant/quantities.pyx":499
+  /* "csiquant/quantities.pyx":495
  * 
  *     def __deepcopy__(self, memodict={}):
  *         return self             # <<<<<<<<<<<<<<
@@ -11387,7 +11271,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_52__deepcopy__(struct
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":498
+  /* "csiquant/quantities.pyx":494
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
@@ -11402,7 +11286,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_52__deepcopy__(struct
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":501
+/* "csiquant/quantities.pyx":497
  *         return self
  * 
  *     def __bool__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11430,21 +11314,21 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity_54__bool__(struct __pyx_obj
   int __pyx_t_2;
   __Pyx_RefNannySetupContext("__bool__", 0);
 
-  /* "csiquant/quantities.pyx":502
+  /* "csiquant/quantities.pyx":498
  * 
  *     def __bool__(Quantity self):
  *         return bool(self.data.quantity)             # <<<<<<<<<<<<<<
  * 
  *     def __float__(Quantity self):
  */
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 502, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 498, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 502, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(1, 498, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = (!(!__pyx_t_2));
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":501
+  /* "csiquant/quantities.pyx":497
  *         return self
  * 
  *     def __bool__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11462,7 +11346,7 @@ static int __pyx_pf_8csiquant_10quantities_8Quantity_54__bool__(struct __pyx_obj
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":504
+/* "csiquant/quantities.pyx":500
  *         return bool(self.data.quantity)
  * 
  *     def __float__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11489,7 +11373,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_56__float__(struct __
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__float__", 0);
 
-  /* "csiquant/quantities.pyx":505
+  /* "csiquant/quantities.pyx":501
  * 
  *     def __float__(Quantity self):
  *         return float(self.data.quantity)             # <<<<<<<<<<<<<<
@@ -11497,13 +11381,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_56__float__(struct __
  *     def __int__(Quantity self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 505, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 501, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":504
+  /* "csiquant/quantities.pyx":500
  *         return bool(self.data.quantity)
  * 
  *     def __float__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11522,7 +11406,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_56__float__(struct __
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":507
+/* "csiquant/quantities.pyx":503
  *         return float(self.data.quantity)
  * 
  *     def __int__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11549,7 +11433,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_58__int__(struct __py
   PyObject *__pyx_t_1 = NULL;
   __Pyx_RefNannySetupContext("__int__", 0);
 
-  /* "csiquant/quantities.pyx":508
+  /* "csiquant/quantities.pyx":504
  * 
  *     def __int__(Quantity self):
  *         return int(self.data.quantity)             # <<<<<<<<<<<<<<
@@ -11557,13 +11441,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_58__int__(struct __py
  *     def __hash__(Quantity self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 508, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromDouble(__pyx_v_self->data.quantity); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 504, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":507
+  /* "csiquant/quantities.pyx":503
  *         return float(self.data.quantity)
  * 
  *     def __int__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11582,7 +11466,7 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_58__int__(struct __py
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":510
+/* "csiquant/quantities.pyx":506
  *         return int(self.data.quantity)
  * 
  *     def __hash__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11614,7 +11498,7 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_8Quantity_60__hash__(struct __p
   Py_hash_t __pyx_t_3;
   __Pyx_RefNannySetupContext("__hash__", 0);
 
-  /* "csiquant/quantities.pyx":511
+  /* "csiquant/quantities.pyx":507
  * 
  *     def __hash__(Quantity self):
  *         cdef double normalized = self.data.quantity * self.data.units.scale             # <<<<<<<<<<<<<<
@@ -11623,31 +11507,31 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_8Quantity_60__hash__(struct __p
  */
   __pyx_v_normalized = (__pyx_v_self->data.quantity * __pyx_v_self->data.units.scale);
 
-  /* "csiquant/quantities.pyx":512
+  /* "csiquant/quantities.pyx":508
  *     def __hash__(Quantity self):
  *         cdef double normalized = self.data.quantity * self.data.units.scale
  *         exponents = tuple(self.data.units.dimensions.exponents)             # <<<<<<<<<<<<<<
  *         qtuple = (normalized, exponents)
  *         return hash(qtuple)
  */
-  __pyx_t_1 = __Pyx_carray_to_py_double(__pyx_v_self->data.units.dimensions.exponents, 7); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 512, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_carray_to_py_double(__pyx_v_self->data.units.dimensions.exponents, 7); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 512, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PySequence_Tuple(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 508, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_exponents = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":513
+  /* "csiquant/quantities.pyx":509
  *         cdef double normalized = self.data.quantity * self.data.units.scale
  *         exponents = tuple(self.data.units.dimensions.exponents)
  *         qtuple = (normalized, exponents)             # <<<<<<<<<<<<<<
  *         return hash(qtuple)
  * 
  */
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_normalized); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 513, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_normalized); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 509, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 513, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 509, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
@@ -11658,18 +11542,18 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_8Quantity_60__hash__(struct __p
   __pyx_v_qtuple = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "csiquant/quantities.pyx":514
+  /* "csiquant/quantities.pyx":510
  *         exponents = tuple(self.data.units.dimensions.exponents)
  *         qtuple = (normalized, exponents)
  *         return hash(qtuple)             # <<<<<<<<<<<<<<
  * 
  *     def __repr__(self):
  */
-  __pyx_t_3 = PyObject_Hash(__pyx_v_qtuple); if (unlikely(__pyx_t_3 == ((Py_hash_t)-1))) __PYX_ERR(1, 514, __pyx_L1_error)
+  __pyx_t_3 = PyObject_Hash(__pyx_v_qtuple); if (unlikely(__pyx_t_3 == ((Py_hash_t)-1))) __PYX_ERR(1, 510, __pyx_L1_error)
   __pyx_r = __pyx_t_3;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":510
+  /* "csiquant/quantities.pyx":506
  *         return int(self.data.quantity)
  * 
  *     def __hash__(Quantity self):             # <<<<<<<<<<<<<<
@@ -11691,7 +11575,7 @@ static Py_hash_t __pyx_pf_8csiquant_10quantities_8Quantity_60__hash__(struct __p
   return __pyx_r;
 }
 
-/* "csiquant/quantities.pyx":516
+/* "csiquant/quantities.pyx":512
  *         return hash(qtuple)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -11721,13 +11605,13 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_62__repr__(struct __p
   PyObject *__pyx_t_5 = NULL;
   __Pyx_RefNannySetupContext("__repr__", 0);
 
-  /* "csiquant/quantities.pyx":517
+  /* "csiquant/quantities.pyx":513
  * 
  *     def __repr__(self):
  *         return 'Quantity(%f, %r)' % (self.quantity, self.units)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = 0;
   __pyx_t_3 = 127;
@@ -11735,9 +11619,9 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_62__repr__(struct __p
   __pyx_t_2 += 9;
   __Pyx_GIVEREF(__pyx_kp_u_Quantity);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_Quantity);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_quantity); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_quantity); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_n_u_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_n_u_f); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_3;
@@ -11749,9 +11633,9 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_62__repr__(struct __p
   __pyx_t_2 += 2;
   __Pyx_GIVEREF(__pyx_kp_u__8);
   PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__8);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_units); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_v_self), __pyx_n_s_units); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Repr(__pyx_t_5), __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Repr(__pyx_t_5), __pyx_empty_unicode); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_t_3 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) > __pyx_t_3) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_4) : __pyx_t_3;
@@ -11763,14 +11647,14 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_62__repr__(struct __p
   __pyx_t_2 += 1;
   __Pyx_GIVEREF(__pyx_kp_u__9);
   PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u__9);
-  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 517, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Join(__pyx_t_1, 5, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 513, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_r = __pyx_t_4;
   __pyx_t_4 = 0;
   goto __pyx_L0;
 
-  /* "csiquant/quantities.pyx":516
+  /* "csiquant/quantities.pyx":512
  *         return hash(qtuple)
  * 
  *     def __repr__(self):             # <<<<<<<<<<<<<<
@@ -11893,1494 +11777,6 @@ static PyObject *__pyx_pf_8csiquant_10quantities_8Quantity_66__setstate_cython__
   __Pyx_AddTraceback("csiquant.quantities.Quantity.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":19
- *     QUANTITY = 4
- * 
- * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
- * 
- */
-
-static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
-  int __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("eq_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":20
- * 
- * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0             # <<<<<<<<<<<<<<
- * 
- * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
- */
-  __pyx_r = (memcmp((&__pyx_v_lhs), (&__pyx_v_rhs), (sizeof(struct __pyx_t_8csiquant_6ctypes_DData))) == 0);
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":19
- *     QUANTITY = 4
- * 
- * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":22
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
- * 
- * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     return src.quantity * src.units.scale / units.scale
- * 
- */
-
-static CYTHON_INLINE double __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
-  double __pyx_r;
-  __Pyx_RefNannyDeclarations
-  double __pyx_t_1;
-  __Pyx_RefNannySetupContext("unsafe_extract_quantity", 0);
-
-  /* "csiquant/ctypes.pxd":23
- * 
- * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
- *     return src.quantity * src.units.scale / units.scale             # <<<<<<<<<<<<<<
- * 
- * 
- */
-  __pyx_t_1 = (__pyx_v_src.quantity * __pyx_v_src.units.scale);
-  if (unlikely(__pyx_v_units.scale == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(3, 23, __pyx_L1_error)
-  }
-  __pyx_r = (__pyx_t_1 / __pyx_v_units.scale);
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":22
- *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
- * 
- * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     return src.quantity * src.units.scale / units.scale
- * 
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_WriteUnraisable("csiquant.ctypes.unsafe_extract_quantity", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = 0;
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":38
- * 
- * #Success
- * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
-  int __pyx_v_i;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("mul_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":40
- * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):
- *     cdef int i
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
- *     return Success
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":41
- *     cdef int i
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) + (__pyx_v_rhs.exponents[__pyx_v_i]));
-  }
-
-  /* "csiquant/ctypes.pxd":42
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":38
- * 
- * #Success
- * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":45
- * 
- * #Success
- * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
-  int __pyx_v_i;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("div_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":47
- * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):
- *     cdef int i
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
- *     return Success
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":48
- *     cdef int i
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) - (__pyx_v_rhs.exponents[__pyx_v_i]));
-  }
-
-  /* "csiquant/ctypes.pxd":49
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":45
- * 
- * #Success
- * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":52
- * 
- * #Success
- * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, double __pyx_v_power) {
-  int __pyx_v_i;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("pow_ddata", 0);
-
-  /* "csiquant/ctypes.pxd":54
- * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):
- *     cdef int i
- *     for i in range(7):             # <<<<<<<<<<<<<<
- *         out.exponents[i] = lhs.exponents[i] * power
- *     return Success
- */
-  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
-    __pyx_v_i = __pyx_t_1;
-
-    /* "csiquant/ctypes.pxd":55
- *     cdef int i
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] * power             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) * __pyx_v_power);
-  }
-
-  /* "csiquant/ctypes.pxd":56
- *     for i in range(7):
- *         out.exponents[i] = lhs.exponents[i] * power
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * # begin udata functions
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":52
- * 
- * #Success
- * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
- *     cdef int i
- *     for i in range(7):
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":61
- * 
- * #Success
- * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     #todo: overflow checks
- *     out.scale = lhs.scale * rhs.scale
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("mul_udata", 0);
-
-  /* "csiquant/ctypes.pxd":63
- * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):
- *     #todo: overflow checks
- *     out.scale = lhs.scale * rhs.scale             # <<<<<<<<<<<<<<
- *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
- * 
- */
-  __pyx_v_out.scale = (__pyx_v_lhs.scale * __pyx_v_rhs.scale);
-
-  /* "csiquant/ctypes.pxd":64
- *     #todo: overflow checks
- *     out.scale = lhs.scale * rhs.scale
- *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":61
- * 
- * #Success
- * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     #todo: overflow checks
- *     out.scale = lhs.scale * rhs.scale
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":68
- * #Success
- * #ZeroDiv
- * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if rhs.scale == 0:
- *         return ZeroDiv
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("div_udata", 0);
-
-  /* "csiquant/ctypes.pxd":69
- * #ZeroDiv
- * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
- *         return ZeroDiv
- *     out.scale = lhs.scale / rhs.scale
- */
-  __pyx_t_1 = ((__pyx_v_rhs.scale == 0.0) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":70
- * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if rhs.scale == 0:
- *         return ZeroDiv             # <<<<<<<<<<<<<<
- *     out.scale = lhs.scale / rhs.scale
- *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":69
- * #ZeroDiv
- * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
- *         return ZeroDiv
- *     out.scale = lhs.scale / rhs.scale
- */
-  }
-
-  /* "csiquant/ctypes.pxd":71
- *     if rhs.scale == 0:
- *         return ZeroDiv
- *     out.scale = lhs.scale / rhs.scale             # <<<<<<<<<<<<<<
- *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
- * 
- */
-  if (unlikely(__pyx_v_rhs.scale == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(3, 71, __pyx_L1_error)
-  }
-  __pyx_v_out.scale = (__pyx_v_lhs.scale / __pyx_v_rhs.scale);
-
-  /* "csiquant/ctypes.pxd":72
- *         return ZeroDiv
- *     out.scale = lhs.scale / rhs.scale
- *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":68
- * #Success
- * #ZeroDiv
- * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if rhs.scale == 0:
- *         return ZeroDiv
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_WriteUnraisable("csiquant.ctypes.div_udata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":75
- * 
- * #Success
- * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
- *     #todo: overflow checks
- *     out.scale = lhs.scale ** power
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, double __pyx_v_power) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("pow_udata", 0);
-
-  /* "csiquant/ctypes.pxd":77
- * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):
- *     #todo: overflow checks
- *     out.scale = lhs.scale ** power             # <<<<<<<<<<<<<<
- *     return pow_ddata(out.dimensions, lhs.dimensions, power)
- * 
- */
-  __pyx_v_out.scale = pow(((double)__pyx_v_lhs.scale), __pyx_v_power);
-
-  /* "csiquant/ctypes.pxd":78
- *     #todo: overflow checks
- *     out.scale = lhs.scale ** power
- *     return pow_ddata(out.dimensions, lhs.dimensions, power)             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_power);
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":75
- * 
- * #Success
- * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
- *     #todo: overflow checks
- *     out.scale = lhs.scale ** power
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":82
- * #Success
- * #DimensionMismatch
- * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("cmp_udata", 0);
-
-  /* "csiquant/ctypes.pxd":83
- * #DimensionMismatch
- * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":84
- * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch             # <<<<<<<<<<<<<<
- * 
- *     if lhs.scale > rhs.scale:
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":83
- * #DimensionMismatch
- * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":86
- *         return DimensionMismatch
- * 
- *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = 1
- *     elif lhs.scale < rhs.scale:
- */
-  __pyx_t_1 = ((__pyx_v_lhs.scale > __pyx_v_rhs.scale) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":87
- * 
- *     if lhs.scale > rhs.scale:
- *         (&out)[0] = 1             # <<<<<<<<<<<<<<
- *     elif lhs.scale < rhs.scale:
- *         (&out)[0] = -1
- */
-    ((&__pyx_v_out)[0]) = 1;
-
-    /* "csiquant/ctypes.pxd":86
- *         return DimensionMismatch
- * 
- *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = 1
- *     elif lhs.scale < rhs.scale:
- */
-    goto __pyx_L4;
-  }
-
-  /* "csiquant/ctypes.pxd":88
- *     if lhs.scale > rhs.scale:
- *         (&out)[0] = 1
- *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = -1
- *     else:
- */
-  __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":89
- *         (&out)[0] = 1
- *     elif lhs.scale < rhs.scale:
- *         (&out)[0] = -1             # <<<<<<<<<<<<<<
- *     else:
- *         (&out)[0] = 0
- */
-    ((&__pyx_v_out)[0]) = -1;
-
-    /* "csiquant/ctypes.pxd":88
- *     if lhs.scale > rhs.scale:
- *         (&out)[0] = 1
- *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = -1
- *     else:
- */
-    goto __pyx_L4;
-  }
-
-  /* "csiquant/ctypes.pxd":91
- *         (&out)[0] = -1
- *     else:
- *         (&out)[0] = 0             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  /*else*/ {
-    ((&__pyx_v_out)[0]) = 0;
-  }
-  __pyx_L4:;
-
-  /* "csiquant/ctypes.pxd":93
- *         (&out)[0] = 0
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":82
- * #Success
- * #DimensionMismatch
- * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":97
- * #Success
- * #DimensionMismatch
- * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_min_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("min_udata", 0);
-
-  /* "csiquant/ctypes.pxd":98
- * #DimensionMismatch
- * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":99
- * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch             # <<<<<<<<<<<<<<
- * 
- *     if lhs.scale < rhs.scale:
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":98
- * #DimensionMismatch
- * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":101
- *         return DimensionMismatch
- * 
- *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = lhs
- *     else:
- */
-  __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":102
- * 
- *     if lhs.scale < rhs.scale:
- *         (&out)[0] = lhs             # <<<<<<<<<<<<<<
- *     else:
- *         (&out)[0] = rhs
- */
-    ((&__pyx_v_out)[0]) = __pyx_v_lhs;
-
-    /* "csiquant/ctypes.pxd":101
- *         return DimensionMismatch
- * 
- *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
- *         (&out)[0] = lhs
- *     else:
- */
-    goto __pyx_L4;
-  }
-
-  /* "csiquant/ctypes.pxd":104
- *         (&out)[0] = lhs
- *     else:
- *         (&out)[0] = rhs             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  /*else*/ {
-    ((&__pyx_v_out)[0]) = __pyx_v_rhs;
-  }
-  __pyx_L4:;
-
-  /* "csiquant/ctypes.pxd":106
- *         (&out)[0] = rhs
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * ## begin qdata functions
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":97
- * #Success
- * #DimensionMismatch
- * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
- *         return DimensionMismatch
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":111
- * 
- * #Success
- * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("mul_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":114
- *     cdef Error error_code
- * 
- *     error_code = mul_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_mul_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
-
-  /* "csiquant/ctypes.pxd":115
- * 
- *     error_code = mul_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":116
- *     error_code = mul_udata(out.units, lhs.units, rhs.units)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.quantity = lhs.quantity * rhs.quantity
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":115
- * 
- *     error_code = mul_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":118
- *         return error_code
- * 
- *     out.quantity = lhs.quantity * rhs.quantity             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  __pyx_v_out.quantity = (__pyx_v_lhs.quantity * __pyx_v_rhs.quantity);
-
-  /* "csiquant/ctypes.pxd":120
- *     out.quantity = lhs.quantity * rhs.quantity
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":111
- * 
- * #Success
- * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":124
- * #Success
- * #ZeroDiv
- * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if rhs.quantity == 0.0:
- *         return ZeroDiv
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("div_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":125
- * #ZeroDiv
- * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
- *         return ZeroDiv
- * 
- */
-  __pyx_t_1 = ((__pyx_v_rhs.quantity == 0.0) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":126
- * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if rhs.quantity == 0.0:
- *         return ZeroDiv             # <<<<<<<<<<<<<<
- * 
- *     cdef Error error_code
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":125
- * #ZeroDiv
- * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
- *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
- *         return ZeroDiv
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":130
- *     cdef Error error_code
- * 
- *     error_code = div_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
-
-  /* "csiquant/ctypes.pxd":131
- * 
- *     error_code = div_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":132
- *     error_code = div_udata(out.units, lhs.units, rhs.units)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.quantity = lhs.quantity / rhs.quantity
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":131
- * 
- *     error_code = div_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":134
- *         return error_code
- * 
- *     out.quantity = lhs.quantity / rhs.quantity             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-  if (unlikely(__pyx_v_rhs.quantity == 0)) {
-    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(3, 134, __pyx_L1_error)
-  }
-  __pyx_v_out.quantity = (__pyx_v_lhs.quantity / __pyx_v_rhs.quantity);
-
-  /* "csiquant/ctypes.pxd":135
- * 
- *     out.quantity = lhs.quantity / rhs.quantity
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":124
- * #Success
- * #ZeroDiv
- * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if rhs.quantity == 0.0:
- *         return ZeroDiv
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_WriteUnraisable("csiquant.ctypes.div_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":138
- * 
- * #Success
- * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, double __pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("pow_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":141
- *     cdef Error error_code
- * 
- *     error_code = pow_udata(out.units, lhs.units, rhs)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_pow_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs);
-
-  /* "csiquant/ctypes.pxd":142
- * 
- *     error_code = pow_udata(out.units, lhs.units, rhs)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":143
- *     error_code = pow_udata(out.units, lhs.units, rhs)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.quantity = lhs.quantity ** rhs
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":142
- * 
- *     error_code = pow_udata(out.units, lhs.units, rhs)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":145
- *         return error_code
- * 
- *     out.quantity = lhs.quantity ** rhs             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  __pyx_v_out.quantity = pow(((double)__pyx_v_lhs.quantity), __pyx_v_rhs);
-
-  /* "csiquant/ctypes.pxd":147
- *     out.quantity = lhs.quantity ** rhs
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":138
- * 
- * #Success
- * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":151
- * #Success
- * #DimensionMismatch
- * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_add_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("add_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":154
- *     cdef Error error_code
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
-
-  /* "csiquant/ctypes.pxd":155
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":156
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":155
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":158
- *         return error_code
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
- *     out.quantity += unsafe_extract_quantity(rhs, out.units)
- * 
- */
-  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
-
-  /* "csiquant/ctypes.pxd":159
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)
- *     out.quantity += unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  __pyx_v_out.quantity = (__pyx_v_out.quantity + __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
-
-  /* "csiquant/ctypes.pxd":161
- *     out.quantity += unsafe_extract_quantity(rhs, out.units)
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":151
- * #Success
- * #DimensionMismatch
- * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":165
- * #Success
- * #DimensionMismatch
- * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_sub_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("sub_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":168
- *     cdef Error error_code
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
-
-  /* "csiquant/ctypes.pxd":169
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":170
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":169
- * 
- *     error_code = min_udata(out.units, lhs.units, rhs.units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":172
- *         return error_code
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
- *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
- *     return Success
- */
-  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
-
-  /* "csiquant/ctypes.pxd":173
- * 
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)
- *     out.quantity -= unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-  __pyx_v_out.quantity = (__pyx_v_out.quantity - __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
-
-  /* "csiquant/ctypes.pxd":174
- *     out.quantity = unsafe_extract_quantity(lhs, out.units)
- *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":165
- * #Success
- * #DimensionMismatch
- * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":178
- * #Success
- * #DimensionMismatch
- * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("cvt_quantity", 0);
-
-  /* "csiquant/ctypes.pxd":181
- *     cdef Error error_code
- * 
- *     error_code = extract_quantity(out.quantity, src, units)             # <<<<<<<<<<<<<<
- *     if error_code:
- *         return error_code
- */
-  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_out.quantity, __pyx_v_src, __pyx_v_units);
-
-  /* "csiquant/ctypes.pxd":182
- * 
- *     error_code = extract_quantity(out.quantity, src, units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  if (__pyx_v_error_code) {
-
-    /* "csiquant/ctypes.pxd":183
- *     error_code = extract_quantity(out.quantity, src, units)
- *     if error_code:
- *         return error_code             # <<<<<<<<<<<<<<
- * 
- *     out.units = units
- */
-    __pyx_r = __pyx_v_error_code;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":182
- * 
- *     error_code = extract_quantity(out.quantity, src, units)
- *     if error_code:             # <<<<<<<<<<<<<<
- *         return error_code
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":185
- *         return error_code
- * 
- *     out.units = units             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-  __pyx_v_out.units = __pyx_v_units;
-
-  /* "csiquant/ctypes.pxd":186
- * 
- *     out.units = units
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":178
- * #Success
- * #DimensionMismatch
- * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     cdef Error error_code
- * 
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":190
- * #Success
- * #DimensionMismatch
- * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return DimensionMismatch
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_extract_quantity(double &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  __Pyx_RefNannySetupContext("extract_quantity", 0);
-
-  /* "csiquant/ctypes.pxd":191
- * #DimensionMismatch
- * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
- *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- *     (&out)[0] = unsafe_extract_quantity(src, units)
- */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_src.units.dimensions, __pyx_v_units.dimensions) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":192
- * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
- *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return DimensionMismatch             # <<<<<<<<<<<<<<
- *     (&out)[0] = unsafe_extract_quantity(src, units)
- *     return Success
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":191
- * #DimensionMismatch
- * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
- *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- *     (&out)[0] = unsafe_extract_quantity(src, units)
- */
-  }
-
-  /* "csiquant/ctypes.pxd":193
- *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return DimensionMismatch
- *     (&out)[0] = unsafe_extract_quantity(src, units)             # <<<<<<<<<<<<<<
- *     return Success
- * 
- */
-  ((&__pyx_v_out)[0]) = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_src, __pyx_v_units);
-
-  /* "csiquant/ctypes.pxd":194
- *         return DimensionMismatch
- *     (&out)[0] = unsafe_extract_quantity(src, units)
- *     return Success             # <<<<<<<<<<<<<<
- * 
- * #Success
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":190
- * #Success
- * #DimensionMismatch
- * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(src.units.dimensions, units.dimensions):
- *         return DimensionMismatch
- */
-
-  /* function exit code */
-  __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-/* "csiquant/ctypes.pxd":198
- * #Success
- * #DimensionMismatch
- * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return DimensionMismatch
- */
-
-static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
-  PyObject *__pyx_v_lhs_norm = 0;
-  PyObject *__pyx_v_rhs_norm = 0;
-  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
-  __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  PyObject *__pyx_t_2 = NULL;
-  __Pyx_RefNannySetupContext("cmp_qdata", 0);
-
-  /* "csiquant/ctypes.pxd":199
- * #DimensionMismatch
- * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
- *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.units.dimensions, __pyx_v_rhs.units.dimensions) != 0)) != 0);
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":200
- * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
- *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return DimensionMismatch             # <<<<<<<<<<<<<<
- * 
- *     cdef lhs_norm = lhs.quantity * lhs.units.scale
- */
-    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
-    goto __pyx_L0;
-
-    /* "csiquant/ctypes.pxd":199
- * #DimensionMismatch
- * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
- *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
- *         return DimensionMismatch
- * 
- */
-  }
-
-  /* "csiquant/ctypes.pxd":202
- *         return DimensionMismatch
- * 
- *     cdef lhs_norm = lhs.quantity * lhs.units.scale             # <<<<<<<<<<<<<<
- *     cdef rhs_norm = rhs.quantity * rhs.units.scale
- * 
- */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_lhs.quantity * __pyx_v_lhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 202, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_v_lhs_norm = __pyx_t_2;
-  __pyx_t_2 = 0;
-
-  /* "csiquant/ctypes.pxd":203
- * 
- *     cdef lhs_norm = lhs.quantity * lhs.units.scale
- *     cdef rhs_norm = rhs.quantity * rhs.units.scale             # <<<<<<<<<<<<<<
- * 
- *     if lhs_norm > rhs_norm:
- */
-  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_rhs.quantity * __pyx_v_rhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 203, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_v_rhs_norm = __pyx_t_2;
-  __pyx_t_2 = 0;
-
-  /* "csiquant/ctypes.pxd":205
- *     cdef rhs_norm = rhs.quantity * rhs.units.scale
- * 
- *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
- *         (&out)[0] = 1
- *     elif lhs_norm < rhs_norm:
- */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 205, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 205, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":206
- * 
- *     if lhs_norm > rhs_norm:
- *         (&out)[0] = 1             # <<<<<<<<<<<<<<
- *     elif lhs_norm < rhs_norm:
- *         (&out)[0] = -1
- */
-    ((&__pyx_v_out)[0]) = 1;
-
-    /* "csiquant/ctypes.pxd":205
- *     cdef rhs_norm = rhs.quantity * rhs.units.scale
- * 
- *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
- *         (&out)[0] = 1
- *     elif lhs_norm < rhs_norm:
- */
-    goto __pyx_L4;
-  }
-
-  /* "csiquant/ctypes.pxd":207
- *     if lhs_norm > rhs_norm:
- *         (&out)[0] = 1
- *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
- *         (&out)[0] = -1
- *     else:
- */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 207, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 207, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__pyx_t_1) {
-
-    /* "csiquant/ctypes.pxd":208
- *         (&out)[0] = 1
- *     elif lhs_norm < rhs_norm:
- *         (&out)[0] = -1             # <<<<<<<<<<<<<<
- *     else:
- *         (&out)[0] = 0
- */
-    ((&__pyx_v_out)[0]) = -1;
-
-    /* "csiquant/ctypes.pxd":207
- *     if lhs_norm > rhs_norm:
- *         (&out)[0] = 1
- *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
- *         (&out)[0] = -1
- *     else:
- */
-    goto __pyx_L4;
-  }
-
-  /* "csiquant/ctypes.pxd":210
- *         (&out)[0] = -1
- *     else:
- *         (&out)[0] = 0             # <<<<<<<<<<<<<<
- * 
- *     return Success
- */
-  /*else*/ {
-    ((&__pyx_v_out)[0]) = 0;
-  }
-  __pyx_L4:;
-
-  /* "csiquant/ctypes.pxd":212
- *         (&out)[0] = 0
- * 
- *     return Success             # <<<<<<<<<<<<<<
- * 
- */
-  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
-  goto __pyx_L0;
-
-  /* "csiquant/ctypes.pxd":198
- * #Success
- * #DimensionMismatch
- * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
- *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
- *         return DimensionMismatch
- */
-
-  /* function exit code */
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_WriteUnraisable("csiquant.ctypes.cmp_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
-  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
-  __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_lhs_norm);
-  __Pyx_XDECREF(__pyx_v_rhs_norm);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
@@ -14352,6 +12748,1541 @@ static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Operand __pyx_f_8csiquant_10
   return __pyx_r;
 }
 
+/* "csiquant/ctypes.pxd":20
+ *     QUANTITY = 4
+ * 
+ * cdef inline bint fapprox(double a, double b, double rtol, double atol):             # <<<<<<<<<<<<<<
+ *     cdef double epsilon = fabs(fmax(atol, rtol * fmax(1, fmax(a, b))))
+ *     return fabs(a - b) <= epsilon
+ */
+
+static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_fapprox(double __pyx_v_a, double __pyx_v_b, double __pyx_v_rtol, double __pyx_v_atol) {
+  double __pyx_v_epsilon;
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("fapprox", 0);
+
+  /* "csiquant/ctypes.pxd":21
+ * 
+ * cdef inline bint fapprox(double a, double b, double rtol, double atol):
+ *     cdef double epsilon = fabs(fmax(atol, rtol * fmax(1, fmax(a, b))))             # <<<<<<<<<<<<<<
+ *     return fabs(a - b) <= epsilon
+ * 
+ */
+  __pyx_v_epsilon = fabs(fmax(__pyx_v_atol, (__pyx_v_rtol * fmax(1.0, fmax(__pyx_v_a, __pyx_v_b)))));
+
+  /* "csiquant/ctypes.pxd":22
+ * cdef inline bint fapprox(double a, double b, double rtol, double atol):
+ *     cdef double epsilon = fabs(fmax(atol, rtol * fmax(1, fmax(a, b))))
+ *     return fabs(a - b) <= epsilon             # <<<<<<<<<<<<<<
+ * 
+ * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
+ */
+  __pyx_r = (fabs((__pyx_v_a - __pyx_v_b)) <= __pyx_v_epsilon);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":20
+ *     QUANTITY = 4
+ * 
+ * cdef inline bint fapprox(double a, double b, double rtol, double atol):             # <<<<<<<<<<<<<<
+ *     cdef double epsilon = fabs(fmax(atol, rtol * fmax(1, fmax(a, b))))
+ *     return fabs(a - b) <= epsilon
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":24
+ *     return fabs(a - b) <= epsilon
+ * 
+ * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+ * 
+ */
+
+static CYTHON_INLINE int __pyx_f_8csiquant_6ctypes_eq_ddata(struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
+  int __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("eq_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":25
+ * 
+ * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0             # <<<<<<<<<<<<<<
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
+ */
+  __pyx_r = (memcmp((&__pyx_v_lhs), (&__pyx_v_rhs), (sizeof(struct __pyx_t_8csiquant_6ctypes_DData))) == 0);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":24
+ *     return fabs(a - b) <= epsilon
+ * 
+ * cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":27
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     return src.quantity * src.units.scale / units.scale
+ * 
+ */
+
+static CYTHON_INLINE double __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  double __pyx_r;
+  __Pyx_RefNannyDeclarations
+  double __pyx_t_1;
+  __Pyx_RefNannySetupContext("unsafe_extract_quantity", 0);
+
+  /* "csiquant/ctypes.pxd":28
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):
+ *     return src.quantity * src.units.scale / units.scale             # <<<<<<<<<<<<<<
+ * 
+ * 
+ */
+  __pyx_t_1 = (__pyx_v_src.quantity * __pyx_v_src.units.scale);
+  if (unlikely(__pyx_v_units.scale == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(3, 28, __pyx_L1_error)
+  }
+  __pyx_r = (__pyx_t_1 / __pyx_v_units.scale);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":27
+ *     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
+ * 
+ * cdef inline double unsafe_extract_quantity(const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     return src.quantity * src.units.scale / units.scale
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_WriteUnraisable("csiquant.ctypes.unsafe_extract_quantity", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":43
+ * 
+ * #Success
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("mul_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":45
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":46
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) + (__pyx_v_rhs.exponents[__pyx_v_i]));
+  }
+
+  /* "csiquant/ctypes.pxd":47
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] + rhs.exponents[i]
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":43
+ * 
+ * #Success
+ * cdef inline Error mul_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":50
+ * 
+ * #Success
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_rhs) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("div_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":52
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":53
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) - (__pyx_v_rhs.exponents[__pyx_v_i]));
+  }
+
+  /* "csiquant/ctypes.pxd":54
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] - rhs.exponents[i]
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":50
+ * 
+ * #Success
+ * cdef inline Error div_ddata(DData& out, const DData& lhs, const DData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":57
+ * 
+ * #Success
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_ddata(struct __pyx_t_8csiquant_6ctypes_DData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_DData const &__pyx_v_lhs, double __pyx_v_power) {
+  int __pyx_v_i;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("pow_ddata", 0);
+
+  /* "csiquant/ctypes.pxd":59
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):
+ *     cdef int i
+ *     for i in range(7):             # <<<<<<<<<<<<<<
+ *         out.exponents[i] = lhs.exponents[i] * power
+ *     return Success
+ */
+  for (__pyx_t_1 = 0; __pyx_t_1 < 7; __pyx_t_1+=1) {
+    __pyx_v_i = __pyx_t_1;
+
+    /* "csiquant/ctypes.pxd":60
+ *     cdef int i
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] * power             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+    (__pyx_v_out.exponents[__pyx_v_i]) = ((__pyx_v_lhs.exponents[__pyx_v_i]) * __pyx_v_power);
+  }
+
+  /* "csiquant/ctypes.pxd":61
+ *     for i in range(7):
+ *         out.exponents[i] = lhs.exponents[i] * power
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * # begin udata functions
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":57
+ * 
+ * #Success
+ * cdef inline Error pow_ddata(DData& out, const DData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     cdef int i
+ *     for i in range(7):
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":66
+ * 
+ * #Success
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale * rhs.scale
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("mul_udata", 0);
+
+  /* "csiquant/ctypes.pxd":68
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale * rhs.scale             # <<<<<<<<<<<<<<
+ *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ * 
+ */
+  __pyx_v_out.scale = (__pyx_v_lhs.scale * __pyx_v_rhs.scale);
+
+  /* "csiquant/ctypes.pxd":69
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale * rhs.scale
+ *     return mul_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_f_8csiquant_6ctypes_mul_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":66
+ * 
+ * #Success
+ * cdef inline Error mul_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale * rhs.scale
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":73
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("div_udata", 0);
+
+  /* "csiquant/ctypes.pxd":74
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale
+ */
+  __pyx_t_1 = ((__pyx_v_rhs.scale == 0.0) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":75
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:
+ *         return ZeroDiv             # <<<<<<<<<<<<<<
+ *     out.scale = lhs.scale / rhs.scale
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":74
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if rhs.scale == 0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":76
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale             # <<<<<<<<<<<<<<
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)
+ * 
+ */
+  if (unlikely(__pyx_v_rhs.scale == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(3, 76, __pyx_L1_error)
+  }
+  __pyx_v_out.scale = (__pyx_v_lhs.scale / __pyx_v_rhs.scale);
+
+  /* "csiquant/ctypes.pxd":77
+ *         return ZeroDiv
+ *     out.scale = lhs.scale / rhs.scale
+ *     return div_ddata(out.dimensions, lhs.dimensions, rhs.dimensions)             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_f_8csiquant_6ctypes_div_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":73
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.scale == 0:
+ *         return ZeroDiv
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_WriteUnraisable("csiquant.ctypes.div_udata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":80
+ * 
+ * #Success
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale ** power
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, double __pyx_v_power) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("pow_udata", 0);
+
+  /* "csiquant/ctypes.pxd":82
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale ** power             # <<<<<<<<<<<<<<
+ *     return pow_ddata(out.dimensions, lhs.dimensions, power)
+ * 
+ */
+  __pyx_v_out.scale = pow(((double)__pyx_v_lhs.scale), __pyx_v_power);
+
+  /* "csiquant/ctypes.pxd":83
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale ** power
+ *     return pow_ddata(out.dimensions, lhs.dimensions, power)             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_f_8csiquant_6ctypes_pow_ddata(__pyx_v_out.dimensions, __pyx_v_lhs.dimensions, __pyx_v_power);
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":80
+ * 
+ * #Success
+ * cdef inline Error pow_udata(UData& out, const UData& lhs, double power):             # <<<<<<<<<<<<<<
+ *     #todo: overflow checks
+ *     out.scale = lhs.scale ** power
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":87
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_udata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("cmp_udata", 0);
+
+  /* "csiquant/ctypes.pxd":88
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":89
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
+ * 
+ *     if lhs.scale > rhs.scale:
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":88
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":91
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = 1
+ *     elif lhs.scale < rhs.scale:
+ */
+  __pyx_t_1 = ((__pyx_v_lhs.scale > __pyx_v_rhs.scale) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":92
+ * 
+ *     if lhs.scale > rhs.scale:
+ *         (&out)[0] = 1             # <<<<<<<<<<<<<<
+ *     elif lhs.scale < rhs.scale:
+ *         (&out)[0] = -1
+ */
+    ((&__pyx_v_out)[0]) = 1;
+
+    /* "csiquant/ctypes.pxd":91
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale > rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = 1
+ *     elif lhs.scale < rhs.scale:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":93
+ *     if lhs.scale > rhs.scale:
+ *         (&out)[0] = 1
+ *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = -1
+ *     else:
+ */
+  __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":94
+ *         (&out)[0] = 1
+ *     elif lhs.scale < rhs.scale:
+ *         (&out)[0] = -1             # <<<<<<<<<<<<<<
+ *     else:
+ *         (&out)[0] = 0
+ */
+    ((&__pyx_v_out)[0]) = -1;
+
+    /* "csiquant/ctypes.pxd":93
+ *     if lhs.scale > rhs.scale:
+ *         (&out)[0] = 1
+ *     elif lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = -1
+ *     else:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":96
+ *         (&out)[0] = -1
+ *     else:
+ *         (&out)[0] = 0             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  /*else*/ {
+    ((&__pyx_v_out)[0]) = 0;
+  }
+  __pyx_L4:;
+
+  /* "csiquant/ctypes.pxd":98
+ *         (&out)[0] = 0
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":87
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_udata(int& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":102
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_min_udata(struct __pyx_t_8csiquant_6ctypes_UData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("min_udata", 0);
+
+  /* "csiquant/ctypes.pxd":103
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.dimensions, __pyx_v_rhs.dimensions) != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":104
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
+ * 
+ *     if lhs.scale < rhs.scale:
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":103
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":106
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = lhs
+ *     else:
+ */
+  __pyx_t_1 = ((__pyx_v_lhs.scale < __pyx_v_rhs.scale) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":107
+ * 
+ *     if lhs.scale < rhs.scale:
+ *         (&out)[0] = lhs             # <<<<<<<<<<<<<<
+ *     else:
+ *         (&out)[0] = rhs
+ */
+    ((&__pyx_v_out)[0]) = __pyx_v_lhs;
+
+    /* "csiquant/ctypes.pxd":106
+ *         return DimensionMismatch
+ * 
+ *     if lhs.scale < rhs.scale:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = lhs
+ *     else:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":109
+ *         (&out)[0] = lhs
+ *     else:
+ *         (&out)[0] = rhs             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  /*else*/ {
+    ((&__pyx_v_out)[0]) = __pyx_v_rhs;
+  }
+  __pyx_L4:;
+
+  /* "csiquant/ctypes.pxd":111
+ *         (&out)[0] = rhs
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * ## begin qdata functions
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":102
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error min_udata(UData& out, const UData& lhs, const UData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.dimensions, rhs.dimensions):
+ *         return DimensionMismatch
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":116
+ * 
+ * #Success
+ * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_mul_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("mul_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":119
+ *     cdef Error error_code
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_mul_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":120
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":121
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity * rhs.quantity
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":120
+ * 
+ *     error_code = mul_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":123
+ *         return error_code
+ * 
+ *     out.quantity = lhs.quantity * rhs.quantity             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  __pyx_v_out.quantity = (__pyx_v_lhs.quantity * __pyx_v_rhs.quantity);
+
+  /* "csiquant/ctypes.pxd":125
+ *     out.quantity = lhs.quantity * rhs.quantity
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":116
+ * 
+ * #Success
+ * cdef inline Error mul_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":129
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_div_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("div_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":130
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ * 
+ */
+  __pyx_t_1 = ((__pyx_v_rhs.quantity == 0.0) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":131
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv             # <<<<<<<<<<<<<<
+ * 
+ *     cdef Error error_code
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_ZeroDiv;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":130
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):
+ *     if rhs.quantity == 0.0:             # <<<<<<<<<<<<<<
+ *         return ZeroDiv
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":135
+ *     cdef Error error_code
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_div_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":136
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":137
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity / rhs.quantity
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":136
+ * 
+ *     error_code = div_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":139
+ *         return error_code
+ * 
+ *     out.quantity = lhs.quantity / rhs.quantity             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+  if (unlikely(__pyx_v_rhs.quantity == 0)) {
+    PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+    __PYX_ERR(3, 139, __pyx_L1_error)
+  }
+  __pyx_v_out.quantity = (__pyx_v_lhs.quantity / __pyx_v_rhs.quantity);
+
+  /* "csiquant/ctypes.pxd":140
+ * 
+ *     out.quantity = lhs.quantity / rhs.quantity
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":129
+ * #Success
+ * #ZeroDiv
+ * cdef inline Error div_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if rhs.quantity == 0.0:
+ *         return ZeroDiv
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_WriteUnraisable("csiquant.ctypes.div_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":143
+ * 
+ * #Success
+ * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_pow_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, double __pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("pow_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":146
+ *     cdef Error error_code
+ * 
+ *     error_code = pow_udata(out.units, lhs.units, rhs)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_pow_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs);
+
+  /* "csiquant/ctypes.pxd":147
+ * 
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":148
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = lhs.quantity ** rhs
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":147
+ * 
+ *     error_code = pow_udata(out.units, lhs.units, rhs)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":150
+ *         return error_code
+ * 
+ *     out.quantity = lhs.quantity ** rhs             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  __pyx_v_out.quantity = pow(((double)__pyx_v_lhs.quantity), __pyx_v_rhs);
+
+  /* "csiquant/ctypes.pxd":152
+ *     out.quantity = lhs.quantity ** rhs
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":143
+ * 
+ * #Success
+ * cdef inline Error pow_qdata(QData& out, const QData& lhs, double rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":156
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_add_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("add_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":159
+ *     cdef Error error_code
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":160
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":161
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":160
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":163
+ *         return error_code
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)
+ * 
+ */
+  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
+
+  /* "csiquant/ctypes.pxd":164
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  __pyx_v_out.quantity = (__pyx_v_out.quantity + __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
+
+  /* "csiquant/ctypes.pxd":166
+ *     out.quantity += unsafe_extract_quantity(rhs, out.units)
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":156
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error add_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":170
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_sub_qdata(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("sub_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":173
+ *     cdef Error error_code
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_min_udata(__pyx_v_out.units, __pyx_v_lhs.units, __pyx_v_rhs.units);
+
+  /* "csiquant/ctypes.pxd":174
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":175
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":174
+ * 
+ *     error_code = min_udata(out.units, lhs.units, rhs.units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":177
+ *         return error_code
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)             # <<<<<<<<<<<<<<
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
+ *     return Success
+ */
+  __pyx_v_out.quantity = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_lhs, __pyx_v_out.units);
+
+  /* "csiquant/ctypes.pxd":178
+ * 
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+  __pyx_v_out.quantity = (__pyx_v_out.quantity - __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_rhs, __pyx_v_out.units));
+
+  /* "csiquant/ctypes.pxd":179
+ *     out.quantity = unsafe_extract_quantity(lhs, out.units)
+ *     out.quantity -= unsafe_extract_quantity(rhs, out.units)
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":170
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error sub_qdata(QData& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":183
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cvt_quantity(struct __pyx_t_8csiquant_6ctypes_QData &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_v_error_code;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("cvt_quantity", 0);
+
+  /* "csiquant/ctypes.pxd":186
+ *     cdef Error error_code
+ * 
+ *     error_code = extract_quantity(out.quantity, src, units)             # <<<<<<<<<<<<<<
+ *     if error_code:
+ *         return error_code
+ */
+  __pyx_v_error_code = __pyx_f_8csiquant_6ctypes_extract_quantity(__pyx_v_out.quantity, __pyx_v_src, __pyx_v_units);
+
+  /* "csiquant/ctypes.pxd":187
+ * 
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  if (__pyx_v_error_code) {
+
+    /* "csiquant/ctypes.pxd":188
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:
+ *         return error_code             # <<<<<<<<<<<<<<
+ * 
+ *     out.units = units
+ */
+    __pyx_r = __pyx_v_error_code;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":187
+ * 
+ *     error_code = extract_quantity(out.quantity, src, units)
+ *     if error_code:             # <<<<<<<<<<<<<<
+ *         return error_code
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":190
+ *         return error_code
+ * 
+ *     out.units = units             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+  __pyx_v_out.units = __pyx_v_units;
+
+  /* "csiquant/ctypes.pxd":191
+ * 
+ *     out.units = units
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":183
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cvt_quantity(QData& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     cdef Error error_code
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":195
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):
+ *         return DimensionMismatch
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_extract_quantity(double &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_src, struct __pyx_t_8csiquant_6ctypes_UData const &__pyx_v_units) {
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  __Pyx_RefNannySetupContext("extract_quantity", 0);
+
+  /* "csiquant/ctypes.pxd":196
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ */
+  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_src.units.dimensions, __pyx_v_units.dimensions) != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":197
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ *     return Success
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":196
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":198
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)             # <<<<<<<<<<<<<<
+ *     return Success
+ * 
+ */
+  ((&__pyx_v_out)[0]) = __pyx_f_8csiquant_6ctypes_unsafe_extract_quantity(__pyx_v_src, __pyx_v_units);
+
+  /* "csiquant/ctypes.pxd":199
+ *         return DimensionMismatch
+ *     (&out)[0] = unsafe_extract_quantity(src, units)
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ * #Success
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":195
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error extract_quantity(double& out, const QData& src, const UData& units):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(src.units.dimensions, units.dimensions):
+ *         return DimensionMismatch
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "csiquant/ctypes.pxd":203
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
+ *         return DimensionMismatch
+ */
+
+static CYTHON_INLINE enum __pyx_t_8csiquant_6ctypes_Error __pyx_f_8csiquant_6ctypes_cmp_qdata(int &__pyx_v_out, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_lhs, struct __pyx_t_8csiquant_6ctypes_QData const &__pyx_v_rhs) {
+  PyObject *__pyx_v_lhs_norm = 0;
+  PyObject *__pyx_v_rhs_norm = 0;
+  enum __pyx_t_8csiquant_6ctypes_Error __pyx_r;
+  __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  __Pyx_RefNannySetupContext("cmp_qdata", 0);
+
+  /* "csiquant/ctypes.pxd":204
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+ *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  __pyx_t_1 = ((!(__pyx_f_8csiquant_6ctypes_eq_ddata(__pyx_v_lhs.units.dimensions, __pyx_v_rhs.units.dimensions) != 0)) != 0);
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":205
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+ *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
+ *         return DimensionMismatch             # <<<<<<<<<<<<<<
+ * 
+ *     cdef lhs_norm = lhs.quantity * lhs.units.scale
+ */
+    __pyx_r = __pyx_e_8csiquant_6ctypes_DimensionMismatch;
+    goto __pyx_L0;
+
+    /* "csiquant/ctypes.pxd":204
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):
+ *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):             # <<<<<<<<<<<<<<
+ *         return DimensionMismatch
+ * 
+ */
+  }
+
+  /* "csiquant/ctypes.pxd":207
+ *         return DimensionMismatch
+ * 
+ *     cdef lhs_norm = lhs.quantity * lhs.units.scale             # <<<<<<<<<<<<<<
+ *     cdef rhs_norm = rhs.quantity * rhs.units.scale
+ * 
+ */
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_lhs.quantity * __pyx_v_lhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 207, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_lhs_norm = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "csiquant/ctypes.pxd":208
+ * 
+ *     cdef lhs_norm = lhs.quantity * lhs.units.scale
+ *     cdef rhs_norm = rhs.quantity * rhs.units.scale             # <<<<<<<<<<<<<<
+ * 
+ *     if lhs_norm > rhs_norm:
+ */
+  __pyx_t_2 = PyFloat_FromDouble((__pyx_v_rhs.quantity * __pyx_v_rhs.units.scale)); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 208, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_rhs_norm = __pyx_t_2;
+  __pyx_t_2 = 0;
+
+  /* "csiquant/ctypes.pxd":210
+ *     cdef rhs_norm = rhs.quantity * rhs.units.scale
+ * 
+ *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = 1
+ *     elif lhs_norm < rhs_norm:
+ */
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 210, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 210, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":211
+ * 
+ *     if lhs_norm > rhs_norm:
+ *         (&out)[0] = 1             # <<<<<<<<<<<<<<
+ *     elif lhs_norm < rhs_norm:
+ *         (&out)[0] = -1
+ */
+    ((&__pyx_v_out)[0]) = 1;
+
+    /* "csiquant/ctypes.pxd":210
+ *     cdef rhs_norm = rhs.quantity * rhs.units.scale
+ * 
+ *     if lhs_norm > rhs_norm:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = 1
+ *     elif lhs_norm < rhs_norm:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":212
+ *     if lhs_norm > rhs_norm:
+ *         (&out)[0] = 1
+ *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = -1
+ *     else:
+ */
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_lhs_norm, __pyx_v_rhs_norm, Py_LT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 212, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_1 < 0)) __PYX_ERR(3, 212, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_1) {
+
+    /* "csiquant/ctypes.pxd":213
+ *         (&out)[0] = 1
+ *     elif lhs_norm < rhs_norm:
+ *         (&out)[0] = -1             # <<<<<<<<<<<<<<
+ *     else:
+ *         (&out)[0] = 0
+ */
+    ((&__pyx_v_out)[0]) = -1;
+
+    /* "csiquant/ctypes.pxd":212
+ *     if lhs_norm > rhs_norm:
+ *         (&out)[0] = 1
+ *     elif lhs_norm < rhs_norm:             # <<<<<<<<<<<<<<
+ *         (&out)[0] = -1
+ *     else:
+ */
+    goto __pyx_L4;
+  }
+
+  /* "csiquant/ctypes.pxd":215
+ *         (&out)[0] = -1
+ *     else:
+ *         (&out)[0] = 0             # <<<<<<<<<<<<<<
+ * 
+ *     return Success
+ */
+  /*else*/ {
+    ((&__pyx_v_out)[0]) = 0;
+  }
+  __pyx_L4:;
+
+  /* "csiquant/ctypes.pxd":217
+ *         (&out)[0] = 0
+ * 
+ *     return Success             # <<<<<<<<<<<<<<
+ * 
+ */
+  __pyx_r = __pyx_e_8csiquant_6ctypes_Success;
+  goto __pyx_L0;
+
+  /* "csiquant/ctypes.pxd":203
+ * #Success
+ * #DimensionMismatch
+ * cdef inline Error cmp_qdata(int& out, const QData& lhs, const QData& rhs):             # <<<<<<<<<<<<<<
+ *     if not eq_ddata(lhs.units.dimensions, rhs.units.dimensions):
+ *         return DimensionMismatch
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_WriteUnraisable("csiquant.ctypes.cmp_qdata", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = (enum __pyx_t_8csiquant_6ctypes_Error) 0;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_lhs_norm);
+  __Pyx_XDECREF(__pyx_v_rhs_norm);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 /* "carray.to_py":112
  * 
  * @cname("__Pyx_carray_to_py_double")
@@ -15274,6 +15205,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_u_Quantity, __pyx_k_Quantity, sizeof(__pyx_k_Quantity), 0, 1, 0, 0},
   {&__pyx_n_s_Quantity_2, __pyx_k_Quantity_2, sizeof(__pyx_k_Quantity_2), 0, 0, 1, 1},
   {&__pyx_n_s_RuntimeError, __pyx_k_RuntimeError, sizeof(__pyx_k_RuntimeError), 0, 0, 1, 1},
+  {&__pyx_n_s_SCALE_RTOL, __pyx_k_SCALE_RTOL, sizeof(__pyx_k_SCALE_RTOL), 0, 0, 1, 1},
   {&__pyx_kp_u_SIUnit, __pyx_k_SIUnit, sizeof(__pyx_k_SIUnit), 0, 1, 0, 0},
   {&__pyx_n_s_SIUnit_2, __pyx_k_SIUnit_2, sizeof(__pyx_k_SIUnit_2), 0, 0, 1, 1},
   {&__pyx_n_s_SIUnit_quantities, __pyx_k_SIUnit_quantities, sizeof(__pyx_k_SIUnit_quantities), 0, 0, 1, 1},
@@ -15356,11 +15288,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_RuntimeError = __Pyx_GetBuiltinName(__pyx_n_s_RuntimeError); if (!__pyx_builtin_RuntimeError) __PYX_ERR(0, 49, __pyx_L1_error)
   __pyx_builtin_ZeroDivisionError = __Pyx_GetBuiltinName(__pyx_n_s_ZeroDivisionError); if (!__pyx_builtin_ZeroDivisionError) __PYX_ERR(0, 68, __pyx_L1_error)
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(1, 12, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 56, __pyx_L1_error)
-  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 58, __pyx_L1_error)
-  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) __PYX_ERR(1, 112, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(3, 40, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(1, 14, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 60, __pyx_L1_error)
+  __pyx_builtin_NotImplemented = __Pyx_GetBuiltinName(__pyx_n_s_NotImplemented); if (!__pyx_builtin_NotImplemented) __PYX_ERR(1, 114, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(3, 45, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -15370,58 +15302,58 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "csiquant/quantities.pyx":56
+  /* "csiquant/quantities.pyx":58
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):
  *         if scale <= 0:
  *             raise ValueError("arg 'scale' must be greater than 0")             # <<<<<<<<<<<<<<
  *         if type(dims) is not d.Dimensions:
  *             raise TypeError("Expected Dimensions")
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_arg_scale_must_be_greater_than_0); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 56, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_arg_scale_must_be_greater_than_0); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(1, 58, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "csiquant/quantities.pyx":58
+  /* "csiquant/quantities.pyx":60
  *             raise ValueError("arg 'scale' must be greater than 0")
  *         if type(dims) is not d.Dimensions:
  *             raise TypeError("Expected Dimensions")             # <<<<<<<<<<<<<<
  *         self.data.scale = scale
  *         self.data.dimensions = dims.data
  */
-  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_Expected_Dimensions); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_tuple__3 = PyTuple_Pack(1, __pyx_kp_u_Expected_Dimensions); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "csiquant/quantities.pyx":94
+  /* "csiquant/quantities.pyx":96
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("unit mismatch")             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 94, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "csiquant/quantities.pyx":143
+  /* "csiquant/quantities.pyx":142
  * 
  *         if error_code == c.DimensionMismatch:
  *             raise ValueError("units mismatch")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_units_mismatch); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 143, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_u_units_mismatch); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(1, 142, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "csiquant/quantities.pyx":199
+  /* "csiquant/quantities.pyx":195
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not SIUnit:
  *             raise TypeError("Expected SIUnit ** Number")             # <<<<<<<<<<<<<<
  *         return lhs.exp(rhs)
  * 
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Expected_SIUnit_Number); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 199, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_u_Expected_SIUnit_Number); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
@@ -15444,36 +15376,36 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__11);
   __Pyx_GIVEREF(__pyx_tuple__11);
 
-  /* "csiquant/quantities.pyx":389
+  /* "csiquant/quantities.pyx":385
  * 
  *         if error_code1 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (lhs)")             # <<<<<<<<<<<<<<
  *         if error_code2 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (rhs)")
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch_lhs); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 389, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch_lhs); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(1, 385, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
 
-  /* "csiquant/quantities.pyx":391
+  /* "csiquant/quantities.pyx":387
  *             raise ValueError("unit mismatch (lhs)")
  *         if error_code2 == c.DimensionMismatch:
  *             raise ValueError("unit mismatch (rhs)")             # <<<<<<<<<<<<<<
  * 
  *         raise RuntimeError("Unknown Error Occurred: %i" % (error_code1 | error_code2))
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch_rhs); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 391, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_u_unit_mismatch_rhs); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(1, 387, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "csiquant/quantities.pyx":455
+  /* "csiquant/quantities.pyx":451
  *     def __pow__(lhs, rhs, modulo):
  *         if type(lhs) is not Quantity:
  *             raise TypeError("Expected Quantity ** Number")             # <<<<<<<<<<<<<<
  *         return lhs.exp(rhs)
  * 
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_Expected_Quantity_Number); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 455, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_kp_u_Expected_Quantity_Number); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(1, 451, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
 
@@ -15496,17 +15428,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__17);
   __Pyx_GIVEREF(__pyx_tuple__17);
 
-  /* "csiquant/quantities.pyx":13
+  /* "csiquant/quantities.pyx":15
  * 
  *     @staticmethod
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):             # <<<<<<<<<<<<<<
  *         return SIUnit(scale, d.Dimensions(kg, m, s, k, a, mol, cd))
  * 
  */
-  __pyx_tuple__19 = PyTuple_Pack(8, __pyx_n_s_scale, __pyx_n_s_kg, __pyx_n_s_m, __pyx_n_s_s, __pyx_n_s_k, __pyx_n_s_a, __pyx_n_s_mol, __pyx_n_s_cd); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 13, __pyx_L1_error)
+  __pyx_tuple__19 = PyTuple_Pack(8, __pyx_n_s_scale, __pyx_n_s_kg, __pyx_n_s_m, __pyx_n_s_s, __pyx_n_s_k, __pyx_n_s_a, __pyx_n_s_mol, __pyx_n_s_cd); if (unlikely(!__pyx_tuple__19)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__19);
   __Pyx_GIVEREF(__pyx_tuple__19);
-  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_csiquant_quantities_pyx, __pyx_n_s_Unit, 13, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(1, 13, __pyx_L1_error)
+  __pyx_codeobj__20 = (PyObject*)__Pyx_PyCode_New(8, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__19, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_csiquant_quantities_pyx, __pyx_n_s_Unit, 15, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__20)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -15516,6 +15448,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(1, 1, __pyx_L1_error);
+  __pyx_float_1eneg_9 = PyFloat_FromDouble(1e-9); if (unlikely(!__pyx_float_1eneg_9)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   return 0;
@@ -15587,22 +15520,22 @@ static int __Pyx_modinit_type_init_code(void) {
   __pyx_vtable_8csiquant_10quantities_Quantity.compatible = (int (*)(struct __pyx_obj_8csiquant_10quantities_Quantity *, struct __pyx_obj_8csiquant_10quantities_Quantity *, int __pyx_skip_dispatch))__pyx_f_8csiquant_10quantities_8Quantity_compatible;
   __pyx_vtable_8csiquant_10quantities_Quantity.cmp = (PyObject *(*)(struct __pyx_obj_8csiquant_10quantities_Quantity *, struct __pyx_obj_8csiquant_10quantities_Quantity *, int __pyx_skip_dispatch))__pyx_f_8csiquant_10quantities_8Quantity_cmp;
   __pyx_vtable_8csiquant_10quantities_Quantity.exp = (struct __pyx_obj_8csiquant_10quantities_Quantity *(*)(struct __pyx_obj_8csiquant_10quantities_Quantity *, double, int __pyx_skip_dispatch))__pyx_f_8csiquant_10quantities_8Quantity_exp;
-  if (PyType_Ready(&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 224, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 220, __pyx_L1_error)
   __pyx_type_8csiquant_10quantities_Quantity.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_8csiquant_10quantities_Quantity.tp_dictoffset && __pyx_type_8csiquant_10quantities_Quantity.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_8csiquant_10quantities_Quantity.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (__Pyx_SetVtable(__pyx_type_8csiquant_10quantities_Quantity.tp_dict, __pyx_vtabptr_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 224, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Quantity_2, (PyObject *)&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 224, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 224, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_type_8csiquant_10quantities_Quantity.tp_dict, __pyx_vtabptr_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 220, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Quantity_2, (PyObject *)&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 220, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_8csiquant_10quantities_Quantity) < 0) __PYX_ERR(1, 220, __pyx_L1_error)
   __pyx_ptype_8csiquant_10quantities_Quantity = &__pyx_type_8csiquant_10quantities_Quantity;
-  if (PyType_Ready(&__pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities) < 0) __PYX_ERR(1, 74, __pyx_L1_error)
   __pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities.tp_dictoffset && __pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
   __pyx_ptype_8csiquant_10quantities___pyx_scope_struct__quantities = &__pyx_type_8csiquant_10quantities___pyx_scope_struct__quantities;
-  if (PyType_Ready(&__pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values) < 0) __PYX_ERR(1, 76, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values) < 0) __PYX_ERR(1, 78, __pyx_L1_error)
   __pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values.tp_print = 0;
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values.tp_dictoffset && __pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_8csiquant_10quantities___pyx_scope_struct_1_values.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
@@ -15867,86 +15800,96 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_d, __pyx_t_2) < 0) __PYX_ERR(1, 6, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":13
+  /* "csiquant/quantities.pyx":12
+ * cdef class SIUnit:
+ * 
+ *     SCALE_RTOL = 1e-9             # <<<<<<<<<<<<<<
+ * 
+ *     @staticmethod
+ */
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_SCALE_RTOL, __pyx_float_1eneg_9) < 0) __PYX_ERR(1, 12, __pyx_L1_error)
+  PyType_Modified(__pyx_ptype_8csiquant_10quantities_SIUnit);
+
+  /* "csiquant/quantities.pyx":15
  * 
  *     @staticmethod
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):             # <<<<<<<<<<<<<<
  *         return SIUnit(scale, d.Dimensions(kg, m, s, k, a, mol, cd))
  * 
  */
-  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8csiquant_10quantities_6SIUnit_1Unit, NULL, __pyx_n_s_csiquant_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 13, __pyx_L1_error)
+  __pyx_t_2 = PyCFunction_NewEx(&__pyx_mdef_8csiquant_10quantities_6SIUnit_1Unit, NULL, __pyx_n_s_csiquant_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_Unit, __pyx_t_2) < 0) __PYX_ERR(1, 13, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_Unit, __pyx_t_2) < 0) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_8csiquant_10quantities_SIUnit);
 
-  /* "csiquant/quantities.pyx":12
- * cdef class SIUnit:
+  /* "csiquant/quantities.pyx":14
+ *     SCALE_RTOL = 1e-9
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):
  *         return SIUnit(scale, d.Dimensions(kg, m, s, k, a, mol, cd))
  */
-  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit, __pyx_n_s_Unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 13, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit, __pyx_n_s_Unit); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 12, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_staticmethod, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_Unit, __pyx_t_1) < 0) __PYX_ERR(1, 13, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_Unit, __pyx_t_1) < 0) __PYX_ERR(1, 15, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_8csiquant_10quantities_SIUnit);
 
-  /* "csiquant/quantities.pyx":54
+  /* "csiquant/quantities.pyx":56
  *         return self.data.dimensions.exponents[6]
  * 
  *     def __init__(SIUnit self, double scale=1.0, d.Dimensions dims=d.dimensionless_t):             # <<<<<<<<<<<<<<
  *         if scale <= 0:
  *             raise ValueError("arg 'scale' must be greater than 0")
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_d); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_d); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dimensionless_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dimensionless_t); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 56, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10dimensions_Dimensions))))) __PYX_ERR(1, 54, __pyx_L1_error)
+  if (!(likely(((__pyx_t_2) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_2, __pyx_ptype_8csiquant_10dimensions_Dimensions))))) __PYX_ERR(1, 56, __pyx_L1_error)
   __pyx_k_ = ((struct __pyx_obj_8csiquant_10dimensions_Dimensions *)__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":99
+  /* "csiquant/quantities.pyx":101
  *         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
  * 
  *     __call__ = quantities             # <<<<<<<<<<<<<<
  * 
  *     """
  */
-  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit, __pyx_n_s_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 99, __pyx_L1_error)
+  __Pyx_GetNameInClass(__pyx_t_2, (PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit, __pyx_n_s_quantities); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 101, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_call, __pyx_t_2) < 0) __PYX_ERR(1, 99, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_8csiquant_10quantities_SIUnit->tp_dict, __pyx_n_s_call, __pyx_t_2) < 0) __PYX_ERR(1, 101, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   PyType_Modified(__pyx_ptype_8csiquant_10quantities_SIUnit);
 
-  /* "csiquant/quantities.pyx":214
+  /* "csiquant/quantities.pyx":210
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
  *         return self
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_k__7 = __pyx_t_2;
   __Pyx_GIVEREF(__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "csiquant/quantities.pyx":498
+  /* "csiquant/quantities.pyx":494
  *         return self
  * 
  *     def __deepcopy__(self, memodict={}):             # <<<<<<<<<<<<<<
  *         return self
  * 
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 498, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 494, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_k__15 = __pyx_t_2;
   __Pyx_GIVEREF(__pyx_t_2);
@@ -16713,6 +16656,165 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
 }
 #endif
 
+/* WriteUnraisableException */
+static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
+                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
+                                  int full_traceback, CYTHON_UNUSED int nogil) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_PyThreadState_declare
+#ifdef WITH_THREAD
+    PyGILState_STATE state;
+    if (nogil)
+        state = PyGILState_Ensure();
+#ifdef _MSC_VER
+    else state = (PyGILState_STATE)-1;
+#endif
+#endif
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(1);
+    }
+    #if PY_MAJOR_VERSION < 3
+    ctx = PyString_FromString(name);
+    #else
+    ctx = PyUnicode_FromString(name);
+    #endif
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
+#ifdef WITH_THREAD
+    if (nogil)
+        PyGILState_Release(state);
+#endif
+}
+
+/* PyObjectFormat */
+#if CYTHON_USE_UNICODE_WRITER
+static PyObject* __Pyx_PyObject_Format(PyObject* obj, PyObject* format_spec) {
+    int ret;
+    _PyUnicodeWriter writer;
+    if (likely(PyFloat_CheckExact(obj))) {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x03040000
+        _PyUnicodeWriter_Init(&writer, 0);
+#else
+        _PyUnicodeWriter_Init(&writer);
+#endif
+        ret = _PyFloat_FormatAdvancedWriter(
+            &writer,
+            obj,
+            format_spec, 0, PyUnicode_GET_LENGTH(format_spec));
+    } else if (likely(PyLong_CheckExact(obj))) {
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x03040000
+        _PyUnicodeWriter_Init(&writer, 0);
+#else
+        _PyUnicodeWriter_Init(&writer);
+#endif
+        ret = _PyLong_FormatAdvancedWriter(
+            &writer,
+            obj,
+            format_spec, 0, PyUnicode_GET_LENGTH(format_spec));
+    } else {
+        return PyObject_Format(obj, format_spec);
+    }
+    if (unlikely(ret == -1)) {
+        _PyUnicodeWriter_Dealloc(&writer);
+        return NULL;
+    }
+    return _PyUnicodeWriter_Finish(&writer);
+}
+#endif
+
+/* PyObjectFormatAndDecref */
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f) {
+    if (unlikely(!s)) return NULL;
+    if (likely(PyUnicode_CheckExact(s))) return s;
+    #if PY_MAJOR_VERSION < 3
+    if (likely(PyString_CheckExact(s))) {
+        PyObject *result = PyUnicode_FromEncodedObject(s, NULL, "strict");
+        Py_DECREF(s);
+        return result;
+    }
+    #endif
+    return __Pyx_PyObject_FormatAndDecref(s, f);
+}
+static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f) {
+    PyObject *result = PyObject_Format(s, f);
+    Py_DECREF(s);
+    return result;
+}
+
+/* JoinPyUnicode */
+static PyObject* __Pyx_PyUnicode_Join(PyObject* value_tuple, Py_ssize_t value_count, Py_ssize_t result_ulength,
+                                      CYTHON_UNUSED Py_UCS4 max_char) {
+#if CYTHON_USE_UNICODE_INTERNALS && CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    PyObject *result_uval;
+    int result_ukind;
+    Py_ssize_t i, char_pos;
+    void *result_udata;
+#if CYTHON_PEP393_ENABLED
+    result_uval = PyUnicode_New(result_ulength, max_char);
+    if (unlikely(!result_uval)) return NULL;
+    result_ukind = (max_char <= 255) ? PyUnicode_1BYTE_KIND : (max_char <= 65535) ? PyUnicode_2BYTE_KIND : PyUnicode_4BYTE_KIND;
+    result_udata = PyUnicode_DATA(result_uval);
+#else
+    result_uval = PyUnicode_FromUnicode(NULL, result_ulength);
+    if (unlikely(!result_uval)) return NULL;
+    result_ukind = sizeof(Py_UNICODE);
+    result_udata = PyUnicode_AS_UNICODE(result_uval);
+#endif
+    char_pos = 0;
+    for (i=0; i < value_count; i++) {
+        int ukind;
+        Py_ssize_t ulength;
+        void *udata;
+        PyObject *uval = PyTuple_GET_ITEM(value_tuple, i);
+        if (unlikely(__Pyx_PyUnicode_READY(uval)))
+            goto bad;
+        ulength = __Pyx_PyUnicode_GET_LENGTH(uval);
+        if (unlikely(!ulength))
+            continue;
+        if (unlikely(char_pos + ulength < 0))
+            goto overflow;
+        ukind = __Pyx_PyUnicode_KIND(uval);
+        udata = __Pyx_PyUnicode_DATA(uval);
+        if (!CYTHON_PEP393_ENABLED || ukind == result_ukind) {
+            memcpy((char *)result_udata + char_pos * result_ukind, udata, (size_t) (ulength * result_ukind));
+        } else {
+            #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030300F0 || defined(_PyUnicode_FastCopyCharacters)
+            _PyUnicode_FastCopyCharacters(result_uval, char_pos, uval, 0, ulength);
+            #else
+            Py_ssize_t j;
+            for (j=0; j < ulength; j++) {
+                Py_UCS4 uchar = __Pyx_PyUnicode_READ(ukind, udata, j);
+                __Pyx_PyUnicode_WRITE(result_ukind, result_udata, char_pos+j, uchar);
+            }
+            #endif
+        }
+        char_pos += ulength;
+    }
+    return result_uval;
+overflow:
+    PyErr_SetString(PyExc_OverflowError, "join() result is too long for a Python string");
+bad:
+    Py_DECREF(result_uval);
+    return NULL;
+#else
+    result_ulength++;
+    value_count++;
+    return PyUnicode_Join(__pyx_empty_unicode, value_tuple);
+#endif
+}
+
 /* PyIntCompare */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED long inplace) {
     if (op1 == op2) {
@@ -16933,165 +17035,6 @@ bad:
     Py_XDECREF(local_value);
     Py_XDECREF(local_tb);
     return -1;
-}
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, CYTHON_UNUSED int clineno,
-                                  CYTHON_UNUSED int lineno, CYTHON_UNUSED const char *filename,
-                                  int full_traceback, CYTHON_UNUSED int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-#ifdef WITH_THREAD
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-#ifdef _MSC_VER
-    else state = (PyGILState_STATE)-1;
-#endif
-#endif
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(1);
-    }
-    #if PY_MAJOR_VERSION < 3
-    ctx = PyString_FromString(name);
-    #else
-    ctx = PyUnicode_FromString(name);
-    #endif
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-#ifdef WITH_THREAD
-    if (nogil)
-        PyGILState_Release(state);
-#endif
-}
-
-/* PyObjectFormat */
-#if CYTHON_USE_UNICODE_WRITER
-static PyObject* __Pyx_PyObject_Format(PyObject* obj, PyObject* format_spec) {
-    int ret;
-    _PyUnicodeWriter writer;
-    if (likely(PyFloat_CheckExact(obj))) {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x03040000
-        _PyUnicodeWriter_Init(&writer, 0);
-#else
-        _PyUnicodeWriter_Init(&writer);
-#endif
-        ret = _PyFloat_FormatAdvancedWriter(
-            &writer,
-            obj,
-            format_spec, 0, PyUnicode_GET_LENGTH(format_spec));
-    } else if (likely(PyLong_CheckExact(obj))) {
-#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x03040000
-        _PyUnicodeWriter_Init(&writer, 0);
-#else
-        _PyUnicodeWriter_Init(&writer);
-#endif
-        ret = _PyLong_FormatAdvancedWriter(
-            &writer,
-            obj,
-            format_spec, 0, PyUnicode_GET_LENGTH(format_spec));
-    } else {
-        return PyObject_Format(obj, format_spec);
-    }
-    if (unlikely(ret == -1)) {
-        _PyUnicodeWriter_Dealloc(&writer);
-        return NULL;
-    }
-    return _PyUnicodeWriter_Finish(&writer);
-}
-#endif
-
-/* PyObjectFormatAndDecref */
-static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatSimpleAndDecref(PyObject* s, PyObject* f) {
-    if (unlikely(!s)) return NULL;
-    if (likely(PyUnicode_CheckExact(s))) return s;
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyString_CheckExact(s))) {
-        PyObject *result = PyUnicode_FromEncodedObject(s, NULL, "strict");
-        Py_DECREF(s);
-        return result;
-    }
-    #endif
-    return __Pyx_PyObject_FormatAndDecref(s, f);
-}
-static CYTHON_INLINE PyObject* __Pyx_PyObject_FormatAndDecref(PyObject* s, PyObject* f) {
-    PyObject *result = PyObject_Format(s, f);
-    Py_DECREF(s);
-    return result;
-}
-
-/* JoinPyUnicode */
-static PyObject* __Pyx_PyUnicode_Join(PyObject* value_tuple, Py_ssize_t value_count, Py_ssize_t result_ulength,
-                                      CYTHON_UNUSED Py_UCS4 max_char) {
-#if CYTHON_USE_UNICODE_INTERNALS && CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    PyObject *result_uval;
-    int result_ukind;
-    Py_ssize_t i, char_pos;
-    void *result_udata;
-#if CYTHON_PEP393_ENABLED
-    result_uval = PyUnicode_New(result_ulength, max_char);
-    if (unlikely(!result_uval)) return NULL;
-    result_ukind = (max_char <= 255) ? PyUnicode_1BYTE_KIND : (max_char <= 65535) ? PyUnicode_2BYTE_KIND : PyUnicode_4BYTE_KIND;
-    result_udata = PyUnicode_DATA(result_uval);
-#else
-    result_uval = PyUnicode_FromUnicode(NULL, result_ulength);
-    if (unlikely(!result_uval)) return NULL;
-    result_ukind = sizeof(Py_UNICODE);
-    result_udata = PyUnicode_AS_UNICODE(result_uval);
-#endif
-    char_pos = 0;
-    for (i=0; i < value_count; i++) {
-        int ukind;
-        Py_ssize_t ulength;
-        void *udata;
-        PyObject *uval = PyTuple_GET_ITEM(value_tuple, i);
-        if (unlikely(__Pyx_PyUnicode_READY(uval)))
-            goto bad;
-        ulength = __Pyx_PyUnicode_GET_LENGTH(uval);
-        if (unlikely(!ulength))
-            continue;
-        if (unlikely(char_pos + ulength < 0))
-            goto overflow;
-        ukind = __Pyx_PyUnicode_KIND(uval);
-        udata = __Pyx_PyUnicode_DATA(uval);
-        if (!CYTHON_PEP393_ENABLED || ukind == result_ukind) {
-            memcpy((char *)result_udata + char_pos * result_ukind, udata, (size_t) (ulength * result_ukind));
-        } else {
-            #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030300F0 || defined(_PyUnicode_FastCopyCharacters)
-            _PyUnicode_FastCopyCharacters(result_uval, char_pos, uval, 0, ulength);
-            #else
-            Py_ssize_t j;
-            for (j=0; j < ulength; j++) {
-                Py_UCS4 uchar = __Pyx_PyUnicode_READ(ukind, udata, j);
-                __Pyx_PyUnicode_WRITE(result_ukind, result_udata, char_pos+j, uchar);
-            }
-            #endif
-        }
-        char_pos += ulength;
-    }
-    return result_uval;
-overflow:
-    PyErr_SetString(PyExc_OverflowError, "join() result is too long for a Python string");
-bad:
-    Py_DECREF(result_uval);
-    return NULL;
-#else
-    result_ulength++;
-    value_count++;
-    return PyUnicode_Join(__pyx_empty_unicode, value_tuple);
-#endif
 }
 
 /* PyIntFromDouble */

@@ -9,6 +9,8 @@ from libc.math cimport round, fabs, fmax
 
 cdef class SIUnit:
 
+    SCALE_RTOL = 1e-9
+
     @staticmethod
     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):
         return SIUnit(scale, d.Dimensions(kg, m, s, k, a, mol, cd))
@@ -112,10 +114,7 @@ cdef class SIUnit:
             return NotImplemented
         if not type(rhs) is SIUnit:
             return NotImplemented
-        try:
-            return lhs.cmp(rhs) == 0
-        except ValueError:
-            return NotImplemented
+        return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
 
     def __ne__(lhs, rhs):
         return not lhs == rhs
@@ -147,10 +146,7 @@ cdef class SIUnit:
     cpdef approx(SIUnit self, SIUnit other, double rtol=1e-9, double atol=0.0):
         if not self.compatible(other):
             raise ValueError("unit mismatch")
-
-        cdef double epsilon
-        epsilon = fabs(fmax(atol, fmax(1.0, fmax(self.scale, other.scale)) * rtol))
-        return fabs(self.scale - other.scale) < epsilon
+        return c.fapprox(self.data.scale, other.data.scale, rtol, atol)
 
     cpdef bint compatible(SIUnit self, SIUnit other):
         return c.eq_ddata(self.data.dimensions, other.data.dimensions)

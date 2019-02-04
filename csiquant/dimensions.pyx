@@ -5,6 +5,8 @@ cimport csiquant.ctypes as c
 
 cdef class Dimensions:
 
+    DIMENSION_RTOL = 1e-9
+
     @property
     def kg(self):
         return self.data.exponents[0]
@@ -59,7 +61,11 @@ cdef class Dimensions:
         return self.exact(other)
 
     cpdef bint exact(Dimensions self, Dimensions other):
-        return c.eq_ddata(self.data, other.data)
+        cdef int i
+        for i in range(7):
+            if not c.fapprox(self.data.exponents[i], other.data.exponents[i], Dimensions.DIMENSION_RTOL, 0):
+                return False
+        return True
 
     cpdef Dimensions exp(Dimensions self, double exp):
         cdef Dimensions ret_val = Dimensions.__new__(Dimensions)

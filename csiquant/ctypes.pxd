@@ -1,4 +1,5 @@
 from libc.string cimport memcmp
+from libc.math cimport fabs, fmax
 
 cdef struct DData:
     double exponents[7]
@@ -15,6 +16,10 @@ cdef enum Operand:
     OBJECT = 1
     UNIT = 2
     QUANTITY = 4
+
+cdef inline bint fapprox(double a, double b, double rtol, double atol):
+    cdef double epsilon = fabs(fmax(atol, rtol * fmax(1, fmax(a, b))))
+    return fabs(a - b) <= epsilon
 
 cdef inline bint eq_ddata(const DData& lhs, const DData& rhs):
     return memcmp(&lhs, &rhs, sizeof(DData)) == 0
