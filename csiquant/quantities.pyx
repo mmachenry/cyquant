@@ -7,9 +7,21 @@ import csiquant.dimensions as d
 
 from libc.math cimport round, fabs, fmax
 
+cdef double UNIT_SCALE_RTOL = 1e-12
+
 cdef class SIUnit:
 
-    SCALE_RTOL = 1e-9
+
+    @staticmethod
+    def SetEqRelTol(double rtol):
+        global UNIT_SCALE_RTOL
+        if rtol < 0:
+            raise ValueError("Relative tolerance must be greater than 0.")
+        UNIT_SCALE_RTOL = rtol
+
+    @staticmethod
+    def GetEqRelTol():
+        return UNIT_SCALE_RTOL
 
     @staticmethod
     def Unit(scale=1, kg=0, m=0, s=0, k=0, a=0, mol=0, cd=0):
@@ -114,7 +126,7 @@ cdef class SIUnit:
             return NotImplemented
         if not type(rhs) is SIUnit:
             return NotImplemented
-        return lhs.approx(rhs, rtol=SIUnit.SCALE_RTOL)
+        return lhs.approx(rhs, rtol=UNIT_SCALE_RTOL)
 
     def __ne__(lhs, rhs):
         return not lhs == rhs

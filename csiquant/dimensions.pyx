@@ -3,9 +3,20 @@
 
 cimport csiquant.ctypes as c
 
+cdef double DIMENSIONS_RTOL = 1e-12
+
 cdef class Dimensions:
 
-    DIMENSION_RTOL = 1e-9
+    @staticmethod
+    def GetEqRelTol():
+        return DIMENSIONS_RTOL
+
+    @staticmethod
+    def SetEqRelTol(double rtol):
+        global DIMENSIONS_RTOL
+        if rtol < 0:
+            raise ValueError("relative tolerance must be greater than 0.")
+        DIMENSIONS_RTOL = rtol
 
     @property
     def kg(self):
@@ -63,7 +74,7 @@ cdef class Dimensions:
     cpdef bint exact(Dimensions self, Dimensions other):
         cdef int i
         for i in range(7):
-            if not c.fapprox(self.data.exponents[i], other.data.exponents[i], Dimensions.DIMENSION_RTOL, 0):
+            if not c.fapprox(self.data.exponents[i], other.data.exponents[i], DIMENSIONS_RTOL, 0):
                 return False
         return True
 
