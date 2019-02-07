@@ -69,9 +69,9 @@ cdef class Dimensions:
             return NotImplemented
         if type(other) is not Dimensions:
             return NotImplemented
-        return self.exact(other)
+        return self.approx(other)
 
-    cpdef bint exact(Dimensions self, Dimensions other):
+    cpdef bint approx(Dimensions self, Dimensions other):
         cdef int i
         for i in range(7):
             if not c.fapprox(self.data.exponents[i], other.data.exponents[i], DIMENSIONS_RTOL, 0):
