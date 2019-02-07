@@ -1,6 +1,6 @@
 import pytest
 
-from csiquant import si, SIUnit
+from cyquant import si, SIUnit
 
 def test_create_units():
     x = SIUnit.Unit(m=1)

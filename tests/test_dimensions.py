@@ -1,6 +1,6 @@
 import pytest
 
-from csiquant.dimensions import Dimensions
+from cyquant.dimensions import Dimensions
 
 def test_create_dimensions():
     dims = Dimensions(kg=1, m=2, s=3, k=4, a=5, mol=6, cd=7)

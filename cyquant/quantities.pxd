@@ -1,6 +1,6 @@
-cimport csiquant.ctypes as c
-cimport csiquant.dimensions as d
-import csiquant.dimensions as d
+cimport cyquant.ctypes as c
+cimport cyquant.dimensions as d
+import cyquant.dimensions as d
 
 cdef class SIUnit:
     cdef c.UData data

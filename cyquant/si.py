@@ -1,6 +1,6 @@
 import math
 
-from csiquant.quantities import SIUnit
+from cyquant.quantities import SIUnit
 
 #:
 nano = SIUnit.Unit(1 / 1e9)

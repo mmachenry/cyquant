@@ -1,7 +1,7 @@
 import pytest
 import copy
 
-from csiquant import si, Quantity, SIUnit, Dimensions
+from cyquant import si, Quantity, SIUnit, Dimensions
 
 def test_create_quantity():
     q1 = Quantity(1, SIUnit.Unit(1, m=1))

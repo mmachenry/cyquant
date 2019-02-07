@@ -1,10 +1,10 @@
-cimport csiquant.ctypes as c
+cimport cyquant.ctypes as c
 
-cimport csiquant.dimensions as d
-import csiquant.dimensions as d
+cimport cyquant.dimensions as d
+import cyquant.dimensions as d
 
-cimport csiquant.quantities as q
-import csiquant.quantities as q
+cimport cyquant.quantities as q
+import cyquant.quantities as q
 
 from functools import partial
 

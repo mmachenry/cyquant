@@ -1,7 +1,7 @@
 #!python
 #cython: language_level=3
 
-cimport csiquant.ctypes as c
+cimport cyquant.ctypes as c
 
 cdef double DIMENSIONS_RTOL = 1e-12
 

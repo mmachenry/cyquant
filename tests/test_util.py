@@ -1,6 +1,6 @@
 import pytest
 
-from csiquant import si, converter
+from cyquant import si, converter
 
 def test_converter_strict():
 

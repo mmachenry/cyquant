@@ -53,7 +53,7 @@ CLASSIFIERS = [
 ]
 
 setup(
-    name='csiquant',
+    name=package_name,
     author="Greg Echelberger",
     author_email="gechelberger@gmail.com",
     url="https://github.com/gechelberger/cyquant",
