@@ -5,5 +5,5 @@ build/
 *.egg-info/
 **.so
 .tox/
-csiquant/__pycache__/
+cyquant/__pycache__/
 tests/__pycache__/

@@ -8,7 +8,7 @@ except ImportError:
 else:
     use_cython = True
 
-package_name = 'csiquant'
+package_name = 'cyquant'
 def make_sources(*module_names):
     file_type = '.pyx' if use_cython else ".cpp"
     return {
@@ -56,16 +56,16 @@ setup(
     name='csiquant',
     author="Greg Echelberger",
     author_email="gechelberger@gmail.com",
-    url="https://github.com/gechelberger/csiquant",
+    url="https://github.com/gechelberger/cyquant",
     version="1.0.0a1",
     description="cython dimensional analysis and unit tracking utility",
-    packages=["csiquant"],
+    packages=[package_name],
     cmdclass=CMDCLASS,
     setup_requires=["wheel"],
     extras_require=EXTRAS_REQUIRE,
     ext_modules=extensions,
     package_data={
-        'csiquant': ['*.pyx', '*.pxd', '*.cpp']
+        package_name: ['*.pyx', '*.pxd', '*.cpp']
     },
     keywords=KEYWORDS,
     classifiers=CLASSIFIERS,
