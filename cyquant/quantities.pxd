@@ -22,7 +22,9 @@ cdef class Quantity:
     cdef c.QData data
 
     cpdef is_of(Quantity self, d.Dimensions dimensions)
+
     cpdef get_as(Quantity self, SIUnit units)
+    cpdef round_as(Quantity self, SIUnit units)
 
     cpdef Quantity cvt_to(Quantity self, SIUnit units)
     cpdef Quantity round_to(Quantity self, SIUnit units)

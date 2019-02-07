@@ -41,6 +41,11 @@ def test_extract_quantity():
     with pytest.raises(TypeError):
         in_m.get_as(in_m)
 
+def test_extract_rounded_quantity():
+    in_m = 1025 * si.meters
+
+    assert in_m.round_as(si.kilometers) == 1
+
 def test_cvt_quantity():
     in_m = 1000 * si.meters
 

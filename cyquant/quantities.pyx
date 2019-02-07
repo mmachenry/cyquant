@@ -241,9 +241,7 @@ cdef class Quantity:
         units.data = self.data.units
         return units
 
-    def __init__(Quantity self, double quantity, SIUnit units):
-        if units is None:
-            raise TypeError()
+    def __init__(Quantity self, double quantity, SIUnit units not None):
         self.data.quantity = quantity
         self.data.units = units.data
 
@@ -267,6 +265,9 @@ cdef class Quantity:
             raise ValueError("units mismatch")
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    cpdef round_as(Quantity self, SIUnit units):
+        return round(self.get_as(units))
 
     cpdef Quantity cvt_to(Quantity self, SIUnit units):
         if units is None:
