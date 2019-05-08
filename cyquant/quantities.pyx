@@ -236,6 +236,10 @@ cdef class Quantity:
         return self.data.quantity
 
     @property
+    def q(self):
+        return self.data.quantity
+
+    @property
     def units(self):
         cdef SIUnit units = SIUnit.__new__(SIUnit)
         units.data = self.data.units

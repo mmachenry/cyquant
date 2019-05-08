@@ -1,7 +1,7 @@
 import pytest
 import copy
 
-from cyquant import si, Quantity, SIUnit, Dimensions
+from cyquant import si, Quantity, SIUnit, dimensions
 
 def test_create_quantity():
     q1 = Quantity(1, SIUnit.Unit(1, m=1))
@@ -127,12 +127,12 @@ def test_q_approx_quantity():
         in_km.q_approx(1000 * si.volts, 1 * si.millimeters)
 
 def test_is_of_quantity():
-    in_m = 1000 * si.meters
+    in_m = 1 * si.meters
+    in_mm = 1000 * si.millimeters
 
-    assert in_m.is_of(si.meters.dimensions)
-    assert in_m.is_of(si.millimeters.dimensions)
-
-    assert not in_m.is_of(si.milligrams.dimensions)
+    assert in_m.is_of(dimensions.distance_t)
+    assert in_mm.is_of(dimensions.distance_t)
+    assert not in_m.is_of(dimensions.mass_t)
 
     in_u = 1000 * si.unity
     with pytest.raises(TypeError):

@@ -100,3 +100,165 @@ cdef class Dimensions:
 
 
 dimensionless_t = Dimensions()
+
+#:
+angle_t = Dimensions()
+
+#:
+solid_angle_t = Dimensions()
+
+#:
+strain_t = Dimensions()
+
+#:
+ratio_t = Dimensions()
+
+#:
+mass_t = Dimensions(kg=1)
+
+#:
+distance_t = Dimensions(m=1)
+
+#:
+time_t = Dimensions(s=1)
+
+#:
+temperature_t = Dimensions(k=1)
+
+#:
+current_t = Dimensions(a=1)
+
+#:
+amount_t = Dimensions(mol=1)
+
+#:
+luminosity_t = Dimensions(cd=1)
+
+#:
+frequency_t = Dimensions(s=-1)
+
+#:
+speed_t = distance_t / time_t
+
+#:
+acceleration_t = speed_t / time_t
+
+#:
+jerk_t = acceleration_t / time_t
+
+#:
+jounce_t = jerk_t / time_t
+
+#:
+area_t = distance_t ** 2
+
+#:
+volume_t = distance_t ** 3
+
+#:
+density_t = mass_t / volume_t
+
+#:
+volumetric_flow_t = volume_t / time_t
+
+#:
+force_t = mass_t * acceleration_t
+
+#:
+moment_t = force_t * distance_t
+
+#:
+torque_t = moment_t
+
+#:
+impulse_t = force_t * time_t
+
+#:
+momentum_t = impulse_t
+
+#:
+stress_t = force_t / area_t
+
+#:
+pressure_t = stress_t
+
+#:
+hydrostatic_pressure_t = density_t * acceleration_t * distance_t
+
+#:
+stiffness_t = force_t / distance_t
+
+#:
+surface_tension_t = stiffness_t
+
+#:
+energy_t = force_t * distance_t
+
+#:
+work_t = energy_t
+
+#:
+heat_t = energy_t
+
+#:
+power_t = energy_t / time_t
+
+#:
+charge_t = current_t * time_t
+
+#:
+potential_t = energy_t / current_t
+
+#:
+capacitance_t = charge_t / potential_t
+
+#:
+resistance_t = potential_t / current_t
+
+#:
+impedance_t = resistance_t
+
+#:
+reactance_t = resistance_t
+
+#:
+conductance_t = current_t / potential_t
+
+#:
+magnetic_flux_t = energy_t / current_t
+
+#:
+magnetic_flux_density_t = magnetic_flux_t / area_t
+
+#:
+inductance_t = impedance_t * time_t
+
+#:
+luminous_flux_t = luminosity_t * solid_angle_t
+
+#:
+illuminance_t = luminous_flux_t / area_t
+
+#:
+molarity_t = amount_t / volume_t
+
+#:
+molality_t = amount_t / mass_t
+
+#:
+molar_mass_t = mass_t / amount_t
+
+#:
+entropy_t = energy_t / temperature_t
+
+#:
+heat_capacity_t = entropy_t
+
+#:
+specific_entropy_t = entropy_t / mass_t
+
+#:
+specific_heat_capacity_t = specific_entropy_t
+
+#:
+temperature_gradient_t = temperature_t / distance_t

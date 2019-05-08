@@ -23,7 +23,7 @@ extensions = [
         module_name,
         sources=[source],
         language='c++',
-        include_dirs=["csiquant/"],
+        include_dirs=["cyquant/"],
         libraries=[]
     )
     for module_name, source in sources.items()
