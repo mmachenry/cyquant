@@ -8,6 +8,7 @@ import cyquant.quantities as q
 
 from functools import partial
 
+
 def converter(q.SIUnit units not None, bint promotes=False):
     impl = _promiscuous_convert if promotes else _strict_convert
     return partial(impl, units)
@@ -30,4 +31,3 @@ def args_of(d.Dimensions dims not None, *qargs):
 
 def are_of(d.Dimensions dims not None, qiterable):
     return all(q.is_of(dims) for q in qiterable)
-

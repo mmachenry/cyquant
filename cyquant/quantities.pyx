@@ -110,7 +110,8 @@ cdef class SIUnit:
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    __call__ = quantities
+    def __call__(SIUnit self, iterable):
+        return self.quantities(iterable)
 
     """
     Comparison Methods

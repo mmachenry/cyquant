@@ -1,6 +1,9 @@
 import pytest
 
+import math
+
 from cyquant import si, converter
+from cyquant import util
 
 def test_converter_strict():
 
@@ -62,3 +65,4 @@ def test_converter_promiscuous():
 
     with pytest.raises(TypeError):
         cvtr = converter(object(), promotes=True)
+
