@@ -7,6 +7,10 @@ from libc cimport math
 
 from cyquant import si
 
+pi = math.pi * si.radians
+eta = pi / 2
+tau = pi * 2
+
 cpdef sin(q.Quantity value):
     cdef double rads = value.get_as(si.radians)
     cdef double ratio = math.sin(rads)

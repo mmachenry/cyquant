@@ -3,7 +3,7 @@ import pytest
 import math
 
 from cyquant import si
-from cyquant import math as qmath
+from cyquant import qmath
 
 def test_sin():
     expected = math.sin(math.pi / 2)

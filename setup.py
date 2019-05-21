@@ -16,7 +16,7 @@ def make_sources(*module_names):
         for module_name in module_names
     }
 
-sources = make_sources('dimensions', 'quantities', 'util', 'math')
+sources = make_sources('dimensions', 'quantities', 'util', 'qmath')
 
 extensions = [
     Extension(
