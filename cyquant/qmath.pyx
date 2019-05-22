@@ -50,11 +50,11 @@ cpdef atan2(q.Quantity y, q.Quantity x):
     cdef c.UData norm_udata
     cdef double x_norm, y_norm, rads
 
-    error_code = c.min_udata(norm_udata, y.data.units, x.data.units)
+    error_code = c.min_udata(norm_udata, y.udata, x.udata)
 
     if error_code == c.Success:
-        x_norm = c.unsafe_extract_quantity(x.data, norm_udata)
-        y_norm = c.unsafe_extract_quantity(y.data, norm_udata)
+        x_norm = x.rescale(norm_udata) * (x.c_value if x.py_value is None else float(x.py_value))
+        y_norm = y.rescale(norm_udata) * (y.c_value if y.py_value is None else float(y.py_value))
 
         if x_norm == 0 and y_norm == 0:
             raise ValueError("math domain error")
@@ -67,18 +67,21 @@ cpdef atan2(q.Quantity y, q.Quantity x):
 
     raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
+
+
 cpdef hypot(q.Quantity x, q.Quantity y):
     cdef q.Quantity ret = q.Quantity.__new__(q.Quantity)
     cdef int error_code
     cdef double x_norm, y_norm
 
-    error_code = c.min_udata(ret.data.units, y.data.units, x.data.units)
+    error_code = c.min_udata(ret.udata, y.udata, x.udata)
 
     if error_code == c.Success:
-        x_norm = c.unsafe_extract_quantity(x.data, ret.data.units)
-        y_norm = c.unsafe_extract_quantity(y.data, ret.data.units)
+        x_norm = x.rescale(ret.udata) * (x.c_value if x.py_value is None else float(x.py_value))
+        y_norm = y.rescale(ret.udata) * (y.c_value if y.py_value is None else float(y.py_value))
 
-        ret.data.quantity = math.hypot(x_norm, y_norm)
+        ret.py_value = None
+        ret.c_value = math.hypot(x_norm, y_norm)
         return ret
 
     if error_code == c.DimensionMismatch:

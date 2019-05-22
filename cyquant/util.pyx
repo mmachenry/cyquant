@@ -19,9 +19,7 @@ def _strict_convert(q.SIUnit units not None, q.Quantity quantity not None):
 def _promiscuous_convert(q.SIUnit units not None, object value):
     if type(value) is q.Quantity:
         return value.cvt_to(units)
-
-    # raises TypeError
-    return q.Quantity(value, units)
+    return units.promote(value)
 
 def validator(d.Dimensions dims not None):
     return partial(are_of, dims)
