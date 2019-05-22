@@ -37,7 +37,7 @@ if use_cython:
 
 INSTALL_REQUIRES = []
 
-TESTS_LIBS = ["pytest"]
+TESTS_LIBS = ["pytest", "numpy", "mpmath"]
 DEV_LIBS = ["cython", "bumpversion", "tox"]
 EXTRAS_REQUIRE = {
     "tests" : TESTS_LIBS,

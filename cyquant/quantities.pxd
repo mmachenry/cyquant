@@ -43,8 +43,6 @@ cdef class Quantity:
 
     cpdef bint compatible(Quantity self, Quantity other)
 
-    cpdef cmp(Quantity self, Quantity other)
-
     cpdef Quantity exp(Quantity self, double power)
 
 
@@ -246,7 +244,7 @@ cdef inline c_r_approx(double l, c.UData ul, double r, c.UData ur, double rtol):
 
     raise RuntimeError("Unknown Error: %i" % error_code)
 
-cdef inline py_r_approx(object lhs, c.UData u_lhs, double rhs, c.UData u_rhs, double rtol):
+cdef inline py_r_approx(object lhs, c.UData u_lhs, object rhs, c.UData u_rhs, double rtol):
     cdef int error_code
     cdef c.UData u_min
     cdef object lhs_norm, rhs_norm, epsilon
@@ -319,3 +317,4 @@ cdef inline py_q_approx(object l, c.UData ul, object r, c.UData ur, object q, c.
     r_norm = r * (ur.scale / uq.scale)
 
     return abs(l_norm - r_norm) <= abs(q)
+

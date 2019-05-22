@@ -273,14 +273,14 @@ cdef class SIUnit:
 cdef class Quantity:
 
     @property
-    def quantity(self):
+    def q(self):
         if self.py_value is None:
             return self.c_value
         return self.py_value
 
     @property
-    def q(self):
-        return self.quantity
+    def quantity(self):
+        return self.q
 
     @property
     def units(self):
@@ -360,50 +360,73 @@ cdef class Quantity:
         if type(rhs) is not Quantity:
             return NotImplemented
 
+
         try:
-            return lhs.cmp(rhs) == 0
+            return lhs.equiv(rhs)
         except ValueError:
+            return NotImplemented
+        except TypeError:
             return NotImplemented
 
     def __ne__(lhs, rhs):
         return not lhs == rhs
 
     def __lt__(Quantity lhs not None, Quantity rhs not None):
-        return lhs.cmp(rhs) < 0
+        if not c.eq_ddata(lhs.udata.dimensions, rhs.udata.dimensions):
+            raise ValueError("incompatible units")
+
+        if lhs.py_value is None and rhs.py_value is None:
+            return lhs.c_value * lhs.udata.scale < rhs.c_value * rhs.udata.scale
+
+        cdef object norm1 = lhs.q * lhs.udata.scale
+        cdef object norm2 = rhs.q * rhs.udata.scale
+        return norm1 < norm2
 
     def __le__(Quantity lhs not None, Quantity rhs not None):
-        return lhs.cmp(rhs) <= 0
+        if not c.eq_ddata(lhs.udata.dimensions, rhs.udata.dimensions):
+            raise ValueError("incompatible units")
+
+        if lhs.py_value is None and rhs.py_value is None:
+            return lhs.c_value * lhs.udata.scale <= rhs.c_value * rhs.udata.scale
+
+        cdef object norm1 = lhs.q * lhs.udata.scale
+        cdef object norm2 = rhs.q * rhs.udata.scale
+        return norm1 <= norm2
 
     def __gt__(Quantity lhs not None, Quantity rhs not None):
-        return lhs.cmp(rhs) > 0
+        if not c.eq_ddata(lhs.udata.dimensions, rhs.udata.dimensions):
+            raise ValueError("incompatible units")
+
+        if lhs.py_value is None and rhs.py_value is None:
+            return lhs.c_value * lhs.udata.scale > rhs.c_value * rhs.udata.scale
+
+        cdef object norm1 = lhs.q * lhs.udata.scale
+        cdef object norm2 = rhs.q * rhs.udata.scale
+        return norm1 > norm2
+
 
     def __ge__(Quantity lhs not None, Quantity rhs not None):
-        return lhs.cmp(rhs) >= 0
+        if not c.eq_ddata(lhs.udata.dimensions, rhs.udata.dimensions):
+            raise ValueError("incompatible units")
 
-    cpdef cmp(Quantity self, Quantity other):
+        if lhs.py_value is None and rhs.py_value is None:
+            return lhs.c_value * lhs.udata.scale >= rhs.c_value * rhs.udata.scale
+
+        cdef object norm1 = lhs.q * lhs.udata.scale
+        cdef object norm2 = rhs.q * rhs.udata.scale
+        return norm1 >= norm2
+
+
+    def equiv(Quantity self, Quantity other not None):
         if not c.eq_ddata(self.udata.dimensions, other.udata.dimensions):
-            raise ValueError("Incompatible Dimensions")
+            return False
 
         if self.py_value is None and other.py_value is None:
-            return unsafe_native_cmp(self, other)
+            return self.c_value * self.udata.scale == other.c_value * other.udata.scale
 
-        cdef object lhs, rhs
-
-        if self.py_value is None:
-            lhs = self.c_value * self.udata.scale
-        else:
-            lhs = self.py_value * self.udata.scale
-
-        if other.py_value is None:
-            rhs = other.c_value * self.udata.scale
-        else:
-            rhs = other.py_value * self.udata.scale
-
-        if lhs > rhs:
-            return 1
-        if lhs < rhs:
-            return -1
-        return 0
+        cdef object norm1 = self.q * self.udata.scale
+        cdef object norm2 = other.q * other.udata.scale
+        return norm1 == norm2
 
 
     cpdef bint compatible(Quantity self, Quantity other):
@@ -553,7 +576,7 @@ cdef class Quantity:
             ret.py_value = None
             ret.c_value = -self.c_value
         else:
-            self.py_value = -self.c_value
+            ret.py_value = -self.py_value
         return ret
 
     def __invert__(Quantity self):
