@@ -24,7 +24,8 @@ extensions = [
         sources=[source],
         language='c++',
         include_dirs=["cyquant/"],
-        libraries=[]
+        libraries=[],
+        extra_compile_args=['-O3'],
     )
     for module_name, source in sources.items()
 ]

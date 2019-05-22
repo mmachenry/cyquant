@@ -274,9 +274,9 @@ cdef class Quantity:
 
     @property
     def quantity(self):
-        if self.py_value:
-            return self.py_value
-        return self.c_value
+        if self.py_value is None:
+            return self.c_value
+        return self.py_value
 
     @property
     def q(self):
@@ -311,10 +311,9 @@ cdef class Quantity:
         if units is None:
             raise TypeError("Expected SIUnit")
 
-        if self.py_value:
-            return self.py_value * self.rescale(units.data)
-
-        return self.c_value * self.rescale(units.data)
+        if self.py_value is None:
+            return self.c_value * self.rescale(units.data)
+        return self.py_value * self.rescale(units.data)
 
     cpdef round_as(Quantity self, SIUnit units):
         return round(self.get_as(units))
@@ -329,11 +328,11 @@ cdef class Quantity:
 
         cdef Quantity ret = Quantity.__new__(Quantity)
         ret.udata = units.data
-        if self.py_value:
-            ret.py_value = self.py_value * self.rescale(units.data)
-        else:
+        if self.py_value is None:
             ret.py_value = None
             ret.c_value = self.c_value * self.rescale(units.data)
+        else:
+            ret.py_value = self.py_value * self.rescale(units.data)
 
         return ret
 
@@ -390,15 +389,15 @@ cdef class Quantity:
 
         cdef object lhs, rhs
 
-        if self.py_value:
-            lhs = self.py_value * self.udata.scale
-        else:
+        if self.py_value is None:
             lhs = self.c_value * self.udata.scale
-
-        if other.py_value:
-            rhs = other.py_value * self.udata.scale
         else:
+            lhs = self.py_value * self.udata.scale
+
+        if other.py_value is None:
             rhs = other.c_value * self.udata.scale
+        else:
+            rhs = other.py_value * self.udata.scale
 
         if lhs > rhs:
             return 1

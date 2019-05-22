@@ -1,9 +1,11 @@
 import pytest
 import copy
 
+import numpy as np
+
 from cyquant import si, Quantity, SIUnit, dimensions
 
-def test_create_quantity():
+def test_create_c_quantity():
     q1 = Quantity(1, SIUnit.Unit(1, m=1))
 
     assert q1.quantity == 1
@@ -18,18 +20,44 @@ def test_create_quantity():
     assert dimensions.mol == 0
     assert dimensions.cd == 0
 
-def test_copy_quantity():
+def test_create_py_quantity():
+    q1 = si.meters.promote(np.array([1, 2]))
+
+    assert q1.q[0] == 1
+    assert q1.q[1] == 2
+    assert q1.units == si.meters
+
+def test_copy_c_quantity():
     in_m = 1000 * si.meters
 
     copied = copy.copy(in_m)
     assert copied.quantity == 1000
     assert copied.units == si.meters
+    assert copied is in_m
 
     copied = copy.deepcopy(in_m)
     assert copied.quantity == 1000
     assert copied.units == si.meters
+    assert copied is in_m
 
-def test_extract_quantity():
+def test_copy_py_quantity():
+    value = np.array([1, 2])
+    in_m = si.meters.promote(value)
+
+    copied = copy.copy(in_m)
+    assert np.all(copied.quantity == value)
+    assert copied.units == si.meters
+    assert copied is not in_m
+    assert copied.quantity is not value
+
+    copied = copy.deepcopy(in_m)
+    assert np.all(copied.quantity == value)
+    assert copied.units == si.meters
+    assert copied is not in_m
+    assert copied.quantity is not value
+
+
+def test_extract_c_quantity():
     in_m = 1000 * si.meters
 
     assert in_m.get_as(si.kilometers) == 1
@@ -41,12 +69,29 @@ def test_extract_quantity():
     with pytest.raises(TypeError):
         in_m.get_as(in_m)
 
-def test_extract_rounded_quantity():
+def test_extract_py_quantity():
+    value = np.array([1000, 2000, 3000])
+    in_m = si.meters.promote(value)
+
+    assert np.all(in_m.get_as(si.kilometers) == value / 1000)
+    assert np.all(in_m.get_as(si.millimeters) == value * 1000)
+
+    with pytest.raises(ValueError):
+        in_m.get_as(si.volts)
+
+    with pytest.raises(TypeError):
+        in_m.get_as(None)
+
+def test_extract_rounded_c_quantity():
     in_m = 1025 * si.meters
 
     assert in_m.round_as(si.kilometers) == 1
 
-def test_cvt_quantity():
+@pytest.mark.skip
+def test_extract_rounded_py_quantity():
+    pass
+
+def test_cvt_c_quantity():
     in_m = 1000 * si.meters
 
     in_mm = in_m.cvt_to(si.millimeters)
@@ -61,7 +106,11 @@ def test_cvt_quantity():
     with pytest.raises(TypeError):
         in_m.cvt_to(1)
 
-def test_round_quantity():
+@pytest.mark.skip
+def test_cvt_py_quantity():
+    pass
+
+def test_round_c_quantity():
     in_m = 1001 * si.meters
 
     in_mm = in_m.round_to(si.millimeters)
@@ -76,6 +125,10 @@ def test_round_quantity():
     with pytest.raises(TypeError):
         in_m.round_to(1000)
 
+@pytest.mark.skip
+def test_round_py_quantity():
+    pass
+
 def test_r_approx_quantity():
     in_gpa = 210 * si.gigapascals
     in_kpa = 210000002 * si.kilopascals
@@ -89,6 +142,10 @@ def test_r_approx_quantity():
 
     assert in_gpa.r_approx(in_kpa, 1e-8)
     assert in_kpa.r_approx(in_gpa, 1e-8)
+
+@pytest.mark.skip
+def test_r_approx_py_quantity():
+    pass
 
 def test_a_approx_quantity():
     in_gpa = 210 * si.gigapascals
@@ -109,6 +166,9 @@ def test_a_approx_quantity():
     with pytest.raises(ValueError):
         in_gpa.a_approx(other)
 
+@pytest.mark.skip
+def test_a_approx_py_quantity():
+    pass
 
 def test_q_approx_quantity():
     in_mm = 1000001 * si.millimeters
@@ -126,6 +186,10 @@ def test_q_approx_quantity():
     with pytest.raises(ValueError):
         in_km.q_approx(1000 * si.volts, 1 * si.millimeters)
 
+@pytest.mark.skip
+def test_q_approx_py_quantity():
+    pass
+
 def test_is_of_quantity():
     in_m = 1 * si.meters
     in_mm = 1000 * si.millimeters
@@ -141,6 +205,9 @@ def test_is_of_quantity():
     with pytest.raises(TypeError):
         in_m.is_of(1)
 
+    x = si.meters.promote(np.array([1, 2]))
+    assert x.is_of(dimensions.distance_t)
+
 def test_hash_quantity():
     in_m = 1 * si.meters
     in_mm = 1000 * si.millimeters
@@ -149,6 +216,13 @@ def test_hash_quantity():
     mm_hash = hash(in_mm)
 
     assert m_hash == mm_hash
+
+def test_hash_py_quantity():
+
+    in_m =  (1 + 1j) * si.meters
+    in_mm = (1000 + 1000j) * si.millimeters
+
+    assert hash(in_m) == hash(in_mm)
 
 def test_eq_quantity():
     q1 = 1 * si.meters
@@ -167,6 +241,10 @@ def test_eq_quantity():
     assert q3 != q2
 
     assert q1 != q5
+
+@pytest.mark.skip
+def test_eq_py_quantity():
+    pass
 
 def test_order_quantity():
     q1 = 1 * si.meters
@@ -224,6 +302,11 @@ def test_order_quantity():
     with pytest.raises(TypeError):
         q1 >= 1
 
+@pytest.mark.skip
+def test_ordered_py_quantity():
+    pass
+
+
 def test_float_quantity():
     q1 = 1 * si.meters
     q2 = 1 * si.volts
@@ -233,6 +316,10 @@ def test_float_quantity():
     assert float(q2) == 1
     assert float(q3) == 1000
 
+@pytest.mark.skip
+def test_float_py_quantity():
+    pass
+
 def test_int_quantity():
     q1 = 1 * si.meters
     q2 = 1 * si.volts
@@ -241,6 +328,10 @@ def test_int_quantity():
     assert int(q1) == 1
     assert int(q2) == 1
     assert int(q3) == 1000
+
+@pytest.mark.skip
+def test_int_py_quantity():
+    pass
 
 def test_truth_quantity():
     q0 = 0 * si.meters
@@ -253,6 +344,10 @@ def test_truth_quantity():
     assert q2
     assert q3
 
+@pytest.mark.skip
+def test_truth_py_quantity():
+    pass
+
 def test_abs_quantity():
     q0 = 0 * si.meters
     q1 = 1 * si.meters
@@ -261,6 +356,10 @@ def test_abs_quantity():
     assert q0 == abs(q0)
     assert q1 == abs(q1)
     assert q1 == abs(q2)
+
+@pytest.mark.skip
+def test_abs_py_quantity():
+    pass
 
 def test_invert_quantity():
     q0 = 0 * si.meters
@@ -281,6 +380,10 @@ def test_invert_quantity():
     assert q22 == ~q2
     assert q33 == ~q3
 
+@pytest.mark.skip
+def test_invert_py_quantity():
+    pass
+
 
 def test_neg_quantity():
     q0 = 0 * si.meters
@@ -290,6 +393,10 @@ def test_neg_quantity():
     assert q0 == -q0
     assert qp == -qn
     assert -qp == qn
+
+@pytest.mark.skip
+def test_neg_py_quantity():
+    pass
 
 def test_pow_quantity():
     in_m = 1 * si.meters
@@ -308,6 +415,11 @@ def test_pow_quantity():
 
     assert in_m3 == in_mm3
 
+@pytest.mark.skip
+def test_pow_py_quantity():
+    pass
+
+
 def test_mul_quantity():
     stress = 0.1 * si.gigapascals
     area = 100 * si.millimeters ** 2
@@ -317,6 +429,10 @@ def test_mul_quantity():
     assert force.units.scale == 1e3
 
     assert force.get_as(si.newtons) == 10000
+
+@pytest.mark.skip
+def test_mul_py_quantity():
+    pass
 
 def test_div_quantity():
     force = 10 * si.kilonewtons
@@ -332,6 +448,9 @@ def test_div_quantity():
     with pytest.raises(ZeroDivisionError):
         force / zero_area
 
+@pytest.mark.skip
+def test_div_py_quantity():
+    pass
 
 def test_add_quantity():
     in_m = 1 * si.meters
@@ -368,6 +487,10 @@ def test_add_quantity():
     with pytest.raises(TypeError):
         1 + in_mm
 
+@pytest.mark.skip
+def test_add_py_quantity():
+    pass
+
 def test_sub_quantity():
     in_m = 1 * si.meters
     in_mm = 1000 * si.millimeters
@@ -402,3 +525,22 @@ def test_sub_quantity():
     with pytest.raises(TypeError):
         1 + in_mm
 
+def test_sub_py_quantity():
+
+    in_m = si.meters.promote(1 + 1j)
+    in_mm = si.millimeters.promote(1000 + 1000j)
+
+    out = in_m - in_mm
+    assert out.quantity == 0
+    assert out.units == si.millimeters
+
+    out = in_mm - in_m
+    assert out.quantity == 0
+    assert out.units == si.millimeters
+
+    out = in_m - 1 * si.meters
+    assert out.quantity.real == 0
+    assert out.quantity.imag == 1
+
+    with pytest.raises(ValueError):
+        in_m - si.volts.promote(1 + 1j)
