@@ -2,7 +2,7 @@ cimport cyquant.ctypes as c
 cimport cyquant.dimensions as d
 import cyquant.dimensions as d
 
-from libc.math import fabs, fmax
+from libc.math cimport fabs, fmax
 
 cdef class SIUnit:
     cdef c.UData data
@@ -38,8 +38,8 @@ cdef class Quantity:
     #TODO: think abuot how best to handle approximation
 
     cpdef r_approx(Quantity self, Quantity other, double rtol=*)
-    #cpdef a_approx(Quantity self, Quantity other, double atol=*)
-    #cpdef q_approx(Quantity self, Quantity other, Quantity qtol)
+    cpdef a_approx(Quantity self, Quantity other, double atol=*)
+    cpdef q_approx(Quantity self, Quantity other, Quantity qtol)
 
     cpdef bint compatible(Quantity self, Quantity other)
 
@@ -228,28 +228,25 @@ cdef inline q_norm(Quantity out):
 
     return c.Success
 
-cdef inline q_approx_d(Quantity lhs, Quantity rhs, Quantity tol):
-    pass
-
-cdef inline r_approx_d(double lhs, c.UData u_lhs, double rhs, c.UData u_rhs, double rtol):
+cdef inline c_r_approx(double l, c.UData ul, double r, c.UData ur, double rtol):
     cdef int error_code
     cdef c.UData u_min
-    cdef double lhs_norm, rhs_norm, epsilon
+    cdef double epsilon
 
-    error_code = c.min_udata(u_min, u_lhs, u_rhs)
+    error_code = c.min_udata(u_min, ul, ur)
     if error_code == c.Success:
-        lhs_norm = lhs * u_lhs.data.scale / u_min.scale
-        rhs_norm = rhs * u_rhs.data.scale / u_min.scale
+        l = (l * ul.scale / u_min.scale)
+        r = (r * ur.scale / u_min.scale)
 
-        epsilon = fmax(1.0, fmax(fabs(lhs_norm), fabs(rhs_norm))) * rtol
-        return fabs(lhs_norm - rhs_norm) <= fabs(epsilon)
+        epsilon = fmax(1.0, fmax(fabs(l), fabs(r))) * rtol
+        return fabs(l - r) <= fabs(epsilon)
 
     if error_code == c.DimensionMismatch:
         raise ValueError("Incompatible Units")
 
     raise RuntimeError("Unknown Error: %i" % error_code)
 
-cdef inline r_approx_o(object lhs, c.UData u_lhs, double rhs, c.UData u_rhs, double rtol):
+cdef inline py_r_approx(object lhs, c.UData u_lhs, double rhs, c.UData u_rhs, double rtol):
     cdef int error_code
     cdef c.UData u_min
     cdef object lhs_norm, rhs_norm, epsilon
@@ -259,10 +256,66 @@ cdef inline r_approx_o(object lhs, c.UData u_lhs, double rhs, c.UData u_rhs, dou
         lhs_norm = lhs * (u_lhs.scale / u_min.scale)
         rhs_norm = rhs * (u_rhs.scale / u_min.scale)
 
-        epsilon = max(1.0, abs(lhs_norm), abs(rhs_norm)) * rtol
+        epsilon = max(1.0, abs(lhs_norm), abs(rhs_norm)) * fabs(rtol)
         return abs(lhs_norm - rhs_norm) <= epsilon
 
     if error_code == c.DimensionMismatch:
         raise ValueError("Incompatible Units")
 
     raise RuntimeError("Unknown Error: %i" % error_code)
+
+cdef inline c_a_approx(double l, c.UData ul, double r, c.UData ur, double epsilon):
+    cdef c.UData u_min
+    cdef l_norm, r_norm
+
+    cdef error_code = c.min_udata(u_min, ul, ur)
+    if error_code == c.Success:
+        l_norm = l * (ul.scale / u_min.scale)
+        r_norm = r * (ur.scale / u_min.scale)
+
+        return fabs(l_norm - r_norm) <= fabs(epsilon)
+
+    if error_code == c.DimensionMismatch:
+        raise ValueError("incompatible units")
+
+    raise RuntimeError("unknown error ({})".format(error_code))
+
+cdef inline py_a_approx(object l, c.UData ul, object r, c.UData ur, double epsilon):
+    cdef c.UData u_min
+    cdef object l_norm, r_norm
+
+    cdef error_code = c.min_udata(u_min, ul, ur)
+    if error_code == c.Success:
+        l_norm = l * (ul.scale / u_min.scale)
+        r_norm = r * (ur.scale / u_min.scale)
+
+        return abs(l_norm - r_norm) <= fabs(epsilon)
+
+    if error_code == c.DimensionMismatch:
+        raise ValueError("incompatible units")
+
+    raise RuntimeError("unknown error ({})".format(error_code))
+
+cdef inline c_q_approx(double l, c.UData ul, double r, c.UData ur, double q, c.UData uq):
+    if not c.eq_ddata(ul.dimensions, uq.dimensions):
+        raise ValueError("incompatible units")
+    if not c.eq_ddata(ur.dimensions, uq.dimensions):
+        raise ValueError("incompatible units")
+
+    l = l * ul.scale / uq.scale
+    r = r * ur.scale / uq.scale
+
+    return fabs(l - r) <= fabs(q)
+
+cdef inline py_q_approx(object l, c.UData ul, object r, c.UData ur, object q, c.UData uq):
+    if not c.eq_ddata(ul.dimensions, uq.dimensions):
+        raise ValueError("incompatible units")
+    if not c.eq_ddata(ur.dimensions, uq.dimensions):
+        raise ValueError("incompatible units")
+
+    cdef object l_norm, r_norm
+
+    l_norm = l * (ul.scale / uq.scale)
+    r_norm = r * (ur.scale / uq.scale)
+
+    return abs(l_norm - r_norm) <= abs(q)

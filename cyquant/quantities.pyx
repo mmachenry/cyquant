@@ -412,67 +412,37 @@ cdef class Quantity:
 
 
     cpdef r_approx(Quantity self, Quantity other, double rtol=1e-9):
-        cdef int error_code
-        cdef c.UData norm_udata
-        cdef double self_norm, other_norm, epsilon
-
-        error_code = c.min_udata(norm_udata, self.udata, other.udata)
-
-        if error_code == c.Success:
-            if self.py_value is None and other.py_value is None:
-                return r_approx_d(self.c_value, self.udata, other.c_value, other.udata, rtol)
-
-            return r_approx_o(
-                self.c_value if self.py_value is None else self.py_value,
+        if self.py_value is None and other.py_value is None:
+            return c_r_approx(
+                self.c_value,
                 self.udata,
-                other.c_value if other.py_value is None else other.py_value,
+                other.c_value,
                 other.udata,
                 rtol
             )
 
-        if error_code == c.DimensionMismatch:
-            raise ValueError("unit mismatch")
-
-        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+        return py_r_approx(self.q, self.udata, other.q, other.udata, rtol)
 
 
-    """
     cpdef a_approx(Quantity self, Quantity other, double atol=1e-6):
-        cdef int error_code
-        cdef c.UData norm_udata
-        cdef double self_norm, other_norm
+        if self.py_value is None and other.py_value is None:
+            return c_a_approx(self.c_value, self.udata, other.c_value, other.udata, atol)
 
-        error_code = c.min_udata(norm_udata, self.data.units, other.data.units)
-        if error_code == c.Success:
-            self_norm = c.unsafe_extract_quantity(self.data, norm_udata)
-            other_norm = c.unsafe_extract_quantity(other.data, norm_udata)
-            return fabs(self_norm - other_norm) <= fabs(atol)
-
-        if error_code == c.DimensionMismatch:
-            raise ValueError("unit mismatch")
-
-        raise RuntimeError("Unknown Error Occurred: %i" % error_code)
+        return py_a_approx(self.quantity, self.udata, other.quantity, other.udata, atol)
 
 
     cpdef q_approx(Quantity self, Quantity other, Quantity qtol):
         if self.py_value is None and other.py_value is None and qtol.py_value is None:
-            return q_approx_d()
+            return c_q_approx(
+                self.c_value,
+                self.udata,
+                other.c_value,
+                other.udata,
+                qtol.c_value,
+                qtol.udata
+            )
 
-        cdef int error_code1, error_code2
-        cdef double self_val, other_val
-        error_code1 = c.extract_quantity(self_val, self.data, qtol.data.units)
-        error_code2 = c.extract_quantity(other_val, other.data, qtol.data.units)
-
-        if error_code1 | error_code2 == c.Success:
-            return fabs(self_val - other_val) <= fabs(qtol.data.quantity)
-
-        if error_code1 == c.DimensionMismatch:
-            raise ValueError("unit mismatch (lhs)")
-        if error_code2 == c.DimensionMismatch:
-            raise ValueError("unit mismatch (rhs)")
-
-        raise RuntimeError("Unknown Error Occurred: %i" % (error_code1 | error_code2))
-    """
+        return py_q_approx(self.q, self.udata, other.q, other.udata, qtol.q, qtol.udata)
 
 
     """
