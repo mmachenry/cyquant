@@ -1,6 +1,8 @@
 #!python
 #cython: language_level=3
 
+cimport cython
+
 import copy
 
 cimport cyquant.ctypes as c
@@ -11,6 +13,7 @@ from libc.math cimport fabs
 
 cdef double UNIT_SCALE_RTOL = 1e-12
 
+@cython.final
 cdef class SIUnit:
 
 
@@ -270,6 +273,7 @@ cdef class SIUnit:
     def __repr__(SIUnit self):
         return 'SIUnit(%f, %r)' % (self.data.scale, self.dimensions)
 
+@cython.final
 cdef class Quantity:
 
     @property
@@ -669,3 +673,14 @@ cdef class Quantity:
 
     def __repr__(self):
         return 'Quantity(%r, %r)' % (self.quantity, self.units)
+
+    @staticmethod
+    def multiplier(fcn):
+        def wrapper(Quantity lhs, Quantity rhs):
+            cdef Quantity ret = Quantity.__new__(Quantity)
+            c.mul_udata(ret.udata, lhs.udata, rhs.udata)
+            ret.py_value = fcn(lhs.q, rhs.q)
+            if q_norm(ret) == c.Success:
+                return ret
+            raise RuntimeError("unknown error")
+        return wrapper
