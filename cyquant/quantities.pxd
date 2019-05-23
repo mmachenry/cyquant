@@ -318,3 +318,4 @@ cdef inline py_q_approx(object l, c.UData ul, object r, c.UData ur, object q, c.
 
     return abs(l_norm - r_norm) <= abs(q)
 
+

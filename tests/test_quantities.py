@@ -696,3 +696,14 @@ def test_sub_py_quantity():
 
     with pytest.raises(ValueError):
         in_m - si.volts.promote(1 + 1j)
+
+def test_q_multiplier():
+
+    qdot = Quantity.multiplier(np.dot)
+
+    a = si.meters.promote(np.array([1, 2, 3]))
+    b = si.millimeters.promote(np.array([1000, 2000, 3000]))
+
+    c = qdot(a, b)
+
+    assert c.get_as(si.meters ** 2) == pytest.approx(1 + 4 + 9)
