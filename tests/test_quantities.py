@@ -29,6 +29,24 @@ def test_create_py_quantity():
     assert q1.q[1] == 2
     assert q1.units == si.meters
 
+def test_creat_mul_quantity():
+    x = 10 * si.meters
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+    x = si.meters * 10
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+def test_create_div_quantity():
+    x = 1000 / si.meters
+    assert x.quantity == pytest.approx(1000)
+    assert x.units == ~si.meters
+
+    x = si.meters / 1000
+    assert x.quantity == pytest.approx(1/1000)
+    assert x.units == si.meters
+
 def test_copy_c_quantity():
     in_m = 1000 * si.meters
 
@@ -548,6 +566,40 @@ def test_mul_quantity():
 
     assert force.get_as(si.newtons) == 10000
 
+def test_mul_quantity_scalar():
+    x = 10 * si.meters
+
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+    y = x * 10
+    assert y.quantity == pytest.approx(100)
+    assert y.units == si.meters
+
+    y = 10 * x
+    assert y.quantity == pytest.approx(100)
+    assert y.units == si.meters
+
+
+def test_mul_quantity_units():
+    x = 10 * si.meters
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+    x = si.meters * 10
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+    y = x * si.meters
+    assert y.quantity == pytest.approx(10)
+    assert y.units == si.meters ** 2
+
+
+    y = si.meters * x
+    assert y.quantity == pytest.approx(10)
+    assert y.units == si.meters ** 2
+
+
 def test_mul_py_quantity():
     x = 1j * si.meters
 
@@ -575,6 +627,32 @@ def test_div_quantity():
     zero_area = 0 * si.millimeters ** 2
     with pytest.raises(ZeroDivisionError):
         force / zero_area
+
+def test_div_quantity_scalar():
+    x = 10 * si.meters
+    assert x.quantity == pytest.approx(10)
+    assert x.units == si.meters
+
+    y = x / 10
+    assert y.quantity == 1
+    assert y.units == si.meters
+
+    y = 10 / x
+    assert y.quantity == 1
+    assert y.units == ~si.meters
+
+
+def test_div_quantity_units():
+    x = 10 * si.meters
+
+    y = x / si.meters
+    assert y.quantity == pytest.approx(10)
+    assert y.units == si.unity
+
+    y = si.meters / x
+
+    assert y.quantity == pytest.approx(1 / 10)
+    assert y.units == si.unity
 
 def test_div_py_quantity():
     x = 1j / si.seconds

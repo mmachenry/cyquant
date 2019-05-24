@@ -215,12 +215,13 @@ cdef class SIUnit:
 
             if op_rhs is float or op_rhs is int:
                 ret.py_value = None
-                ret.c_value = rhs
+                ret.c_value = 1 / rhs
             else:
-                ret.py_value = rhs
+                ret.py_value = 1 / rhs
 
         if op_rhs is SIUnit:
             get_udata(ret.udata, rhs)
+            c.inv_udata(ret.udata, ret.udata)
 
             if op_lhs is float or op_lhs is int:
                 ret.py_value = None
@@ -228,10 +229,7 @@ cdef class SIUnit:
             else:
                 ret.py_value = lhs
 
-        if c.inv_udata(ret.udata, ret.udata) == c.Success:
-            return ret
-
-        raise RuntimeError("unknown error")
+        return ret
 
 
     def __invert__(SIUnit self):
