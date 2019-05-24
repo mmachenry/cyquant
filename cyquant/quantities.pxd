@@ -166,21 +166,15 @@ cdef inline q_assign_mul_o(Quantity out, object rhs):
 
 cdef inline q_assign_div(Quantity out, object rhs):
     cdef type value_type = type(rhs)
-
-    print(value_type)
-
     if value_type is Quantity:
         return q_assign_div_q(out, rhs)
     if value_type is float or value_type is int:
-        print('q_assign_div_d')
         return q_assign_div_d(out, rhs)
     if value_type is SIUnit:
         return q_assign_div_u(out, rhs)
     return q_assign_div_o(out, rhs)
 
 cdef inline q_assign_div_q(Quantity out, Quantity rhs):
-    print('q_assign_div_q')
-
     c.div_udata(out.udata, out.udata, rhs.udata)
 
     if out.py_value is None and rhs.py_value is None:
@@ -202,7 +196,6 @@ cdef inline q_assign_div_q(Quantity out, Quantity rhs):
     return q_norm(out)
 
 cdef inline q_assign_div_u(Quantity out, SIUnit rhs):
-    print('q_assign_div_u')
     c.div_udata(out.udata, out.udata, rhs.data)
     return c.Success
 
@@ -219,7 +212,6 @@ cdef inline q_assign_div_d(Quantity out, double rhs):
 
 
 cdef inline q_assign_div_o(Quantity out, object rhs):
-    print('q_assign_div_o')
     if out.py_value is None:
         out.py_value = out.c_value / rhs
     else:

@@ -1,7 +1,8 @@
 #!/bin/sh
 
-pip uninstall csiquant
+pip uninstall cyquant
 rm -r dist/
-rm -r csiquant.egg-info/
+rm -r cyquant.egg-info/
 rm -r build/
-
+rm cyquant/*.cpp
+rm cyquant/*.so
