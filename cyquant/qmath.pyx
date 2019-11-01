@@ -21,6 +21,13 @@ cpdef cos(q.Quantity value):
     cdef double ratio = math.cos(rads)
     return si.unity.promote(ratio)
 
+cpdef sin_cos(q.Quantity value):
+    cdef double rads = value.get_as(si.radians)
+    return (
+        si.unity.promote(math.sin(rads)),
+        si.unity.promote(math.cos(rads))
+    )
+
 cpdef tan(q.Quantity value):
     cdef double rads = value.get_as(si.radians)
     cdef double ratio = math.tan(rads)

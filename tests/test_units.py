@@ -30,6 +30,9 @@ def test_hash_units():
 
 def test_cmp_units():
 
+    assert si.meters == si.meters
+    assert si.meters != si.millimeters
+    assert si.meters != si.kilonewtons
 
     assert si.millimeters < si.meters
     assert si.millimeters <= si.meters

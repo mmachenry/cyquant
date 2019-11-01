@@ -138,6 +138,8 @@ cdef class SIUnit:
             return NotImplemented
         if not type(rhs) is SIUnit:
             return NotImplemented
+        if lhs.dimensions != rhs.dimensions:
+            return False
         return lhs.approx(rhs, rtol=UNIT_SCALE_RTOL)
 
     def __ne__(lhs, rhs):
@@ -669,8 +671,36 @@ cdef class Quantity:
             return hash((self.c_value * self.udata.scale, dims))
         return hash((self.py_value * self.udata.scale, dims))
 
-    def __repr__(self):
+    def __repr__(Quantity self):
         return 'Quantity(%r, %r)' % (self.quantity, self.units)
+
+    def __iter__(Quantity self):
+        if self.py_value is None:
+            raise TypeError("decimal quantity is not iterable")
+
+        cdef Quantity ret
+        for value in self.py_value:
+            ret = Quantity.__new__(Quantity)
+            ret.udata = self.udata
+            ret.py_value = value
+            if q_norm(ret) == c.Success:
+                yield ret
+
+    def __getitem__(Quantity self, idx):
+        if self.py_value is None:
+            raise TypeError("decimal quantity does not support indexing")
+        cdef Quantity ret = Quantity.__new__(Quantity)
+        ret.udata = self.udata
+        ret.py_value = self.py_value[idx]
+        if q_norm(ret) == c.Success:
+            return ret
+
+        raise RuntimeError("unknown error")
+
+    def __len__(Quantity self):
+        if self.py_value is None:
+            raise TypeError("decimal quantity does not support len")
+        return len(self.py_value)
 
     @staticmethod
     def multiplier(fcn):
