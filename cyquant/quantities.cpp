@@ -8351,6 +8351,7 @@ static PyObject *__pyx_pf_7cyquant_10quantities_8Quantity_8cvt_to(struct __pyx_o
 
 static PyObject *__pyx_pw_7cyquant_10quantities_8Quantity_11round_to(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quantities_8Quantity_round_to(struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_v_self, struct __pyx_obj_7cyquant_10quantities_SIUnit *__pyx_v_units, CYTHON_UNUSED int __pyx_skip_dispatch, struct __pyx_opt_args_7cyquant_10quantities_8Quantity_round_to *__pyx_optional_args) {
+  int __pyx_v_places = ((int)0);
   struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_v_ret = 0;
   struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -8360,8 +8361,12 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
   struct __pyx_t_7cyquant_6ctypes_UData __pyx_t_4;
   double __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
   __Pyx_RefNannySetupContext("round_to", 0);
   if (__pyx_optional_args) {
+    if (__pyx_optional_args->__pyx_n > 0) {
+      __pyx_v_places = __pyx_optional_args->places;
+    }
   }
 
   /* "cyquant/quantities.pyx":344
@@ -8424,7 +8429,7 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
  *         ret.udata = units.data
  *         if self.py_value is None:             # <<<<<<<<<<<<<<
  *             ret.py_value = None
- *             ret.c_value = round(self.c_value * self.rescale(units.data), 0)
+ *             ret.c_value = round(self.c_value * self.rescale(units.data), places)
  */
   __pyx_t_2 = (__pyx_v_self->py_value == Py_None);
   __pyx_t_1 = (__pyx_t_2 != 0);
@@ -8434,7 +8439,7 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
  *         ret.udata = units.data
  *         if self.py_value is None:
  *             ret.py_value = None             # <<<<<<<<<<<<<<
- *             ret.c_value = round(self.c_value * self.rescale(units.data), 0)
+ *             ret.c_value = round(self.c_value * self.rescale(units.data), places)
  *         else:
  */
     __Pyx_INCREF(Py_None);
@@ -8446,26 +8451,28 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
     /* "cyquant/quantities.pyx":351
  *         if self.py_value is None:
  *             ret.py_value = None
- *             ret.c_value = round(self.c_value * self.rescale(units.data), 0)             # <<<<<<<<<<<<<<
+ *             ret.c_value = round(self.c_value * self.rescale(units.data), places)             # <<<<<<<<<<<<<<
  *         else:
- *             ret.py_value = round(self.py_value * self.rescale(units.data), 0)
+ *             ret.py_value = round(self.py_value * self.rescale(units.data), places)
  */
     __pyx_t_5 = __pyx_f_7cyquant_10quantities_8Quantity_rescale(__pyx_v_self, __pyx_v_units->data); if (unlikely(__pyx_t_5 == ((double)(-1.0)))) __PYX_ERR(1, 351, __pyx_L1_error)
     __pyx_t_3 = PyFloat_FromDouble((__pyx_v_self->c_value * __pyx_t_5)); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 351, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 351, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_places); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 351, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 351, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_3);
-    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3);
-    __Pyx_INCREF(__pyx_int_0);
-    __Pyx_GIVEREF(__pyx_int_0);
-    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_int_0);
+    PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_6);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 351, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_7, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 351, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 351, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 351, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_v_ret->c_value = __pyx_t_5;
 
     /* "cyquant/quantities.pyx":349
@@ -8473,32 +8480,34 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
  *         ret.udata = units.data
  *         if self.py_value is None:             # <<<<<<<<<<<<<<
  *             ret.py_value = None
- *             ret.c_value = round(self.c_value * self.rescale(units.data), 0)
+ *             ret.c_value = round(self.c_value * self.rescale(units.data), places)
  */
     goto __pyx_L4;
   }
 
   /* "cyquant/quantities.pyx":353
- *             ret.c_value = round(self.c_value * self.rescale(units.data), 0)
+ *             ret.c_value = round(self.c_value * self.rescale(units.data), places)
  *         else:
- *             ret.py_value = round(self.py_value * self.rescale(units.data), 0)             # <<<<<<<<<<<<<<
+ *             ret.py_value = round(self.py_value * self.rescale(units.data), places)             # <<<<<<<<<<<<<<
  * 
  *         return ret
  */
   /*else*/ {
     __pyx_t_5 = __pyx_f_7cyquant_10quantities_8Quantity_rescale(__pyx_v_self, __pyx_v_units->data); if (unlikely(__pyx_t_5 == ((double)(-1.0)))) __PYX_ERR(1, 353, __pyx_L1_error)
-    __pyx_t_3 = PyFloat_FromDouble(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 353, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = PyNumber_Multiply(__pyx_v_self->py_value, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __pyx_t_6 = PyFloat_FromDouble(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 353, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_7 = PyNumber_Multiply(__pyx_v_self->py_value, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_places); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 353, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
     __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 353, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_7);
+    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_6);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6);
-    __Pyx_INCREF(__pyx_int_0);
-    __Pyx_GIVEREF(__pyx_int_0);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_int_0);
+    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_6);
+    __pyx_t_7 = 0;
     __pyx_t_6 = 0;
     __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_round, __pyx_t_3, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(1, 353, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
@@ -8512,7 +8521,7 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
   __pyx_L4:;
 
   /* "cyquant/quantities.pyx":355
- *             ret.py_value = round(self.py_value * self.rescale(units.data), 0)
+ *             ret.py_value = round(self.py_value * self.rescale(units.data), places)
  * 
  *         return ret             # <<<<<<<<<<<<<<
  * 
@@ -8535,6 +8544,7 @@ static struct __pyx_obj_7cyquant_10quantities_Quantity *__pyx_f_7cyquant_10quant
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_AddTraceback("cyquant.quantities.Quantity.round_to", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;

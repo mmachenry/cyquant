@@ -348,9 +348,9 @@ cdef class Quantity:
         ret.udata = units.data
         if self.py_value is None:
             ret.py_value = None
-            ret.c_value = round(self.c_value * self.rescale(units.data), 0)
+            ret.c_value = round(self.c_value * self.rescale(units.data), places)
         else:
-            ret.py_value = round(self.py_value * self.rescale(units.data), 0)
+            ret.py_value = round(self.py_value * self.rescale(units.data), places)
 
         return ret
 

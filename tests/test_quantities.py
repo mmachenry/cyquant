@@ -103,9 +103,17 @@ def test_extract_py_quantity():
         in_m.get_as(None)
 
 def test_extract_rounded_c_quantity():
-    in_m = 1025 * si.meters
+    in_m = 1125 * si.meters
 
     assert in_m.round_as(si.kilometers) == 1
+    assert in_m.round_as(si.kilometers, 0) == round(1.125, 0)
+    assert in_m.round_as(si.kilometers, 1) == round(1.125, 1)
+    assert in_m.round_as(si.kilometers, 2) == round(1.125, 2)
+    assert in_m.round_as(si.kilometers, 3) == round(1.125, 3)
+    assert in_m.round_as(si.kilometers, 4) == round(1.125, 4)
+
+    with pytest.raises(ValueError):
+        in_m.round_as(si.grams)
 
 def test_extract_rounded_py_quantity():
     in_m = mp.mpf(1025) * si.meters
@@ -120,6 +128,14 @@ def test_cvt_c_quantity():
 
     in_km = in_m.cvt_to(si.kilometers)
     assert in_km.quantity == 1
+
+    in_m = 1.123456789 * si.meters
+
+    assert in_m.round_to(si.millimeters) == 1123 * si.millimeters
+    assert in_m.round_to(si.millimeters, 0) == 1123 * si.millimeters
+    assert in_m.round_to(si.millimeters, 1) == 1123.5 * si.millimeters
+    assert in_m.round_to(si.millimeters, 2) == 1123.46 * si.millimeters
+    assert in_m.round_to(si.millimeters, 3) == 1123.457 * si.millimeters
 
     with pytest.raises(ValueError):
         in_m.cvt_to(si.volts)
