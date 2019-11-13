@@ -30,10 +30,10 @@ cdef class Quantity:
     cpdef is_of(Quantity self, d.Dimensions dimensions)
 
     cpdef get_as(Quantity self, SIUnit units)
-    cpdef round_as(Quantity self, SIUnit units)
+    cpdef round_as(Quantity self, SIUnit units, int places=*)
 
     cpdef Quantity cvt_to(Quantity self, SIUnit units)
-    cpdef Quantity round_to(Quantity self, SIUnit units)
+    cpdef Quantity round_to(Quantity self, SIUnit units, int places=*)
 
     #TODO: think abuot how best to handle approximation
 

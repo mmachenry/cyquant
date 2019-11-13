@@ -319,8 +319,8 @@ cdef class Quantity:
             return self.c_value * self.rescale(units.data)
         return self.py_value * self.rescale(units.data)
 
-    cpdef round_as(Quantity self, SIUnit units):
-        return round(self.get_as(units))
+    cpdef round_as(Quantity self, SIUnit units, int places=0):
+        return round(self.get_as(units), places)
 
     cpdef Quantity cvt_to(Quantity self, SIUnit units):
         if units is None:
@@ -340,7 +340,7 @@ cdef class Quantity:
 
         return ret
 
-    cpdef Quantity round_to(Quantity self, SIUnit units):
+    cpdef Quantity round_to(Quantity self, SIUnit units, int places=0):
         if units is None:
             raise TypeError("Expected SIUnit")
 
@@ -348,9 +348,9 @@ cdef class Quantity:
         ret.udata = units.data
         if self.py_value is None:
             ret.py_value = None
-            ret.c_value = round(self.c_value * self.rescale(units.data))
+            ret.c_value = round(self.c_value * self.rescale(units.data), 0)
         else:
-            ret.py_value = round(self.py_value * self.rescale(units.data))
+            ret.py_value = round(self.py_value * self.rescale(units.data), 0)
 
         return ret
 
