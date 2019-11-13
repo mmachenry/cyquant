@@ -58,7 +58,7 @@ setup(
     author="Greg Echelberger",
     author_email="gechelberger@gmail.com",
     url="https://github.com/gechelberger/cyquant",
-    version="1.0.0a7",
+    version="1.0.0a8",
     description="cython dimensional analysis and unit tracking utility",
     packages=[package_name],
     cmdclass=CMDCLASS,
