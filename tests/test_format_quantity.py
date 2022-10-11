@@ -13,11 +13,7 @@ def test_show_quantity():
 				raise ValueError("Unrecognized Dimension")
 		dims.update(dimensions)
 
-		return Quantity(value, SIUnit(scale, Dimensions(
-			kg=dims.get("kg"), m=dims.get("m"), s=dims.get("s"),
-			k=dims.get("k"), a=dims.get("a"), mol=dims.get("mol"),
-			cd=dims.get("cd")
-		)))
+		return Quantity(value, SIUnit(scale, Dimensions(**dims)))
 
 	# (si unit, expected value)
 	values = [
