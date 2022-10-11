@@ -8,3 +8,6 @@ build/
 .tox/
 cyquant/__pycache__/
 tests/__pycache__/
+**.cp37-win_amd64.pyd
+**.cp38-win_amd64.pyd
+**.cp39-win_amd64.pyd
