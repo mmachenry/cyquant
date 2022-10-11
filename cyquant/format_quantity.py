@@ -145,9 +145,9 @@ def show_quantity(quantity: cyquant.quantities.Quantity, show_unit_symbol=True):
 
 		for idx, dim in enumerate(dims):
 			if bool_dims_list[idx]:
-				# use new update dict. operator in python 3.9+
-				dimensions_dict["dimensions"] |= {
-					dim: getattr(quantity.units.dimensions, dim)}
+				dimensions_dict["dimensions"].update(
+					{ dim: getattr(quantity.units.dimensions, dim) }
+				)
 		return dimensions_dict
 
 	def _dim2str(dimensions) -> str:
