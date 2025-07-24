@@ -7,6 +7,7 @@ build/
 **.so
 .tox/
 cyquant/__pycache__/
+cyquant/*.cpp
 tests/__pycache__/
 **.cp37-win_amd64.pyd
 **.cp38-win_amd64.pyd

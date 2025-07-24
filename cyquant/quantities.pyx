@@ -181,55 +181,63 @@ cdef class SIUnit:
     Arithmetic Methods
     """
 
-    def __mul__(lhs not None, rhs not None):
-        cdef type op_lhs = type(lhs)
+    def __mul__(self, rhs not None):
         cdef type op_rhs = type(rhs)
 
-        if op_lhs is Quantity or op_rhs is Quantity:
+        if op_rhs is Quantity:
             return NotImplemented
 
-        if op_lhs is SIUnit and op_rhs is SIUnit:
-            return mul_units(lhs, rhs)
-
-        if op_lhs is SIUnit:
-            return lhs.promote(rhs)
         if op_rhs is SIUnit:
-            return rhs.promote(lhs)
+            return mul_units(self, rhs)
 
-        raise RuntimeError("unknown error")
+        return self.promote(rhs)
 
 
+    def __rmul__(self, lhs not None):
+        return self.__mul__(lhs)
 
-    def __truediv__(lhs not None, rhs not None):
-        cdef type op_lhs = type(lhs)
+
+    def __truediv__(self, rhs not None):
         cdef type op_rhs = type(rhs)
 
-        if op_lhs is Quantity or op_rhs is Quantity:
+        if op_rhs is Quantity:
             return NotImplemented
 
-        if op_lhs is SIUnit and op_rhs is SIUnit:
-            return div_units(lhs, rhs)
+        if op_rhs is SIUnit:
+            return div_units(self, rhs)
 
         cdef Quantity ret = Quantity.__new__(Quantity)
 
+        get_udata(ret.udata, self)
+
+        if op_rhs is float or op_rhs is int:
+            ret.py_value = None
+            ret.c_value = 1 / rhs
+        else:
+            ret.py_value = 1 / rhs
+
+        return ret
+
+
+    def __rtruediv__(self, lhs not None):
+        cdef type op_lhs = type(lhs)
+
+        if op_lhs is Quantity:
+            return NotImplemented
+
         if op_lhs is SIUnit:
-            get_udata(ret.udata, lhs)
+            return div_units(lhs, self)
 
-            if op_rhs is float or op_rhs is int:
-                ret.py_value = None
-                ret.c_value = 1 / rhs
-            else:
-                ret.py_value = 1 / rhs
+        cdef Quantity ret = Quantity.__new__(Quantity)
 
-        if op_rhs is SIUnit:
-            get_udata(ret.udata, rhs)
-            c.inv_udata(ret.udata, ret.udata)
+        get_udata(ret.udata, self)
+        c.inv_udata(ret.udata, ret.udata)
 
-            if op_lhs is float or op_lhs is int:
-                ret.py_value = None
-                ret.c_value = lhs
-            else:
-                ret.py_value = lhs
+        if op_lhs is float or op_lhs is int:
+            ret.py_value = None
+            ret.c_value = lhs
+        else:
+            ret.py_value = lhs
 
         return ret
 
@@ -545,21 +553,37 @@ cdef class Quantity:
 
         raise RuntimeError("Unknown Error Occurred: %i" % error_code)
 
-    def __mul__(lhs not None, rhs not None):
+    def __mul__(self, rhs not None):
         cdef Quantity ret = Quantity.__new__(Quantity)
-        parse_q(ret, lhs)
+        parse_q(ret, self)
         q_assign_mul(ret, rhs)
         return ret
 
 
+    def __rmul__(self, lhs not None):
+        return self.__mul__(lhs)
 
 
-    def __truediv__(lhs not None, rhs not None):
+    def __truediv__(self, rhs not None):
+        cdef int error_code
+        cdef Quantity ret = Quantity.__new__(Quantity)
+        parse_q(ret, self)
+
+        error_code = q_assign_div(ret, rhs)
+        if error_code == c.Success:
+            return ret
+
+        if error_code == c.ZeroDiv:
+            raise ZeroDivisionError()
+
+        return RuntimeError("Unknown Error Occurred: %i" % error_code)
+
+    def __rtruediv__(self, lhs not None):
         cdef int error_code
         cdef Quantity ret = Quantity.__new__(Quantity)
         parse_q(ret, lhs)
 
-        error_code = q_assign_div(ret, rhs)
+        error_code = q_assign_div(ret, self)
         if error_code == c.Success:
             return ret
 
