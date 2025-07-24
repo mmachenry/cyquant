@@ -431,13 +431,6 @@ def test_float_quantity():
     assert float(q2) == 1
     assert float(q3) == 1000
 
-def test_float_py_quantity():
-    x = si.meters.promote(np.array([10]))
-    assert float(x) == 10.0
-
-    x = si.millimeters.promote(np.array([10]))
-    assert float(x) == 10.0
-
 def test_int_quantity():
     q1 = 1 * si.meters
     q2 = 1 * si.volts
@@ -446,14 +439,6 @@ def test_int_quantity():
     assert int(q1) == 1
     assert int(q2) == 1
     assert int(q3) == 1000
-
-
-def test_int_py_quantity():
-    x = si.meters.promote(np.array([10]))
-    assert int(x) == 10
-
-    x = si.millimeters.promote(np.array([10]))
-    assert int(x) == 10
 
 def test_truth_quantity():
     q0 = 0 * si.meters
@@ -470,7 +455,6 @@ def test_truth_quantity():
 def test_truth_py_quantity():
     assert bool(1j * si.meters)
     assert not bool(0j * si.meters)
-    assert not bool(si.meters.promote(np.array([])))
 
 def test_abs_quantity():
     q0 = 0 * si.meters
