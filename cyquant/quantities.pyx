@@ -578,19 +578,10 @@ cdef class Quantity:
 
         return RuntimeError("Unknown Error Occurred: %i" % error_code)
 
+
     def __rtruediv__(self, lhs not None):
-        cdef int error_code
-        cdef Quantity ret = Quantity.__new__(Quantity)
-        parse_q(ret, lhs)
+        return self.__invert__().__mul__(lhs)
 
-        error_code = q_assign_div(ret, self)
-        if error_code == c.Success:
-            return ret
-
-        if error_code == c.ZeroDiv:
-            raise ZeroDivisionError()
-
-        return RuntimeError("Unknown Error Occurred: %i" % error_code)
 
     def __pow__(lhs, rhs, modulo):
         if type(lhs) is not Quantity:
