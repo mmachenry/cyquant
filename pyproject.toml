@@ -10,14 +10,13 @@ authors = [
     { name = "Greg Echelberger", email = "gechelberger@gmail.com" }
 ]
 readme = "README.md"
-license = { text = "MIT" }
+#license = "MIT" # This works in 3.13 and 3.12 but breaks 3.9,3.10,3.11
 requires-python = ">=3.9"
 keywords = ["c-extension", "SI", "units", "quantities", "dimensional analysis"]
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Cython",
-    "License :: OSI Approved :: MIT License",
     "Topic :: Scientific/Engineering",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research"
