@@ -1,0 +1,40 @@
+[build-system]
+requires = [
+    "setuptools>=61",
+    "wheel",
+    "cython"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cyquant"
+version = "1.0.0"
+description = "cython dimensional analysis and unit tracking utility"
+authors = [
+    { name = "Greg Echelberger", email = "gechelberger@gmail.com" }
+]
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9"
+keywords = ["c-extension", "SI", "units", "quantities", "dimensional analysis"]
+classifiers = [
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research"
+]
+dependencies = []
+
+[project.optional-dependencies]
+tests = ["pytest", "numpy", "mpmath"]
+dev = ["pytest", "numpy", "mpmath", "cython", "bumpversion", "tox"]
+
+[tool.setuptools]
+packages = ["cyquant"]
+
+[tool.setuptools.package-data]
+cyquant = ["*.pyx", "*.pxd", "*.cpp"]
+
+[tool.setuptools.cmdclass]
+build_ext = "Cython.Distutils.build_ext"
+ 
