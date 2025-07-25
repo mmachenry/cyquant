@@ -159,7 +159,8 @@ cdef class SIUnit:
 
 
     cpdef cmp(SIUnit self, SIUnit other):
-        cdef int signum, error_code
+        cdef int signum = 0
+        cdef int error_code
         error_code = c.cmp_udata(signum, self.data, other.data)
         if error_code == c.Success:
             return signum
