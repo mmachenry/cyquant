@@ -4,6 +4,7 @@ cimport cyquant.quantities as q
 import cyquant.quantities as q
 
 from libc cimport math
+from libc.string cimport memset
 
 from cyquant import si
 
@@ -55,6 +56,7 @@ cpdef atan(q.Quantity value):
 cpdef atan2(q.Quantity y, q.Quantity x):
     cdef int error_code
     cdef c.UData norm_udata
+    memset(&norm_udata, 0, sizeof(c.UData))
     cdef double x_norm, y_norm, rads
 
     error_code = c.min_udata(norm_udata, y.udata, x.udata)
@@ -78,6 +80,7 @@ cpdef atan2(q.Quantity y, q.Quantity x):
 
 cpdef hypot(q.Quantity x, q.Quantity y):
     cdef q.Quantity ret = q.Quantity.__new__(q.Quantity)
+    memset(&ret.udata, 0, sizeof(c.UData))
     cdef int error_code
     cdef double x_norm, y_norm
 
