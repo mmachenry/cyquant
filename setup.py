@@ -38,7 +38,7 @@ if use_cython:
 
 setup(
     name="cyquantx",
-    version="1.1.0",
+    version="1.1.1",
     packages=[package_name],
     ext_modules=extensions,
     cmdclass=cmdclass,
