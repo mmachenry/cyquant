@@ -6,6 +6,7 @@ build/
 *.egg-info/
 **.so
 .tox/
+.python-version
 cyquant/__pycache__/
 cyquant/*.cpp
 tests/__pycache__/
