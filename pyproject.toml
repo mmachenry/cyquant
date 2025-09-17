@@ -3,8 +3,8 @@ requires = ["setuptools>=61", "wheel", "cython"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cyquantx"
-version = "1.1.0"
+name = "cyquant"
+version = "1.1.1"
 description = "cython dimensional analysis and unit tracking utility"
 authors = [
     { name = "Greg Echelberger", email = "gechelberger@gmail.com" }

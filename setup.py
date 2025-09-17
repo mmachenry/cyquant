@@ -37,7 +37,7 @@ if use_cython:
     cmdclass["build_ext"] = build_ext
 
 setup(
-    name="cyquantx",
+    name="cyquant",
     version="1.1.1",
     packages=[package_name],
     ext_modules=extensions,
